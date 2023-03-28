@@ -22,20 +22,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="前言本文将介绍如何在树莓派上安装系统。 说明：这是一篇之前写过的文章，最近搭建了个人博客顺便搬过来。">
+  <meta name="description" content="前言本文将介绍UART通信协议。 说明：学习嵌入式五大通信协议之一的UART通信协议。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="树莓派初始化">
-<meta property="og:url" content="http://example.com/2023/03/17/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%88%9D%E5%A7%8B%E5%8C%96/index.html">
+<meta property="og:title" content="通信协议（1）UART">
+<meta property="og:url" content="http://example.com/2023/03/28/UART%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/index.html">
 <meta property="og:site_name" content="FaiMhr&#39;s Blog">
-<meta property="og:description" content="前言本文将介绍如何在树莓派上安装系统。 说明：这是一篇之前写过的文章，最近搭建了个人博客顺便搬过来。">
+<meta property="og:description" content="前言本文将介绍UART通信协议。 说明：学习嵌入式五大通信协议之一的UART通信协议。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-03-17T08:51:00.000Z">
-<meta property="article:modified_time" content="2023-03-19T13:39:57.663Z">
+<meta property="article:published_time" content="2023-03-28T06:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-28T02:30:30.566Z">
 <meta property="article:author" content="马泓睿">
-<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="通信协议">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2023/03/17/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%88%9D%E5%A7%8B%E5%8C%96/">
+<link rel="canonical" href="http://example.com/2023/03/28/UART%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/">
 
 
 <script id="page-configurations">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>树莓派初始化 | FaiMhr's Blog</title>
+  <title>通信协议（1）UART | FaiMhr's Blog</title>
   
 
 
@@ -198,7 +198,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/17/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%88%9D%E5%A7%8B%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/28/UART%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -211,7 +211,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          树莓派初始化
+          通信协议（1）UART
         </h1>
 
         <div class="post-meta">
@@ -220,23 +220,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-03-17 16:51:00" itemprop="dateCreated datePublished" datetime="2023-03-17T16:51:00+08:00">2023-03-17</time>
+              <time title="创建时间：2023-03-28 14:00:00 / 修改时间：10:30:30" itemprop="dateCreated datePublished" datetime="2023-03-28T14:00:00+08:00">2023-03-28</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-19 21:39:57" itemprop="dateModified" datetime="2023-03-19T21:39:57+08:00">2023-03-19</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" itemprop="url" rel="index"><span itemprop="name">通信协议</span></a>
                 </span>
             </span>
 
@@ -251,72 +245,67 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文将介绍如何在树莓派上安装系统。</p>
-<p>说明：这是一篇之前写过的文章，最近搭建了个人博客顺便搬过来。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文将介绍UART通信协议。</p>
+<p>说明：学习嵌入式五大通信协议之一的UART通信协议。</p>
 <span id="more"></span>
 
-<h1 id="树莓派环境搭建"><a href="#树莓派环境搭建" class="headerlink" title="树莓派环境搭建"></a>树莓派环境搭建</h1><h2 id="下载树莓派官方系统"><a href="#下载树莓派官方系统" class="headerlink" title="下载树莓派官方系统"></a>下载树莓派官方系统</h2><p>官方地址：<a target="_blank" rel="noopener" href="https://www.raspberrypi.org/software/operating-systems/">https://www.raspberrypi.org/software/operating-systems/</a></p>
-<p>选择自己需要的系统（支持pc，mac，pi），这里我选择的是 <strong>Raspberry Pi OS with desktop</strong> 这个带桌面的。直接点击 <strong>Archive</strong> 进入后，再点击进入 <strong>最新的日期</strong> 的文件夹，最后选择 <strong>.img.xz</strong> 结尾的文件（size最大的）下载。<br>注：.xz是压缩方式的一种</p>
-<p>由于这个是国外的网站下载速度可能会比较慢，要是太慢可以选择国内的镜像源： </p>
-<ol>
-<li>TUNA 镜像站（位于北京）：<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/raspberry-pi-os-images/">https://mirrors.tuna.tsinghua.edu.cn/raspberry-pi-os-images/</a></li>
-<li>SJTUG 镜像站（位于上海）：<a target="_blank" rel="noopener" href="https://mirrors.sjtug.sjtu.edu.cn/raspberry-pi-os-images/">https://mirrors.sjtug.sjtu.edu.cn/raspberry-pi-os-images/</a></li>
-</ol>
-<p>找到raspbian。</p>
-<ol>
-<li>raspbian&#x2F; 对应官网上的 Raspberry Pi OS with desktop 是带桌面的树莓派系统</li>
-<li>raspbian_full&#x2F; 对应官网上的 Raspberry Pi OS with desktop and recommended software 是带桌面和推荐软件的树莓派操作系统</li>
-<li>raspbian_lite&#x2F; 对应官网上的 Raspberry Pi OS Lite 是精简版的树莓派系统</li>
-</ol>
-<h2 id="安装树莓派官方系统"><a href="#安装树莓派官方系统" class="headerlink" title="安装树莓派官方系统"></a>安装树莓派官方系统</h2><p>当下载好系统后我们就需要把系统安装到SD卡中。</p>
-<p>第一步要将我们的SD卡格式化(主要确保SD卡里没东西，防止出错)。可以使用<a target="_blank" rel="noopener" href="https://www.sdcard.org/">SD Card Formatter</a>(由于是国外网址可能会比较卡，百度下载也是一样的)或者电脑的格式化工具(我的电脑–右键–管理–磁盘管理)<br><strong>注：看清楚再格式化，别弄错盘了！！！</strong></p>
-<p>第二步将下载好的系统镜像文件烧录进SD卡中。可以使用<a target="_blank" rel="noopener" href="https://sourceforge.net/projects/win32diskimager/">Win32DiskImager</a>软件进行烧录。<br><strong>步骤：</strong> 打开Win32DiskImager软件，在映像文件那放入解压后的 <strong>.img</strong> 镜像文件，选择SD卡所在的磁盘，点击 <strong>写入</strong> 耐心等待即可。</p>
-<h2 id="树莓派系统设置"><a href="#树莓派系统设置" class="headerlink" title="树莓派系统设置"></a>树莓派系统设置</h2><p>既然已经安装好了系统，之后只要稍加设置就可以愉快使用了。</p>
-<p>如果现在手头正好有屏幕并且树莓派的mini HDMI线也有的话，可以直接将SD卡插入树莓派并连接上屏幕在屏幕上进行操作。</p>
-<p>如果是没有屏幕的话，可以采用ssh进行连接。</p>
-<p><strong>下面是讲解没有屏幕时的方法。</strong><br>第一步在SD卡上写入两个文件(烧录完成后SD卡上会出现的boot分区，如果没有，拔下读卡器重插一下)。</p>
-<ol>
-<li>第一个文件是一个名字为<strong>ssh</strong>的空白文件(即新建文本文档，将文件名改为ssh，<strong>千万注意没有后缀哦</strong>)</li>
-<li>第二个文件是一个名字为<strong>wpa_supplicant.conf</strong>的文件(用写字板打开后，要在文件中写入一下内容)<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">country=CN</span><br><span class="line">ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</span><br><span class="line">update_config=1</span><br><span class="line"></span><br><span class="line">network=&#123;</span><br><span class="line">    ssid=<span class="string">&quot;想要连接的WiFi名称&quot;</span></span><br><span class="line">    psk=<span class="string">&quot;想要连接的WiFi密码&quot;</span></span><br><span class="line">    key_mgmt=WPA-PSK //WiFi的加密方式(应该可以不写)</span><br><span class="line">    priority=1 //连接优先级，数字越大优先级越高(不可以是负数)</span><br><span class="line">    scan_ssid=1 //连接隐藏WiFi时需要指定该值为1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>第二步这两个文件设置完毕后将SD卡插到树莓派上就可以了。没有问题的话，在路由器管理或者手机热点里可以看到连接了一个raspberrypi的设备，需要查看它连接的 <strong>IP地址</strong> 之后ssh连接会用到。</p>
-<p>第三步需要远程连接树莓派对其进行控制，可以使用<a target="_blank" rel="noopener" href="https://www.putty.be/">PuTTy</a>进行ssh连接<br><strong>步骤：</strong> 进入PuTTY 在Host Name(or IP address)下方的方框中输入刚看到的IP地址 点击下方的Open</p>
-<p>（若弹出任何窗口都不用管，选YES）在弹出的黑色窗口第一行输入当前设备名（第一次输入默认的是pi）pi, 回车 ，在第二行输入当前设备密码(第一次输入默认的是raspberry)raspberry(发现输入没有反应是正常的树莓派默认不会显示密码，我认为这个不好，后面可能会找找办法修改)，回车。这样就已经进入了设备。首次登陆会让你设置一个新密码，直接输入即可。</p>
-<p>树莓派官方系统默认：<br><strong>用户名：pi</strong><br><strong>密码：raspberry</strong></p>
-<p>ubunt系统默认：<br><strong>密码：ubuntu</strong></p>
-<p>以上步骤完成后其实已经能对树莓派进行控制了。如果想远程连接到树莓派桌面请往下看，不需要的可以跳过。</p>
-<p>第四步远程连接树莓派桌面，可以使用<a target="_blank" rel="noopener" href="https://www.realvnc.com/en/connect/download/viewer/">VNC Viewer</a>,下载完成后回到 <strong>Putty</strong> 输入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo raspi-config</span><br></pre></td></tr></table></figure>
 
-<p>接下来按顺序选择Interfacing Options–&gt;回车–&gt;VNC–&gt;回车–&gt;yes–&gt;回车–&gt;y–&gt;回车 (若选错想回退，按向下方向键到最下面按Tab切换)</p>
-<p>此时直接开启VNC若不显示屏幕则是分辨率的问题<br>再次使用 <strong>PuTTy</strong> 进入pi<br>输入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo raspi-config</span><br></pre></td></tr></table></figure>
-<p>接下来按照顺序选择Advanced Options–&gt;Resolution–&gt;选择合适的分辨率</p>
-<p><strong>查的时候发现改完分辨率后再启动可能还会有点问题，这里暂时不写了，后面可能会更新。</strong></p>
-<p>第五步按照pi的提示初始化系统。</p>
-<p>第六步进行换源(由于国外源很慢，可以考虑使用国内的源这样会在下载的时候快点)</p>
-<p>输入一下内容备份原文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">cp</span> /etc/apt/sources.list /etc/apt/sources.list.bak</span><br><span class="line">sudo <span class="built_in">cp</span> /etc/apt/sources.list.d/raspi.list /etc/apt/sources.list.d/raspi.list.bak</span><br></pre></td></tr></table></figure>
+<h1 id="什么是UART通信协议"><a href="#什么是UART通信协议" class="headerlink" title="什么是UART通信协议"></a>什么是UART通信协议</h1><p>UART 通用异步收发器（Universal Asynchronous Receiver Transmitter），是一种通用的<strong>串行</strong>、<strong>异步</strong>通讯总线，有两条数据线，可实现<strong>全双工</strong>的发送和接收。</p>
+<p>在嵌入式系统中常用于主机与辅助设备之间的通信。（在嵌入式领域中使用最多的通信协议）</p>
+<h1 id="通信基础概念"><a href="#通信基础概念" class="headerlink" title="通信基础概念"></a>通信基础概念</h1><h2 id="并行和串行"><a href="#并行和串行" class="headerlink" title="并行和串行"></a>并行和串行</h2><p>总线的作用：在计算机不同传递数据或信息。</p>
+<p>总线是<strong>导线</strong>，通过传递高低电平的信号来实现信息的传递。高电平代表1，低电平代表0。</p>
+<p>并行通信：总线在传递数据的过程中可以通过<strong>多根数据线</strong>把一个数据的多个位<strong>一次性</strong>发送。</p>
+<p>串行通信：总线在传递数据的过程中可以通过<strong>一根数据线</strong>把一个数据<strong>依次</strong>发送。</p>
+<p>并行通信优点在于快速，缺点是线比较多可能布线有一定难度，线之间存在干扰，小数据量下比较浪费。</p>
+<p>串行通讯优点在于稳定，缺点是速度慢，数据大了传输的时间长。</p>
+<p>嵌入式中串行总线用的多。</p>
+<h2 id="单工和双工"><a href="#单工和双工" class="headerlink" title="单工和双工"></a>单工和双工</h2><p>单工通信：有一方是发送器，另一方是接收器。通信时只能由发送器发送数据给接收器。单向的</p>
+<p>双工通信：双方可以发送数据也可以接收数据，但其中半双工里不能双方同时发送数据，只能一方发送一方接收。</p>
+<h2 id="波特率"><a href="#波特率" class="headerlink" title="波特率"></a>波特率</h2><p>波特率用于描述UART通信时的通信速度，其单位为bps（bit per second）即每秒钟传送的bit的数量。</p>
+<h1 id="UART帧格式-UART发送数据的格式"><a href="#UART帧格式-UART发送数据的格式" class="headerlink" title="UART帧格式 - UART发送数据的格式"></a>UART帧格式 - UART发送数据的格式</h1><p>起始位占1位，数据位（要发送的数据，5-8位，先发低位，后发高位位），校验位占1位（可有可无），停止位占1&#x2F;1.5或2位</p>
+<p>当不发送数据时，规定数据线上的状态必须是高电平。</p>
+<p>起始位的电平为低电平。</p>
+<p>通常来说数据位发送8位（一个字节），但5-8位都可以。为什么不能发很多位是为了避免累计误差，由于双方时钟可能存在误差，会导致结果漏掉其中的一两位，发5-8位可以减小累计误差的影响，不至于影响一整个数据。</p>
+<p>检验位为奇偶校验，统计数据中1的个数，如果是偶数就把校验位置为1，反之为0。</p>
+<p>停止位的电平为高电平。</p>
+<p>01和0011的波形是一样的，但是通过波特率能区分0和1的个数。所以双方的波特率必须一致，要事先约定好。</p>
+<h1 id="UART硬件连接"><a href="#UART硬件连接" class="headerlink" title="UART硬件连接"></a>UART硬件连接</h1><p>TXD发送数据，RXD接收数据</p>
+<h1 id="UART控制器"><a href="#UART控制器" class="headerlink" title="UART控制器"></a>UART控制器</h1><p>一般情况下处理器中都会集成UART控制器，使用UART进行通信的时候只需要对其内部的相关寄存器进行设置即可。</p>
+<h2 id="引脚功能设置"><a href="#引脚功能设置" class="headerlink" title="引脚功能设置"></a>引脚功能设置</h2><p>设置引脚功能的实质是让引脚在芯片内部连接到某一个对应的控制器</p>
+<p>串口控制器包含：</p>
+<p>波特率产生器（Baud-rate generator）：控制串口发送数据或者接收数据的速度（需要时钟源来做精确控制，保证波特率的精准）</p>
+<p>发送器（Transmitter）：控制发送数据</p>
+<p>接收器（Receiver）：控制接收数据</p>
+<p>控制单元（Control unit）：控制整个串口控制器的工作逻辑</p>
+<p>主频是CPU的工作频率，串口控制器有自己的工作频率。</p>
+<h2 id="工作逻辑"><a href="#工作逻辑" class="headerlink" title="工作逻辑"></a>工作逻辑</h2><p>发送器和接收器都包含一个队列（FIFO）和一个移位器，队列用来存放数据，移位器用来吧数据传出去。发送的数据首先写到发送的缓冲区（队列），再把要发送的数据包括起始位，校验位和停止位拷贝到移位器，移位器通过右移把数据一位一位的移动到发送的引脚并以电平信号发送出去。</p>
+<p>CPU通过芯片内部总线读取接收队列中的数据；向发送队列写入数据；读写控制器，通过控制寄存器控制整个串口的控制逻辑</p>
+<h1 id="UART寄存器"><a href="#UART寄存器" class="headerlink" title="UART寄存器"></a>UART寄存器</h1><p>不同的寄存器是在自己的基地址的基础上加上需实现功能的偏移量</p>
+<p>单块开发板可以用回环模式（Loop-back Mode）查看是否串口是否设置正确，就是自己发送的数据，自己接收。</p>
+<p>CPU和外围硬件的 <strong>交互模式</strong> 有三种轮询模式，中断模式，DMA模式。</p>
+<p><strong>轮询模式</strong></p>
+<p>数据从外面的芯片发过来，接收器接收了，CPU想要调用这个数据，CPU跑一段自己的程序就查看一下队列中有没有数据，没有就继续跑一段自己的程序再查看一下队列中有没有数据，直到队列中有数据，CPU读取数据。</p>
+<p><strong>中断模式</strong></p>
+<p>一旦队列接收到数据串口控制器就给CPU发送一个中断信号，此时CPU再去读数据</p>
+<p><strong>DMA模式</strong></p>
+<p>直接存储器访问。队列接收到数据后串口控制器直接访问存储器把数据放进去。</p>
+<h1 id="程序思路"><a href="#程序思路" class="headerlink" title="程序思路"></a>程序思路</h1><p>1、定义接收引脚和发送引脚</p>
+<p>要先把低八位清零再设置</p>
+<p>2、设置帧格式</p>
+<p>3、设置数据交互模式</p>
+<p>4、设置波特率</p>
+<p>5、设置循环将发送的数据写入发送寄存器中</p>
+<p><strong>问：为什么只写发送程序电脑接收到的和发送的数据不一样？</strong></p>
+<p>因为在没有限制的情况下CPU往寄存器中写数据的速度和寄存器往外发数据的速度是不一样的。</p>
+<p>解决方法：判断发送器是否是空闲的，空闲了CPU再发。（芯片内部有只读寄存器能判断）</p>
+<p><strong>题外话：</strong>在SecureCRT中看到的显示内容，其实是开发板返回的内容，看到显示的内容和输入的内容一致只是开发板返回了相同的内容。</p>
+<h1 id="输入输出重定向"><a href="#输入输出重定向" class="headerlink" title="输入输出重定向"></a>输入输出重定向</h1><h2 id="如何让串口发送字符串"><a href="#如何让串口发送字符串" class="headerlink" title="如何让串口发送字符串"></a>如何让串口发送字符串</h2><p>首先需要把要发送字符串的首地址传到函数中，再通过发送函数把字符串的每一个字一个一个发出去。</p>
+<p>举例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">void UART_Send_Str(char * pstr)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">while</span>(*pstr != <span class="string">&#x27;\0&#x27;</span>)</span><br><span class="line">    UART_Send_Byte(*pstr++);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># pstr是字符串的首地址，*pstr是首地址对应的内容。</span></span><br></pre></td></tr></table></figure>
 
-<p>修改系统源文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
 
-<p>进入文件编辑模式，添加以下内容(将初始的源使用#注释掉，添加如下两行清华的镜像源)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main contrib non-free rpi</span><br><span class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main contrib non-free rpi</span><br></pre></td></tr></table></figure>
-
-<p>编辑完成后使用快捷键ctrl+x退出编辑，输入y，保存更改。</p>
-<p>更改系统源：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/apt/sources.list.d/raspi.list</span><br></pre></td></tr></table></figure>
-
-<p>进入文件编辑模式，添加以下内容(将初始的源使用#注释掉，添加如下两行清华的镜像源)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui</span><br><span class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui</span><br></pre></td></tr></table></figure>
-
-<p>执行更新</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
-
-<p>注：如果更新后出现文件管理器闪退，或者桌面失去响应之类的问题。建议使用如下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt full-upgrade</span><br></pre></td></tr></table></figure>
-
+<h2 id="输出重定向"><a href="#输出重定向" class="headerlink" title="输出重定向"></a>输出重定向</h2><p>之前电脑安装了C库所以printf输出的内容通过显卡输出到显示屏上；在开发板没有安装C库之前在程序中自定义了printf函数，所以printf输出的内容通过开发板发送到UART上。</p>
+<p>这就是输出重定向。<strong>主要用于系统移植</strong></p>
 
     </div>
 
@@ -336,7 +325,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" rel="tag"># 通信协议</a>
           </div>
 
         
@@ -344,11 +333,11 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2023/03/17/%E6%A0%91%E8%8E%93%E6%B4%BEHexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="next" title="树莓派Hexo博客搭建">
-      树莓派Hexo博客搭建 <i class="fa fa-chevron-right"></i>
+    <a href="/2023/03/28/%E6%95%B0%E6%8D%AE%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AD%98%E5%82%A8/" rel="prev" title="数据在内存中的存储">
+      <i class="fa fa-chevron-left"></i> 数据在内存中的存储
     </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -407,7 +396,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%91%E8%8E%93%E6%B4%BE%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">树莓派环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%98%E6%96%B9%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.1.</span> <span class="nav-text">下载树莓派官方系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%98%E6%96%B9%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.2.</span> <span class="nav-text">安装树莓派官方系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91%E8%8E%93%E6%B4%BE%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.3.</span> <span class="nav-text">树莓派系统设置</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFUART%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.</span> <span class="nav-text">什么是UART通信协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%9A%E4%BF%A1%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="nav-number">3.</span> <span class="nav-text">通信基础概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E5%92%8C%E4%B8%B2%E8%A1%8C"><span class="nav-number">3.1.</span> <span class="nav-text">并行和串行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E5%B7%A5%E5%92%8C%E5%8F%8C%E5%B7%A5"><span class="nav-number">3.2.</span> <span class="nav-text">单工和双工</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A2%E7%89%B9%E7%8E%87"><span class="nav-number">3.3.</span> <span class="nav-text">波特率</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UART%E5%B8%A7%E6%A0%BC%E5%BC%8F-UART%E5%8F%91%E9%80%81%E6%95%B0%E6%8D%AE%E7%9A%84%E6%A0%BC%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">UART帧格式 - UART发送数据的格式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UART%E7%A1%AC%E4%BB%B6%E8%BF%9E%E6%8E%A5"><span class="nav-number">5.</span> <span class="nav-text">UART硬件连接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UART%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="nav-number">6.</span> <span class="nav-text">UART控制器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E8%84%9A%E5%8A%9F%E8%83%BD%E8%AE%BE%E7%BD%AE"><span class="nav-number">6.1.</span> <span class="nav-text">引脚功能设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E9%80%BB%E8%BE%91"><span class="nav-number">6.2.</span> <span class="nav-text">工作逻辑</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UART%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">7.</span> <span class="nav-text">UART寄存器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E6%80%9D%E8%B7%AF"><span class="nav-number">8.</span> <span class="nav-text">程序思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">9.</span> <span class="nav-text">输入输出重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AE%A9%E4%B8%B2%E5%8F%A3%E5%8F%91%E9%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">9.1.</span> <span class="nav-text">如何让串口发送字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">9.2.</span> <span class="nav-text">输出重定向</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
