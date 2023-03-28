@@ -75,7 +75,12 @@
   <entry>
     <title>数据在内存中的存储</title>
     <url>/2023/03/28/%E6%95%B0%E6%8D%AE%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AD%98%E5%82%A8/</url>
-    <content><![CDATA[<h1 id="整数数据类型在内存中的存储"><a href="#整数数据类型在内存中的存储" class="headerlink" title="整数数据类型在内存中的存储"></a>整数数据类型在内存中的存储</h1><h2 id="原码"><a href="#原码" class="headerlink" title="原码:"></a>原码:</h2><p>一组二进制数</p>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文将介绍数据在内存中的存储。</p>
+<p>说明：了解数据在内存中如何存储，利于后面学习对数据的调用。</p>
+<span id="more"></span>
+
+
+<h1 id="整数数据类型在内存中的存储"><a href="#整数数据类型在内存中的存储" class="headerlink" title="整数数据类型在内存中的存储"></a>整数数据类型在内存中的存储</h1><h2 id="原码"><a href="#原码" class="headerlink" title="原码:"></a>原码:</h2><p>一组二进制数</p>
 <h2 id="反码"><a href="#反码" class="headerlink" title="反码:"></a>反码:</h2><p>只要硬件电路中有加法器，计算机就能做减法。</p>
 <p><strong>正数的反码和原码一样。</strong>(正数没有反码，或不需要反码，但为了定义上完整所以规定正数的反码和原码相同)</p>
 <p><strong>负数的反码，除了符号位外，是对其原码逐位取反。</strong></p>
