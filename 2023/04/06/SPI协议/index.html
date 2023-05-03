@@ -22,17 +22,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="If I have been able to see further, it was only because I stood on the shoulder of giants.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="FaiMhr&#39;s Blog">
-<meta property="og:url" content="http://example.com/archives/2023/05/index.html">
+  <meta name="description" content="前言本文将介绍SPI通信协议。 说明：学习嵌入式五大通信协议之一的SPI通信协议。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通信协议（4）SPI">
+<meta property="og:url" content="http://example.com/2023/04/06/SPI%E5%8D%8F%E8%AE%AE/index.html">
 <meta property="og:site_name" content="FaiMhr&#39;s Blog">
-<meta property="og:description" content="If I have been able to see further, it was only because I stood on the shoulder of giants.">
+<meta property="og:description" content="前言本文将介绍SPI通信协议。 说明：学习嵌入式五大通信协议之一的SPI通信协议。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-06T06:00:00.000Z">
+<meta property="article:modified_time" content="2023-05-03T15:55:00.185Z">
 <meta property="article:author" content="马泓睿">
+<meta property="article:tag" content="通信协议">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/archives/2023/05/">
+<link rel="canonical" href="http://example.com/2023/04/06/SPI%E5%8D%8F%E8%AE%AE/">
 
 
 <script id="page-configurations">
@@ -40,12 +43,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | FaiMhr's Blog</title>
+  <title>通信协议（4）SPI | FaiMhr's Blog</title>
   
 
 
@@ -191,47 +194,131 @@
           <div class="content">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 9 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/06/SPI%E5%8D%8F%E8%AE%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="马泓睿">
+      <meta itemprop="description" content="If I have been able to see further, it was only because I stood on the shoulder of giants.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FaiMhr's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          通信协议（4）SPI
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-04-06 14:00:00" itemprop="dateCreated datePublished" datetime="2023-04-06T14:00:00+08:00">2023-04-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-03 23:55:00" itemprop="dateModified" datetime="2023-05-03T23:55:00+08:00">2023-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" itemprop="url" rel="index"><span itemprop="name">通信协议</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2023</span>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文将介绍SPI通信协议。</p>
+<p>说明：学习嵌入式五大通信协议之一的SPI通信协议。</p>
+<span id="more"></span>
+
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>SPI是串行外设接口的缩写，SPI是一种高速的（跟I2C和UART相比）、全双工、同步的（共用一个时钟）串行通信总线；</p>
+<p>SPI采用主从方式工作，一般有一个主设备和一个或多个从设备；</p>
+<p>SPI需要至少4根线，分别是MISO（主设备输入从设备输出）、MOSI（主设备输出从设备输入）、SCLK（时钟）、CS（片选，用于寻址）；</p>
+<p>SPI使用引脚较少且布线方便，所以越来越多的芯片集成了这种通信协议。</p>
+<h1 id="寻址方式"><a href="#寻址方式" class="headerlink" title="寻址方式"></a>寻址方式</h1><p>当主设备要和某个从设备进行通信时，主设备需要先向对应从设备的片选线上发送使能信号（高电平或者低电平，根据从机而定）表示选中该从设备。</p>
+<p>注：主设备有多个CS（CS1,CS2,…）连接不同的从设备。</p>
+<p>如何判断一个芯片是高电平使能还是低电平使能？</p>
+<p>一般电路图上是CS，表示高电平有效；是CS上面一杠，表示低电平有效。</p>
+<h1 id="通信过程"><a href="#通信过程" class="headerlink" title="通信过程"></a>通信过程</h1><p>SPI总线在进行数据传送时，<strong>先传送高位，后传送低位</strong>；</p>
+<p>数据线为高电平表示逻辑‘1’，低电平表示逻辑‘0’；</p>
+<p>一个字节传送完成后<strong>无需应答</strong>即可开始下一个字节的传送，没有起始信号，没有结束信号，没有应答信号；</p>
+<p>SPI总线采用同步方式工作，时钟线在上升沿或下降沿时发送器向数据线上发送数据，在紧接着的下降沿或上升沿时接收器从数据线上读取数据，完成一位数据传送，八个时钟周期即可完成一个字节数据的传送；</p>
+<h1 id="极性和相位"><a href="#极性和相位" class="headerlink" title="极性和相位"></a>极性和相位</h1><p>SPI总线有四种不同的工作模式，取决于极性（CPOL）和相位（CPHL）这两个因素</p>
+<p>CPOL表示SCLK空闲时的状态。CPOL&#x3D;0，空闲时SCLK为低电平；CPOL&#x3D;1，空闲时SCLK为高电平。</p>
+<p>CPHA表示采样时刻。CPHA&#x3D;0，每个周期的第一个时钟沿采样；CPHA&#x3D;1，每个周期的第二个时钟沿采样。</p>
+<p>对于一个特定的从设备来说，一般在出厂时就会将其设计为某种特定的工作模式（看芯片手册）；我们在使用该设备时就必须保证主设备的工作模式和该从设备保持一致，否则是无法进行通信的；所以一般我们需要对主设备的CPOL和CPHA进行配置；</p>
+<h1 id="I2C和SPI的异同"><a href="#I2C和SPI的异同" class="headerlink" title="I2C和SPI的异同"></a>I2C和SPI的异同</h1><h2 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h2><p>均采用串行、同步的方式</p>
+<p>均采用TTL电平，传输距离和应用场景类似</p>
+<p>均采用主从方式工作</p>
+<h2 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h2><p>I2C为半双工，SPI为全双工</p>
+<p>I2C有应答机制，SPI无应答机制</p>
+<p>I2C通过向总线广播从机地址来寻址，SPI通过向对于从机发送使能信号来寻址</p>
+<p>I2C的时钟极性和时钟相位固定，SPI的时钟极性和时钟相位可调</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
+    <div>
+      
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2023-05-03T23:36:22+08:00"
-              content="2023-05-03">
-          05-03
-        </time>
-      </div>
+      
+    </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2023/05/03/SPI%E5%8D%8F%E8%AE%AE/" itemprop="url">
-            <span itemprop="name">未命名</span>
-          </a>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" rel="tag"># 通信协议</a>
+          </div>
 
-    </header>
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/04/06/I2C%E5%8D%8F%E8%AE%AE/" rel="prev" title="通信协议（3）I2C">
+      <i class="fa fa-chevron-left"></i> 通信协议（3）I2C
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/04/10/Can%E5%8D%8F%E8%AE%AE/" rel="next" title="通信协议（5）Can">
+      通信协议（5）Can <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
-
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
@@ -284,6 +371,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">寻址方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%9A%E4%BF%A1%E8%BF%87%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">通信过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%81%E6%80%A7%E5%92%8C%E7%9B%B8%E4%BD%8D"><span class="nav-number">5.</span> <span class="nav-text">极性和相位</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#I2C%E5%92%8CSPI%E7%9A%84%E5%BC%82%E5%90%8C"><span class="nav-number">6.</span> <span class="nav-text">I2C和SPI的异同</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%90%8C%E7%82%B9"><span class="nav-number">6.1.</span> <span class="nav-text">相同点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E7%82%B9"><span class="nav-number">6.2.</span> <span class="nav-text">不同点</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

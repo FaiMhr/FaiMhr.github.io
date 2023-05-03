@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-05-03T15:38:21.880Z</updated>
+  <updated>2023-05-03T15:40:13.658Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,28 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title></title>
-    <link href="http://example.com/2023/05/03/SPI%E5%8D%8F%E8%AE%AE/"/>
-    <id>http://example.com/2023/05/03/SPI%E5%8D%8F%E8%AE%AE/</id>
-    <published>2023-05-03T15:36:22.352Z</published>
-    <updated>2023-05-03T15:38:21.880Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文将介绍SPI通信协议。</p><p>说明：学习嵌入式五大通信协议之一的SPI通信协议。</p><span id="more"></span><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>SPI是串行外设接口的缩写，SPI是一种高速的（跟I2C和UART相比）、全双工、同步的（共用一个时钟）串行通信总线；</p><p>SPI采用主从方式工作，一般有一个主设备和一个或多个从设备；</p><p>SPI需要至少4根线，分别是MISO（主设备输入从设备输出）、MOSI（主设备输出从设备输入）、SCLK（时钟）、CS（片选，用于寻址）；</p><p>SPI使用引脚较少且布线方便，所以越来越多的芯片集成了这种通信协议。</p><h1 id="寻址方式"><a href="#寻址方式" class="headerlink" title="寻址方式"></a>寻址方式</h1><p>当主设备要和某个从设备进行通信时，主设备需要先向对应从设备的片选线上发送使能信号（高电平或者低电平，根据从机而定）表示选中该从设备。</p><p>注：主设备有多个CS（CS1,CS2,…）连接不同的从设备。</p><p>如何判断一个芯片是高电平使能还是低电平使能？</p><p>一般电路图上是CS，表示高电平有效；是CS上面一杠，表示低电平有效。</p><h1 id="通信过程"><a href="#通信过程" class="headerlink" title="通信过程"></a>通信过程</h1><p>SPI总线在进行数据传送时，<strong>先传送高位，后传送低位</strong>；</p><p>数据线为高电平表示逻辑‘1’，低电平表示逻辑‘0’；</p><p>一个字节传送完成后<strong>无需应答</strong>即可开始下一个字节的传送，没有起始信号，没有结束信号，没有应答信号；</p><p>SPI总线采用同步方式工作，时钟线在上升沿或下降沿时发送器向数据线上发送数据，在紧接着的下降沿或上升沿时接收器从数据线上读取数据，完成一位数据传送，八个时钟周期即可完成一个字节数据的传送；</p><h1 id="极性和相位"><a href="#极性和相位" class="headerlink" title="极性和相位"></a>极性和相位</h1><p>SPI总线有四种不同的工作模式，取决于极性（CPOL）和相位（CPHL）这两个因素</p><p>CPOL表示SCLK空闲时的状态。CPOL&#x3D;0，空闲时SCLK为低电平；CPOL&#x3D;1，空闲时SCLK为高电平。</p><p>CPHA表示采样时刻。CPHA&#x3D;0，每个周期的第一个时钟沿采样；CPHA&#x3D;1，每个周期的第二个时钟沿采样。</p><p>对于一个特定的从设备来说，一般在出厂时就会将其设计为某种特定的工作模式（看芯片手册）；我们在使用该设备时就必须保证主设备的工作模式和该从设备保持一致，否则是无法进行通信的；所以一般我们需要对主设备的CPOL和CPHA进行配置；</p><h1 id="I2C和SPI的异同"><a href="#I2C和SPI的异同" class="headerlink" title="I2C和SPI的异同"></a>I2C和SPI的异同</h1><h2 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h2><p>均采用串行、同步的方式</p><p>均采用TTL电平，传输距离和应用场景类似</p><p>均采用主从方式工作</p><h2 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h2><p>I2C为半双工，SPI为全双工</p><p>I2C有应答机制，SPI无应答机制</p><p>I2C通过向总线广播从机地址来寻址，SPI通过向对于从机发送使能信号来寻址</p><p>I2C的时钟极性和时钟相位固定，SPI的时钟极性和时钟相位可调</p>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;本文将介绍SPI通信协议。&lt;/p&gt;
-&lt;p&gt;说明：学习嵌入式五大通信协议之一的SPI通信协议。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="通信协议" scheme="http://example.com/categories/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/"/>
-    
-    
-    <category term="通信协议" scheme="http://example.com/tags/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/"/>
-    
-  </entry>
   
   <entry>
     <title>罗技FLOW连接问题</title>
@@ -72,6 +50,28 @@
     
     <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;本文将介绍Can通信协议。&lt;/p&gt;
 &lt;p&gt;说明：学习嵌入式五大通信协议之一的Can通信协议。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="通信协议" scheme="http://example.com/categories/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/"/>
+    
+    
+    <category term="通信协议" scheme="http://example.com/tags/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>通信协议（4）SPI</title>
+    <link href="http://example.com/2023/04/06/SPI%E5%8D%8F%E8%AE%AE/"/>
+    <id>http://example.com/2023/04/06/SPI%E5%8D%8F%E8%AE%AE/</id>
+    <published>2023-04-06T06:00:00.000Z</published>
+    <updated>2023-05-03T15:55:00.185Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文将介绍SPI通信协议。</p><p>说明：学习嵌入式五大通信协议之一的SPI通信协议。</p><span id="more"></span><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>SPI是串行外设接口的缩写，SPI是一种高速的（跟I2C和UART相比）、全双工、同步的（共用一个时钟）串行通信总线；</p><p>SPI采用主从方式工作，一般有一个主设备和一个或多个从设备；</p><p>SPI需要至少4根线，分别是MISO（主设备输入从设备输出）、MOSI（主设备输出从设备输入）、SCLK（时钟）、CS（片选，用于寻址）；</p><p>SPI使用引脚较少且布线方便，所以越来越多的芯片集成了这种通信协议。</p><h1 id="寻址方式"><a href="#寻址方式" class="headerlink" title="寻址方式"></a>寻址方式</h1><p>当主设备要和某个从设备进行通信时，主设备需要先向对应从设备的片选线上发送使能信号（高电平或者低电平，根据从机而定）表示选中该从设备。</p><p>注：主设备有多个CS（CS1,CS2,…）连接不同的从设备。</p><p>如何判断一个芯片是高电平使能还是低电平使能？</p><p>一般电路图上是CS，表示高电平有效；是CS上面一杠，表示低电平有效。</p><h1 id="通信过程"><a href="#通信过程" class="headerlink" title="通信过程"></a>通信过程</h1><p>SPI总线在进行数据传送时，<strong>先传送高位，后传送低位</strong>；</p><p>数据线为高电平表示逻辑‘1’，低电平表示逻辑‘0’；</p><p>一个字节传送完成后<strong>无需应答</strong>即可开始下一个字节的传送，没有起始信号，没有结束信号，没有应答信号；</p><p>SPI总线采用同步方式工作，时钟线在上升沿或下降沿时发送器向数据线上发送数据，在紧接着的下降沿或上升沿时接收器从数据线上读取数据，完成一位数据传送，八个时钟周期即可完成一个字节数据的传送；</p><h1 id="极性和相位"><a href="#极性和相位" class="headerlink" title="极性和相位"></a>极性和相位</h1><p>SPI总线有四种不同的工作模式，取决于极性（CPOL）和相位（CPHL）这两个因素</p><p>CPOL表示SCLK空闲时的状态。CPOL&#x3D;0，空闲时SCLK为低电平；CPOL&#x3D;1，空闲时SCLK为高电平。</p><p>CPHA表示采样时刻。CPHA&#x3D;0，每个周期的第一个时钟沿采样；CPHA&#x3D;1，每个周期的第二个时钟沿采样。</p><p>对于一个特定的从设备来说，一般在出厂时就会将其设计为某种特定的工作模式（看芯片手册）；我们在使用该设备时就必须保证主设备的工作模式和该从设备保持一致，否则是无法进行通信的；所以一般我们需要对主设备的CPOL和CPHA进行配置；</p><h1 id="I2C和SPI的异同"><a href="#I2C和SPI的异同" class="headerlink" title="I2C和SPI的异同"></a>I2C和SPI的异同</h1><h2 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h2><p>均采用串行、同步的方式</p><p>均采用TTL电平，传输距离和应用场景类似</p><p>均采用主从方式工作</p><h2 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h2><p>I2C为半双工，SPI为全双工</p><p>I2C有应答机制，SPI无应答机制</p><p>I2C通过向总线广播从机地址来寻址，SPI通过向对于从机发送使能信号来寻址</p><p>I2C的时钟极性和时钟相位固定，SPI的时钟极性和时钟相位可调</p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;本文将介绍SPI通信协议。&lt;/p&gt;
+&lt;p&gt;说明：学习嵌入式五大通信协议之一的SPI通信协议。&lt;/p&gt;</summary>
     
     
     

@@ -141,8 +141,8 @@
       </tags>
   </entry>
   <entry>
-    <title></title>
-    <url>/2023/05/03/SPI%E5%8D%8F%E8%AE%AE/</url>
+    <title>通信协议（4）SPI</title>
+    <url>/2023/04/06/SPI%E5%8D%8F%E8%AE%AE/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文将介绍SPI通信协议。</p>
 <p>说明：学习嵌入式五大通信协议之一的SPI通信协议。</p>
 <span id="more"></span>
