@@ -22,20 +22,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="前言本文将介绍如何在树莓派上安装系统。 说明：这是一篇之前写过的文章，最近搭建了个人博客顺便搬过来。">
+  <meta name="description" content="前言本文解决 Logi Options+ flow功能 时遇到的死活找不到配对电脑的问题。 说明：问题的起因是想在两台电脑之间共用一个鼠标。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="树莓派初始化">
-<meta property="og:url" content="http://example.com/2023/03/17/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%88%9D%E5%A7%8B%E5%8C%96/index.html">
+<meta property="og:title" content="罗技FLOW连接问题">
+<meta property="og:url" content="http://example.com/2023/04/20/%E7%BD%97%E6%8A%80flow%E8%BF%9E%E6%8E%A5%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="FaiMhr&#39;s Blog">
-<meta property="og:description" content="前言本文将介绍如何在树莓派上安装系统。 说明：这是一篇之前写过的文章，最近搭建了个人博客顺便搬过来。">
+<meta property="og:description" content="前言本文解决 Logi Options+ flow功能 时遇到的死活找不到配对电脑的问题。 说明：问题的起因是想在两台电脑之间共用一个鼠标。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-03-17T08:51:00.000Z">
-<meta property="article:modified_time" content="2023-03-19T13:39:57.663Z">
+<meta property="article:published_time" content="2023-04-20T03:00:00.000Z">
+<meta property="article:modified_time" content="2023-05-03T15:40:13.658Z">
 <meta property="article:author" content="马泓睿">
-<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="通信协议">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2023/03/17/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%88%9D%E5%A7%8B%E5%8C%96/">
+<link rel="canonical" href="http://example.com/2023/04/20/%E7%BD%97%E6%8A%80flow%E8%BF%9E%E6%8E%A5%E9%97%AE%E9%A2%98/">
 
 
 <script id="page-configurations">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>树莓派初始化 | FaiMhr's Blog</title>
+  <title>罗技FLOW连接问题 | FaiMhr's Blog</title>
   
 
 
@@ -198,7 +198,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/17/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%88%9D%E5%A7%8B%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/20/%E7%BD%97%E6%8A%80flow%E8%BF%9E%E6%8E%A5%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -211,7 +211,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          树莓派初始化
+          罗技FLOW连接问题
         </h1>
 
         <div class="post-meta">
@@ -221,14 +221,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-03-17 16:51:00" itemprop="dateCreated datePublished" datetime="2023-03-17T16:51:00+08:00">2023-03-17</time>
+              <time title="创建时间：2023-04-20 11:00:00" itemprop="dateCreated datePublished" datetime="2023-04-20T11:00:00+08:00">2023-04-20</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-19 21:39:57" itemprop="dateModified" datetime="2023-03-19T21:39:57+08:00">2023-03-19</time>
+                <time title="修改时间：2023-05-03 23:40:13" itemprop="dateModified" datetime="2023-05-03T23:40:13+08:00">2023-05-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -236,7 +236,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" itemprop="url" rel="index"><span itemprop="name">通信协议</span></a>
                 </span>
             </span>
 
@@ -251,72 +251,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文将介绍如何在树莓派上安装系统。</p>
-<p>说明：这是一篇之前写过的文章，最近搭建了个人博客顺便搬过来。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文解决 <strong>Logi Options+</strong> <strong>flow功能</strong> 时遇到的死活找不到配对电脑的问题。</p>
+<p>说明：问题的起因是想在两台电脑之间共用一个鼠标。</p>
 <span id="more"></span>
 
-<h1 id="树莓派环境搭建"><a href="#树莓派环境搭建" class="headerlink" title="树莓派环境搭建"></a>树莓派环境搭建</h1><h2 id="下载树莓派官方系统"><a href="#下载树莓派官方系统" class="headerlink" title="下载树莓派官方系统"></a>下载树莓派官方系统</h2><p>官方地址：<a target="_blank" rel="noopener" href="https://www.raspberrypi.org/software/operating-systems/">https://www.raspberrypi.org/software/operating-systems/</a></p>
-<p>选择自己需要的系统（支持pc，mac，pi），这里我选择的是 <strong>Raspberry Pi OS with desktop</strong> 这个带桌面的。直接点击 <strong>Archive</strong> 进入后，再点击进入 <strong>最新的日期</strong> 的文件夹，最后选择 <strong>.img.xz</strong> 结尾的文件（size最大的）下载。<br>注：.xz是压缩方式的一种</p>
-<p>由于这个是国外的网站下载速度可能会比较慢，要是太慢可以选择国内的镜像源： </p>
-<ol>
-<li>TUNA 镜像站（位于北京）：<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/raspberry-pi-os-images/">https://mirrors.tuna.tsinghua.edu.cn/raspberry-pi-os-images/</a></li>
-<li>SJTUG 镜像站（位于上海）：<a target="_blank" rel="noopener" href="https://mirrors.sjtug.sjtu.edu.cn/raspberry-pi-os-images/">https://mirrors.sjtug.sjtu.edu.cn/raspberry-pi-os-images/</a></li>
-</ol>
-<p>找到raspbian。</p>
-<ol>
-<li>raspbian&#x2F; 对应官网上的 Raspberry Pi OS with desktop 是带桌面的树莓派系统</li>
-<li>raspbian_full&#x2F; 对应官网上的 Raspberry Pi OS with desktop and recommended software 是带桌面和推荐软件的树莓派操作系统</li>
-<li>raspbian_lite&#x2F; 对应官网上的 Raspberry Pi OS Lite 是精简版的树莓派系统</li>
-</ol>
-<h2 id="安装树莓派官方系统"><a href="#安装树莓派官方系统" class="headerlink" title="安装树莓派官方系统"></a>安装树莓派官方系统</h2><p>当下载好系统后我们就需要把系统安装到SD卡中。</p>
-<p>第一步要将我们的SD卡格式化(主要确保SD卡里没东西，防止出错)。可以使用<a target="_blank" rel="noopener" href="https://www.sdcard.org/">SD Card Formatter</a>(由于是国外网址可能会比较卡，百度下载也是一样的)或者电脑的格式化工具(我的电脑–右键–管理–磁盘管理)<br><strong>注：看清楚再格式化，别弄错盘了！！！</strong></p>
-<p>第二步将下载好的系统镜像文件烧录进SD卡中。可以使用<a target="_blank" rel="noopener" href="https://sourceforge.net/projects/win32diskimager/">Win32DiskImager</a>软件进行烧录。<br><strong>步骤：</strong> 打开Win32DiskImager软件，在映像文件那放入解压后的 <strong>.img</strong> 镜像文件，选择SD卡所在的磁盘，点击 <strong>写入</strong> 耐心等待即可。</p>
-<h2 id="树莓派系统设置"><a href="#树莓派系统设置" class="headerlink" title="树莓派系统设置"></a>树莓派系统设置</h2><p>既然已经安装好了系统，之后只要稍加设置就可以愉快使用了。</p>
-<p>如果现在手头正好有屏幕并且树莓派的mini HDMI线也有的话，可以直接将SD卡插入树莓派并连接上屏幕在屏幕上进行操作。</p>
-<p>如果是没有屏幕的话，可以采用ssh进行连接。</p>
-<p><strong>下面是讲解没有屏幕时的方法。</strong><br>第一步在SD卡上写入两个文件(烧录完成后SD卡上会出现的boot分区，如果没有，拔下读卡器重插一下)。</p>
-<ol>
-<li>第一个文件是一个名字为<strong>ssh</strong>的空白文件(即新建文本文档，将文件名改为ssh，<strong>千万注意没有后缀哦</strong>)</li>
-<li>第二个文件是一个名字为<strong>wpa_supplicant.conf</strong>的文件(用写字板打开后，要在文件中写入一下内容)<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">country=CN</span><br><span class="line">ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</span><br><span class="line">update_config=1</span><br><span class="line"></span><br><span class="line">network=&#123;</span><br><span class="line">    ssid=<span class="string">&quot;想要连接的WiFi名称&quot;</span></span><br><span class="line">    psk=<span class="string">&quot;想要连接的WiFi密码&quot;</span></span><br><span class="line">    key_mgmt=WPA-PSK //WiFi的加密方式(应该可以不写)</span><br><span class="line">    priority=1 //连接优先级，数字越大优先级越高(不可以是负数)</span><br><span class="line">    scan_ssid=1 //连接隐藏WiFi时需要指定该值为1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>第二步这两个文件设置完毕后将SD卡插到树莓派上就可以了。没有问题的话，在路由器管理或者手机热点里可以看到连接了一个raspberrypi的设备，需要查看它连接的 <strong>IP地址</strong> 之后ssh连接会用到。</p>
-<p>第三步需要远程连接树莓派对其进行控制，可以使用<a target="_blank" rel="noopener" href="https://www.putty.be/">PuTTy</a>进行ssh连接<br><strong>步骤：</strong> 进入PuTTY 在Host Name(or IP address)下方的方框中输入刚看到的IP地址 点击下方的Open</p>
-<p>（若弹出任何窗口都不用管，选YES）在弹出的黑色窗口第一行输入当前设备名（第一次输入默认的是pi）pi, 回车 ，在第二行输入当前设备密码(第一次输入默认的是raspberry)raspberry(发现输入没有反应是正常的树莓派默认不会显示密码，我认为这个不好，后面可能会找找办法修改)，回车。这样就已经进入了设备。首次登陆会让你设置一个新密码，直接输入即可。</p>
-<p>树莓派官方系统默认：<br><strong>用户名：pi</strong><br><strong>密码：raspberry</strong></p>
-<p>ubunt系统默认：<br><strong>密码：ubuntu</strong></p>
-<p>以上步骤完成后其实已经能对树莓派进行控制了。如果想远程连接到树莓派桌面请往下看，不需要的可以跳过。</p>
-<p>第四步远程连接树莓派桌面，可以使用<a target="_blank" rel="noopener" href="https://www.realvnc.com/en/connect/download/viewer/">VNC Viewer</a>,下载完成后回到 <strong>Putty</strong> 输入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo raspi-config</span><br></pre></td></tr></table></figure>
-
-<p>接下来按顺序选择Interfacing Options–&gt;回车–&gt;VNC–&gt;回车–&gt;yes–&gt;回车–&gt;y–&gt;回车 (若选错想回退，按向下方向键到最下面按Tab切换)</p>
-<p>此时直接开启VNC若不显示屏幕则是分辨率的问题<br>再次使用 <strong>PuTTy</strong> 进入pi<br>输入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo raspi-config</span><br></pre></td></tr></table></figure>
-<p>接下来按照顺序选择Advanced Options–&gt;Resolution–&gt;选择合适的分辨率</p>
-<p><strong>查的时候发现改完分辨率后再启动可能还会有点问题，这里暂时不写了，后面可能会更新。</strong></p>
-<p>第五步按照pi的提示初始化系统。</p>
-<p>第六步进行换源(由于国外源很慢，可以考虑使用国内的源这样会在下载的时候快点)</p>
-<p>输入一下内容备份原文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">cp</span> /etc/apt/sources.list /etc/apt/sources.list.bak</span><br><span class="line">sudo <span class="built_in">cp</span> /etc/apt/sources.list.d/raspi.list /etc/apt/sources.list.d/raspi.list.bak</span><br></pre></td></tr></table></figure>
-
-<p>修改系统源文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
-
-<p>进入文件编辑模式，添加以下内容(将初始的源使用#注释掉，添加如下两行清华的镜像源)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main contrib non-free rpi</span><br><span class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main contrib non-free rpi</span><br></pre></td></tr></table></figure>
-
-<p>编辑完成后使用快捷键ctrl+x退出编辑，输入y，保存更改。</p>
-<p>更改系统源：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/apt/sources.list.d/raspi.list</span><br></pre></td></tr></table></figure>
-
-<p>进入文件编辑模式，添加以下内容(将初始的源使用#注释掉，添加如下两行清华的镜像源)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui</span><br><span class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui</span><br></pre></td></tr></table></figure>
-
-<p>执行更新</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
-
-<p>注：如果更新后出现文件管理器闪退，或者桌面失去响应之类的问题。建议使用如下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt full-upgrade</span><br></pre></td></tr></table></figure>
-
+<p>本人用的是罗技master3鼠标，想要在两台电脑之间使用同一个鼠标且不需要按切换按钮。步骤如下：</p>
+<h1 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h1><p>在两台电脑上下载 <a target="_blank" rel="noopener" href="https://www.logitech.com.cn/zh-cn/setup/mxsetup/logi-options.html">Logi Options+</a> 软件,并完成鼠标配对。</p>
+<h1 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h1><p>保持两台电脑处于同一个网络或局域网下，分别点击两台电脑 <strong>Logi Options+</strong> 下的 <strong>FLOW</strong> 尝试进行连接。如果前面设置正确并显示 <strong>未找到电脑</strong> 请往下看。</p>
+<h1 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h1><p>找了很久方法，有让两台电脑重新下软件的，有重启路由器的……没成功</p>
+<p>最后采用以下方法解决问题：</p>
+<p>win10找到 <strong>设置</strong> –&gt; <strong>主页</strong> –&gt; <strong>更新与安全</strong> –&gt; <strong>Windows安全中心</strong> –&gt; <strong>防火墙与网络保护</strong> –&gt; <strong>高级设置</strong> –&gt; <strong>入站规则&#x2F;出站规则</strong></p>
+<p>找到所有 <strong>Logi Options+ Agent</strong> 右击 <strong>属性</strong> ，找到 <strong>常规</strong> –&gt; <strong>操作</strong> –&gt; <strong>允许连接</strong></p>
+<p>重复第二步操作就可以了</p>
 
     </div>
 
@@ -336,7 +282,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" rel="tag"># 通信协议</a>
           </div>
 
         
@@ -344,10 +290,13 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2023/03/17/%E6%A0%91%E8%8E%93%E6%B4%BEHexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="next" title="树莓派Hexo博客搭建">
-      树莓派Hexo博客搭建 <i class="fa fa-chevron-right"></i>
+    <a href="/2023/04/10/Can%E5%8D%8F%E8%AE%AE/" rel="prev" title="通信协议（5）Can">
+      <i class="fa fa-chevron-left"></i> 通信协议（5）Can
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/05/03/SPI%E5%8D%8F%E8%AE%AE/" rel="next" title="">
+       <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -407,7 +356,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%91%E8%8E%93%E6%B4%BE%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">树莓派环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%98%E6%96%B9%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.1.</span> <span class="nav-text">下载树莓派官方系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%98%E6%96%B9%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.2.</span> <span class="nav-text">安装树莓派官方系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91%E8%8E%93%E6%B4%BE%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.3.</span> <span class="nav-text">树莓派系统设置</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5"><span class="nav-number">2.</span> <span class="nav-text">第一步</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5"><span class="nav-number">3.</span> <span class="nav-text">第二步</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5"><span class="nav-number">4.</span> <span class="nav-text">第三步</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

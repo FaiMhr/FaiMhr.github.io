@@ -22,20 +22,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="前言本文将介绍如何在树莓派上安装系统。 说明：这是一篇之前写过的文章，最近搭建了个人博客顺便搬过来。">
+  <meta name="description" content="前言本文将介绍RS232&#x2F;RS485通信协议。 说明：学习嵌入式五大通信协议之一的RS232&#x2F;RS485通信协议。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="树莓派初始化">
-<meta property="og:url" content="http://example.com/2023/03/17/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%88%9D%E5%A7%8B%E5%8C%96/index.html">
+<meta property="og:title" content="通信协议（2）mudbus">
+<meta property="og:url" content="http://example.com/2023/03/28/Mudbus%E5%8D%8F%E8%AE%AE/index.html">
 <meta property="og:site_name" content="FaiMhr&#39;s Blog">
-<meta property="og:description" content="前言本文将介绍如何在树莓派上安装系统。 说明：这是一篇之前写过的文章，最近搭建了个人博客顺便搬过来。">
+<meta property="og:description" content="前言本文将介绍RS232&#x2F;RS485通信协议。 说明：学习嵌入式五大通信协议之一的RS232&#x2F;RS485通信协议。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-03-17T08:51:00.000Z">
-<meta property="article:modified_time" content="2023-03-19T13:39:57.663Z">
+<meta property="article:published_time" content="2023-03-28T06:00:00.000Z">
+<meta property="article:modified_time" content="2023-05-03T15:37:34.059Z">
 <meta property="article:author" content="马泓睿">
-<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="通信协议">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2023/03/17/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%88%9D%E5%A7%8B%E5%8C%96/">
+<link rel="canonical" href="http://example.com/2023/03/28/Mudbus%E5%8D%8F%E8%AE%AE/">
 
 
 <script id="page-configurations">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>树莓派初始化 | FaiMhr's Blog</title>
+  <title>通信协议（2）mudbus | FaiMhr's Blog</title>
   
 
 
@@ -198,7 +198,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/17/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%88%9D%E5%A7%8B%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/28/Mudbus%E5%8D%8F%E8%AE%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -211,7 +211,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          树莓派初始化
+          通信协议（2）mudbus
         </h1>
 
         <div class="post-meta">
@@ -221,14 +221,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-03-17 16:51:00" itemprop="dateCreated datePublished" datetime="2023-03-17T16:51:00+08:00">2023-03-17</time>
+              <time title="创建时间：2023-03-28 14:00:00" itemprop="dateCreated datePublished" datetime="2023-03-28T14:00:00+08:00">2023-03-28</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-19 21:39:57" itemprop="dateModified" datetime="2023-03-19T21:39:57+08:00">2023-03-19</time>
+                <time title="修改时间：2023-05-03 23:37:34" itemprop="dateModified" datetime="2023-05-03T23:37:34+08:00">2023-05-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -236,7 +236,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" itemprop="url" rel="index"><span itemprop="name">通信协议</span></a>
                 </span>
             </span>
 
@@ -251,72 +251,57 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文将介绍如何在树莓派上安装系统。</p>
-<p>说明：这是一篇之前写过的文章，最近搭建了个人博客顺便搬过来。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文将介绍RS232&#x2F;RS485通信协议。</p>
+<p>说明：学习嵌入式五大通信协议之一的RS232&#x2F;RS485通信协议。</p>
 <span id="more"></span>
 
-<h1 id="树莓派环境搭建"><a href="#树莓派环境搭建" class="headerlink" title="树莓派环境搭建"></a>树莓派环境搭建</h1><h2 id="下载树莓派官方系统"><a href="#下载树莓派官方系统" class="headerlink" title="下载树莓派官方系统"></a>下载树莓派官方系统</h2><p>官方地址：<a target="_blank" rel="noopener" href="https://www.raspberrypi.org/software/operating-systems/">https://www.raspberrypi.org/software/operating-systems/</a></p>
-<p>选择自己需要的系统（支持pc，mac，pi），这里我选择的是 <strong>Raspberry Pi OS with desktop</strong> 这个带桌面的。直接点击 <strong>Archive</strong> 进入后，再点击进入 <strong>最新的日期</strong> 的文件夹，最后选择 <strong>.img.xz</strong> 结尾的文件（size最大的）下载。<br>注：.xz是压缩方式的一种</p>
-<p>由于这个是国外的网站下载速度可能会比较慢，要是太慢可以选择国内的镜像源： </p>
-<ol>
-<li>TUNA 镜像站（位于北京）：<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/raspberry-pi-os-images/">https://mirrors.tuna.tsinghua.edu.cn/raspberry-pi-os-images/</a></li>
-<li>SJTUG 镜像站（位于上海）：<a target="_blank" rel="noopener" href="https://mirrors.sjtug.sjtu.edu.cn/raspberry-pi-os-images/">https://mirrors.sjtug.sjtu.edu.cn/raspberry-pi-os-images/</a></li>
-</ol>
-<p>找到raspbian。</p>
-<ol>
-<li>raspbian&#x2F; 对应官网上的 Raspberry Pi OS with desktop 是带桌面的树莓派系统</li>
-<li>raspbian_full&#x2F; 对应官网上的 Raspberry Pi OS with desktop and recommended software 是带桌面和推荐软件的树莓派操作系统</li>
-<li>raspbian_lite&#x2F; 对应官网上的 Raspberry Pi OS Lite 是精简版的树莓派系统</li>
-</ol>
-<h2 id="安装树莓派官方系统"><a href="#安装树莓派官方系统" class="headerlink" title="安装树莓派官方系统"></a>安装树莓派官方系统</h2><p>当下载好系统后我们就需要把系统安装到SD卡中。</p>
-<p>第一步要将我们的SD卡格式化(主要确保SD卡里没东西，防止出错)。可以使用<a target="_blank" rel="noopener" href="https://www.sdcard.org/">SD Card Formatter</a>(由于是国外网址可能会比较卡，百度下载也是一样的)或者电脑的格式化工具(我的电脑–右键–管理–磁盘管理)<br><strong>注：看清楚再格式化，别弄错盘了！！！</strong></p>
-<p>第二步将下载好的系统镜像文件烧录进SD卡中。可以使用<a target="_blank" rel="noopener" href="https://sourceforge.net/projects/win32diskimager/">Win32DiskImager</a>软件进行烧录。<br><strong>步骤：</strong> 打开Win32DiskImager软件，在映像文件那放入解压后的 <strong>.img</strong> 镜像文件，选择SD卡所在的磁盘，点击 <strong>写入</strong> 耐心等待即可。</p>
-<h2 id="树莓派系统设置"><a href="#树莓派系统设置" class="headerlink" title="树莓派系统设置"></a>树莓派系统设置</h2><p>既然已经安装好了系统，之后只要稍加设置就可以愉快使用了。</p>
-<p>如果现在手头正好有屏幕并且树莓派的mini HDMI线也有的话，可以直接将SD卡插入树莓派并连接上屏幕在屏幕上进行操作。</p>
-<p>如果是没有屏幕的话，可以采用ssh进行连接。</p>
-<p><strong>下面是讲解没有屏幕时的方法。</strong><br>第一步在SD卡上写入两个文件(烧录完成后SD卡上会出现的boot分区，如果没有，拔下读卡器重插一下)。</p>
-<ol>
-<li>第一个文件是一个名字为<strong>ssh</strong>的空白文件(即新建文本文档，将文件名改为ssh，<strong>千万注意没有后缀哦</strong>)</li>
-<li>第二个文件是一个名字为<strong>wpa_supplicant.conf</strong>的文件(用写字板打开后，要在文件中写入一下内容)<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">country=CN</span><br><span class="line">ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</span><br><span class="line">update_config=1</span><br><span class="line"></span><br><span class="line">network=&#123;</span><br><span class="line">    ssid=<span class="string">&quot;想要连接的WiFi名称&quot;</span></span><br><span class="line">    psk=<span class="string">&quot;想要连接的WiFi密码&quot;</span></span><br><span class="line">    key_mgmt=WPA-PSK //WiFi的加密方式(应该可以不写)</span><br><span class="line">    priority=1 //连接优先级，数字越大优先级越高(不可以是负数)</span><br><span class="line">    scan_ssid=1 //连接隐藏WiFi时需要指定该值为1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>第二步这两个文件设置完毕后将SD卡插到树莓派上就可以了。没有问题的话，在路由器管理或者手机热点里可以看到连接了一个raspberrypi的设备，需要查看它连接的 <strong>IP地址</strong> 之后ssh连接会用到。</p>
-<p>第三步需要远程连接树莓派对其进行控制，可以使用<a target="_blank" rel="noopener" href="https://www.putty.be/">PuTTy</a>进行ssh连接<br><strong>步骤：</strong> 进入PuTTY 在Host Name(or IP address)下方的方框中输入刚看到的IP地址 点击下方的Open</p>
-<p>（若弹出任何窗口都不用管，选YES）在弹出的黑色窗口第一行输入当前设备名（第一次输入默认的是pi）pi, 回车 ，在第二行输入当前设备密码(第一次输入默认的是raspberry)raspberry(发现输入没有反应是正常的树莓派默认不会显示密码，我认为这个不好，后面可能会找找办法修改)，回车。这样就已经进入了设备。首次登陆会让你设置一个新密码，直接输入即可。</p>
-<p>树莓派官方系统默认：<br><strong>用户名：pi</strong><br><strong>密码：raspberry</strong></p>
-<p>ubunt系统默认：<br><strong>密码：ubuntu</strong></p>
-<p>以上步骤完成后其实已经能对树莓派进行控制了。如果想远程连接到树莓派桌面请往下看，不需要的可以跳过。</p>
-<p>第四步远程连接树莓派桌面，可以使用<a target="_blank" rel="noopener" href="https://www.realvnc.com/en/connect/download/viewer/">VNC Viewer</a>,下载完成后回到 <strong>Putty</strong> 输入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo raspi-config</span><br></pre></td></tr></table></figure>
-
-<p>接下来按顺序选择Interfacing Options–&gt;回车–&gt;VNC–&gt;回车–&gt;yes–&gt;回车–&gt;y–&gt;回车 (若选错想回退，按向下方向键到最下面按Tab切换)</p>
-<p>此时直接开启VNC若不显示屏幕则是分辨率的问题<br>再次使用 <strong>PuTTy</strong> 进入pi<br>输入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo raspi-config</span><br></pre></td></tr></table></figure>
-<p>接下来按照顺序选择Advanced Options–&gt;Resolution–&gt;选择合适的分辨率</p>
-<p><strong>查的时候发现改完分辨率后再启动可能还会有点问题，这里暂时不写了，后面可能会更新。</strong></p>
-<p>第五步按照pi的提示初始化系统。</p>
-<p>第六步进行换源(由于国外源很慢，可以考虑使用国内的源这样会在下载的时候快点)</p>
-<p>输入一下内容备份原文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">cp</span> /etc/apt/sources.list /etc/apt/sources.list.bak</span><br><span class="line">sudo <span class="built_in">cp</span> /etc/apt/sources.list.d/raspi.list /etc/apt/sources.list.d/raspi.list.bak</span><br></pre></td></tr></table></figure>
-
-<p>修改系统源文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
-
-<p>进入文件编辑模式，添加以下内容(将初始的源使用#注释掉，添加如下两行清华的镜像源)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main contrib non-free rpi</span><br><span class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main contrib non-free rpi</span><br></pre></td></tr></table></figure>
-
-<p>编辑完成后使用快捷键ctrl+x退出编辑，输入y，保存更改。</p>
-<p>更改系统源：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/apt/sources.list.d/raspi.list</span><br></pre></td></tr></table></figure>
-
-<p>进入文件编辑模式，添加以下内容(将初始的源使用#注释掉，添加如下两行清华的镜像源)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui</span><br><span class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui</span><br></pre></td></tr></table></figure>
-
-<p>执行更新</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
-
-<p>注：如果更新后出现文件管理器闪退，或者桌面失去响应之类的问题。建议使用如下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt full-upgrade</span><br></pre></td></tr></table></figure>
-
+<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p><strong>首先必须清楚一个概念RS232&#x2F;RS485并不是协议只是一个接口，mudbus才是通信协议</strong></p>
+<p><strong>Modbus协议支持传统的RS232、RS422、RS485接口和以太网设备接口</strong></p>
+<h1 id="UART存在的问题"><a href="#UART存在的问题" class="headerlink" title="UART存在的问题"></a>UART存在的问题</h1><p>Mudbus协议是电气层（物理层）的协议，依赖于串口协议，只是在电气层进行了一些处理，能让它的抗干扰能力更强，传输距离更远。</p>
+<p>一般做项目很少直接用串口直接进行通信的</p>
+<p>原因（UART存在的问题）：</p>
+<p><strong>电气接口不统一</strong></p>
+<p>UART只是对信号的时序进行了定义，而未定义接口的电气特性；</p>
+<p><strong>电气特性</strong>指网络物理层协议一个方面的特征。它规定传输二进制比特时线路上所采用的信号的电压高低、匹配阻抗大小、传输速率和距离限制等。</p>
+<p>UART通信时一般直接使用处理器使用的电平，即TTL电平，但不同的处理器使用的电平存在差异，所以不同的处理器使用通信时一般不能直接相连。</p>
+<p>例如：51单片机处理器高电平可能是5V，低电平是0V；stm32单片机处理器高电平可能是3.3V，低电平是0V。</p>
+<p>注：单片机是一种集成电路芯片，把很多功能集成到一块硅片上构成的一个小而完善的计算机系统</p>
+<p>视频上说：UART没有规定不同器件连接时连接器的标准，所以不同器件之间通过UART通信时连接很不方便。</p>
+<p><strong>我认为这不能算缺点，正是因为没有统一标准所以可以自由搭配，反而增强了UART的兼容性。</strong></p>
+<p><strong>抗干扰能力差</strong></p>
+<p>UART一般直接使用TTL信号来表示0和1，但TTL信号的抗干扰能力较差，数据在传输过程中很容易出错。</p>
+<p><strong>通信距离极短</strong></p>
+<p>因为TTL信号的抗干扰能力较差，所以其通信距离也很短，一般只能用于一个电路板上的两个不同芯片之间的通信。</p>
+<p>mudbus就由此诞生。</p>
+<h1 id="RS232接口"><a href="#RS232接口" class="headerlink" title="RS232接口"></a>RS232接口</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>RS-232标准接口（又称EIA RS-232）是由美国电子工业协会(Electronic Industry Association，EIA)联合贝尔系统公司、调制解调器厂家及计算机终端生产厂家于1970年<strong>共同制定的用于串行通讯的标准</strong>，其全名是“数据终端设备( DTE)和数据通信设备(DCE)之间串行二进制数据交换接口技术标准”。</p>
+<p>该标准规定<strong>采用一个标准的连接器</strong>，标准中<strong>对连接器的每一个引脚的作用加以规定</strong>，还<strong>对信号的电平加以规定</strong>。</p>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>该接口标准一开始采用25引脚的DB-25连接器，对引脚和信号也进行了定义；后来IBM的PC机将RS232简化成DB-9连接器，后来成为事实标准；现在在工业控制的RS-232接口一般只使用RXD、TXD、GND三条线。</p>
+<p><strong>全双工</strong></p>
+<h2 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h2><p>该标准规定逻辑“1”的电平为-5V到-15V，逻辑“0”的电平为+5V到+15V，选用该电气标准的目的在于提高抗干扰能力，增大通信距离，其传送距离一般可达15m。</p>
+<p>电平高，范围大，所以抗干扰能力强。</p>
+<h2 id="电平转换"><a href="#电平转换" class="headerlink" title="电平转换"></a>电平转换</h2><p>虽然很多处理器中都会集成UART控制器，但处理器产生的信号一般都是TTL信号并不符合RS232标准，所以一般需要在处理器外部添加电路对信号的电平进行转换。（添加外围电路，信号要经过其他芯片处理，例如MAX232EPE芯片，CH340芯片）</p>
+<p><strong>RS232只是在电气层面进行了改进，所以RS232编程和UART一样</strong></p>
+<h2 id="RS232存在的问题"><a href="#RS232存在的问题" class="headerlink" title="RS232存在的问题"></a>RS232存在的问题</h2><p>接口的信号电平值较高，易损坏接口电路的芯片，又因为与TTL电平不兼容，所以需要使用电平转换芯片才能与TTL电路连接。</p>
+<p>通信速度慢。</p>
+<p>易产生共模干扰，抗噪声干扰性弱。</p>
+<p>（共模干扰指的是干扰电压在信号线及其回线（一般称为信号地线）上的幅度相同，这里的电压以附近任何一个物体（大地、金属机箱、参考地线板等）为参考电位，干扰电流回路则是在导线与参考物体构成的回路中流动。）</p>
+<p>传输距离还是短。</p>
+<h1 id="RS485接口"><a href="#RS485接口" class="headerlink" title="RS485接口"></a>RS485接口</h1><h2 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h2><p>该接口标准由电信行业协会和电子工业联盟定义；使用该标准的通信网络能在<strong>远距离</strong>条件下以及电子噪声大的环境下<strong>有效传输信号</strong>；该标准允许连接多个收发器，，即具有<strong>多站能力</strong>，这样可以利用单一的RS485接口方便地建立起一个<strong>设备网络</strong>。</p>
+<p><strong>通信距离可达1500m</strong></p>
+<p><strong>抗干扰能力增强</strong></p>
+<p><strong>具有组网能力（32个站点）</strong></p>
+<p>主机需要对从机进行管理保证总线上的收发通畅。</p>
+<h2 id="信号-1"><a href="#信号-1" class="headerlink" title="信号"></a>信号</h2><p>RS485标准规定采用差分信号进行数据传输，两线间地电压差为+2V到+6V表示逻辑“1”，两线间地电压差为-2V到-6V表示逻辑“0”；使用<strong>差分信号</strong>能有效地减少噪声信号地干扰（有效降低共模干扰，因为差分信号两根线是互作参考，即使有干扰也是两根线共同被干扰，之间的电压差不变），延长通信距离，RS485地通信距离可达1500m；RS485接口信号地电平比RS232降低了，所以不易损坏接口电路地芯片，且<strong>该电平与TTL电平兼容</strong>，可方便地与TTL电路连接。</p>
+<p>串口和RS232都是通过一根线对GND线地高和低来表示1和0。</p>
+<p>差分信号：用两根线（双绞线）来描述一个信号，用两根线之间的差（有正负）的大小范围来描述1或0。</p>
+<h2 id="接口-1"><a href="#接口-1" class="headerlink" title="接口"></a>接口</h2><p>RS485采用两线制，这种接线方式为总线式拓扑结构，在同一总线上可以存在多个节点；</p>
+<p>因为采用两线制，数据的发送和接收都要使用这对差分信号线，<strong>发送和接收不能同时进行</strong>，所以只能采用<strong>半双工</strong>的工作方式，编程时也需要加以处理。</p>
+<h2 id="电平转换-1"><a href="#电平转换-1" class="headerlink" title="电平转换"></a>电平转换</h2><p>虽然很多处理器中都会集成UART控制器，但处理器产生的信号一般都是TTL信号并不是符合RS485标准的信号，所有一般我们还需要在处理器外部去添加电路将TTL信号转换成差分信号。（也就是要通过另一个芯片把单片机出来的单根线的信号转换成差分信号）</p>
+<h2 id="RS485的优势"><a href="#RS485的优势" class="headerlink" title="RS485的优势"></a>RS485的优势</h2><p>接口的信号电平值较低，不易损坏接口电路的芯片，且与TTL电平兼容，可以方便地与TTL电路连接。</p>
+<p>通信速度快</p>
+<p>抗噪声干扰能力强</p>
+<p>传输距离较远（1500m）</p>
+<p>可实现多节点组网</p>
 
     </div>
 
@@ -336,7 +321,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" rel="tag"># 通信协议</a>
           </div>
 
         
@@ -344,10 +329,13 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2023/03/17/%E6%A0%91%E8%8E%93%E6%B4%BEHexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="next" title="树莓派Hexo博客搭建">
-      树莓派Hexo博客搭建 <i class="fa fa-chevron-right"></i>
+    <a href="/2023/03/28/UART%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" rel="prev" title="通信协议（1）UART">
+      <i class="fa fa-chevron-left"></i> 通信协议（1）UART
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/04/06/I2C%E5%8D%8F%E8%AE%AE/" rel="next" title="通信协议（3）I2C">
+      通信协议（3）I2C <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -407,7 +395,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%91%E8%8E%93%E6%B4%BE%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">树莓派环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%98%E6%96%B9%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.1.</span> <span class="nav-text">下载树莓派官方系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%98%E6%96%B9%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.2.</span> <span class="nav-text">安装树莓派官方系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91%E8%8E%93%E6%B4%BE%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.3.</span> <span class="nav-text">树莓派系统设置</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F"><span class="nav-number">2.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UART%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">UART存在的问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RS232%E6%8E%A5%E5%8F%A3"><span class="nav-number">4.</span> <span class="nav-text">RS232接口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">4.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3"><span class="nav-number">4.2.</span> <span class="nav-text">接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7"><span class="nav-number">4.3.</span> <span class="nav-text">信号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B5%E5%B9%B3%E8%BD%AC%E6%8D%A2"><span class="nav-number">4.4.</span> <span class="nav-text">电平转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RS232%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">4.5.</span> <span class="nav-text">RS232存在的问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RS485%E6%8E%A5%E5%8F%A3"><span class="nav-number">5.</span> <span class="nav-text">RS485接口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B-1"><span class="nav-number">5.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7-1"><span class="nav-number">5.2.</span> <span class="nav-text">信号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3-1"><span class="nav-number">5.3.</span> <span class="nav-text">接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B5%E5%B9%B3%E8%BD%AC%E6%8D%A2-1"><span class="nav-number">5.4.</span> <span class="nav-text">电平转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RS485%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-number">5.5.</span> <span class="nav-text">RS485的优势</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
