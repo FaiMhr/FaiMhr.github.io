@@ -254,7 +254,6 @@
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文将介绍SPI通信协议。</p>
 <p>说明：学习嵌入式五大通信协议之一的SPI通信协议。</p>
 <span id="more"></span>
-
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>SPI是串行外设接口的缩写，SPI是一种高速的（跟I2C和UART相比）、全双工、同步的（共用一个时钟）串行通信总线；</p>
 <p>SPI采用主从方式工作，一般有一个主设备和一个或多个从设备；</p>
 <p>SPI需要至少4根线，分别是MISO（主设备输入从设备输出）、MOSI（主设备输出从设备输入）、SCLK（时钟）、CS（片选，用于寻址）；</p>
@@ -268,8 +267,8 @@
 <p>一个字节传送完成后<strong>无需应答</strong>即可开始下一个字节的传送，没有起始信号，没有结束信号，没有应答信号；</p>
 <p>SPI总线采用同步方式工作，时钟线在上升沿或下降沿时发送器向数据线上发送数据，在紧接着的下降沿或上升沿时接收器从数据线上读取数据，完成一位数据传送，八个时钟周期即可完成一个字节数据的传送；</p>
 <h1 id="极性和相位"><a href="#极性和相位" class="headerlink" title="极性和相位"></a>极性和相位</h1><p>SPI总线有四种不同的工作模式，取决于极性（CPOL）和相位（CPHL）这两个因素</p>
-<p>CPOL表示SCLK空闲时的状态。CPOL&#x3D;0，空闲时SCLK为低电平；CPOL&#x3D;1，空闲时SCLK为高电平。</p>
-<p>CPHA表示采样时刻。CPHA&#x3D;0，每个周期的第一个时钟沿采样；CPHA&#x3D;1，每个周期的第二个时钟沿采样。</p>
+<p>CPOL表示SCLK空闲时的状态。CPOL=0，空闲时SCLK为低电平；CPOL=1，空闲时SCLK为高电平。</p>
+<p>CPHA表示采样时刻。CPHA=0，每个周期的第一个时钟沿采样；CPHA=1，每个周期的第二个时钟沿采样。</p>
 <p>对于一个特定的从设备来说，一般在出厂时就会将其设计为某种特定的工作模式（看芯片手册）；我们在使用该设备时就必须保证主设备的工作模式和该从设备保持一致，否则是无法进行通信的；所以一般我们需要对主设备的CPOL和CPHA进行配置；</p>
 <h1 id="I2C和SPI的异同"><a href="#I2C和SPI的异同" class="headerlink" title="I2C和SPI的异同"></a>I2C和SPI的异同</h1><h2 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h2><p>均采用串行、同步的方式</p>
 <p>均采用TTL电平，传输距离和应用场景类似</p>
@@ -389,20 +388,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -486,7 +485,7 @@
 <div class="theme-info">
   <div class="powered-by"></div>
   
-  <span class="post-count">博客全站共12.5k字</span>
+  <span class="post-count">博客全站共16k字</span>
   <span class="post-meta-divider">|</span>
   本站访客数<span id="busuanzi_value_site_uv"></span>人次
 </div>
@@ -555,6 +554,8 @@
 
 
 
+
+  
 
   
 

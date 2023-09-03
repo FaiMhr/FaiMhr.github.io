@@ -248,8 +248,6 @@
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文将介绍UART通信协议。</p>
 <p>说明：学习嵌入式五大通信协议之一的UART通信协议。</p>
 <span id="more"></span>
-
-
 <h1 id="什么是UART通信协议"><a href="#什么是UART通信协议" class="headerlink" title="什么是UART通信协议"></a>什么是UART通信协议</h1><p>UART 通用异步收发器（Universal Asynchronous Receiver Transmitter），是一种通用的<strong>串行</strong>、<strong>异步</strong>通讯总线，有两条数据线，可实现<strong>全双工</strong>的发送和接收。</p>
 <p>在嵌入式系统中常用于主机与辅助设备之间的通信。（在嵌入式领域中使用最多的通信协议）</p>
 <h1 id="通信基础概念"><a href="#通信基础概念" class="headerlink" title="通信基础概念"></a>通信基础概念</h1><h2 id="并行和串行"><a href="#并行和串行" class="headerlink" title="并行和串行"></a>并行和串行</h2><p>总线的作用：在计算机不同传递数据或信息。</p>
@@ -262,7 +260,7 @@
 <h2 id="单工和双工"><a href="#单工和双工" class="headerlink" title="单工和双工"></a>单工和双工</h2><p>单工通信：有一方是发送器，另一方是接收器。通信时只能由发送器发送数据给接收器。单向的</p>
 <p>双工通信：双方可以发送数据也可以接收数据，但其中半双工里不能双方同时发送数据，只能一方发送一方接收。</p>
 <h2 id="波特率"><a href="#波特率" class="headerlink" title="波特率"></a>波特率</h2><p>波特率用于描述UART通信时的通信速度，其单位为bps（bit per second）即每秒钟传送的bit的数量。</p>
-<h1 id="UART帧格式-UART发送数据的格式"><a href="#UART帧格式-UART发送数据的格式" class="headerlink" title="UART帧格式 - UART发送数据的格式"></a>UART帧格式 - UART发送数据的格式</h1><p>起始位占1位，数据位（要发送的数据，5-8位，先发低位，后发高位位），校验位占1位（可有可无），停止位占1&#x2F;1.5或2位</p>
+<h1 id="UART帧格式-UART发送数据的格式"><a href="#UART帧格式-UART发送数据的格式" class="headerlink" title="UART帧格式 - UART发送数据的格式"></a>UART帧格式 - UART发送数据的格式</h1><p>起始位占1位，数据位（要发送的数据，5-8位，先发低位，后发高位位），校验位占1位（可有可无），停止位占1/1.5或2位</p>
 <p>当不发送数据时，规定数据线上的状态必须是高电平。</p>
 <p>起始位的电平为低电平。</p>
 <p>通常来说数据位发送8位（一个字节），但5-8位都可以。为什么不能发很多位是为了避免累计误差，由于双方时钟可能存在误差，会导致结果漏掉其中的一两位，发5-8位可以减小累计误差的影响，不至于影响一整个数据。</p>
@@ -302,8 +300,6 @@
 <h1 id="输入输出重定向"><a href="#输入输出重定向" class="headerlink" title="输入输出重定向"></a>输入输出重定向</h1><h2 id="如何让串口发送字符串"><a href="#如何让串口发送字符串" class="headerlink" title="如何让串口发送字符串"></a>如何让串口发送字符串</h2><p>首先需要把要发送字符串的首地址传到函数中，再通过发送函数把字符串的每一个字一个一个发出去。</p>
 <p>举例</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">void UART_Send_Str(char * pstr)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">while</span>(*pstr != <span class="string">&#x27;\0&#x27;</span>)</span><br><span class="line">    UART_Send_Byte(*pstr++);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># pstr是字符串的首地址，*pstr是首地址对应的内容。</span></span><br></pre></td></tr></table></figure>
-
-
 <h2 id="输出重定向"><a href="#输出重定向" class="headerlink" title="输出重定向"></a>输出重定向</h2><p>之前电脑安装了C库所以printf输出的内容通过显卡输出到显示屏上；在开发板没有安装C库之前在程序中自定义了printf函数，所以printf输出的内容通过开发板发送到UART上。</p>
 <p>这就是输出重定向。<strong>主要用于系统移植</strong></p>
 
@@ -417,20 +413,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -514,7 +510,7 @@
 <div class="theme-info">
   <div class="powered-by"></div>
   
-  <span class="post-count">博客全站共12.5k字</span>
+  <span class="post-count">博客全站共16k字</span>
   <span class="post-meta-divider">|</span>
   本站访客数<span id="busuanzi_value_site_uv"></span>人次
 </div>
@@ -583,6 +579,8 @@
 
 
 
+
+  
 
   
 

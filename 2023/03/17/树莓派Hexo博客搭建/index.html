@@ -252,76 +252,58 @@
 
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文将介绍如何使用Hexo+Github搭建个人博客(适用于Linux)。</p>
-<p>说明：本片文章参考了CSDN，知乎，他人博客。特别感谢CSDN<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42293280/article/details/114487698?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1-114487698-blog-104490335.pc_relevant_3mothn_strategy_recovery&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1-114487698-blog-104490335.pc_relevant_3mothn_strategy_recovery&utm_relevant_index=2">树莓派搭建个人博客</a>的作者 周-周 ，知乎<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26625249">GitHub+Hexo 搭建个人网站详细教程</a>的作者 知乎用户wdnLIq，个人博客<a target="_blank" rel="noopener" href="https://homepea.top/2020/02.Hexo+Next/#more">记录Hexo建站</a>的作者Homepea。写这篇文章的目的在于记录下自己搭建Hexo博客的过程。</p>
+<p>说明：本片文章参考了CSDN，知乎，他人博客。特别感谢CSDN<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42293280/article/details/114487698?spm=1001.2101.3001.6650.1&amp;utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1-114487698-blog-104490335.pc_relevant_3mothn_strategy_recovery&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1-114487698-blog-104490335.pc_relevant_3mothn_strategy_recovery&amp;utm_relevant_index=2">树莓派搭建个人博客</a>的作者 周-周 ，知乎<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26625249">GitHub+Hexo 搭建个人网站详细教程</a>的作者 知乎用户wdnLIq，个人博客<a target="_blank" rel="noopener" href="https://homepea.top/2020/02.Hexo+Next/#more">记录Hexo建站</a>的作者Homepea。写这篇文章的目的在于记录下自己搭建Hexo博客的过程。</p>
 <span id="more"></span>
-
 <h1 id="创建GitHub的个人仓库"><a href="#创建GitHub的个人仓库" class="headerlink" title="创建GitHub的个人仓库"></a>创建GitHub的个人仓库</h1><p>登录到<a target="_blank" rel="noopener" href="https://github.com/">GitHub</a>，如果没有Github账号先<a target="_blank" rel="noopener" href="https://github.com/signup?source=login">注册</a>，<a target="_blank" rel="noopener" href="https://github.com/login">登录</a>完成后看到界面右上角有个 <strong>+</strong> 号，点击 <strong>+</strong> 号会有一个下拉菜单，点击 <strong>New repository</strong> 创建个人仓库。</p>
 <p>[图片待更新]</p>
 <p>进入 <strong>Create a new repository</strong> 界面，下方有一个 <strong>Repository name</strong> 在下面方框内输入仓库名: 用户名.github.io(注意:必须以.github.io结尾，这是固定写法)。例如: faimhr.github.io</p>
 <p>[图片待更新]</p>
 <h1 id="相关软件配置"><a href="#相关软件配置" class="headerlink" title="相关软件配置"></a>相关软件配置</h1><h2 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h2><p>用putty进入终端输入以下命令，安装git</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
-
 <p>注: git是一个开源的分布式版本控制系统，用以有效、高速的处理从很小到非常大的项目版本管理。是Linux  Torvalds为了帮助管理Linux内核开发而开发的一个开放源码的版本控制软件。</p>
 <p>在终端输入一下命令修改全局用户名(需要修改双引号中的内容)</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;你的GitHub/Gitee用户名&quot;</span>  </span><br><span class="line">git config --global user.email <span class="string">&quot;你的GitHub/Gitee邮箱&quot;</span></span><br></pre></td></tr></table></figure>
-
 <p>在终端输入以下命令查看是否修改成功：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --list</span><br></pre></td></tr></table></figure>
-
 <p>如果能看到刚刚输入的 <strong>用户名和邮箱</strong> ，说明已经修改完成了。</p>
 <p>[图片待更新]</p>
 <h2 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h2><p>首先查看树莓派的架构，树莓派终端输入命令:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">uname</span> -a</span><br></pre></td></tr></table></figure>
-
 <p>[图片待更新]</p>
 <p>此处armv71表示是armv7架构的，记住这个下一步会用到。</p>
 <p>登录<a target="_blank" rel="noopener" href="https://nodejs.org/en/download">Nood.js官网</a>找到对应的型号。</p>
 <p>目前最新的版本是 <strong>18.15.0</strong> ，可以选择其他的版本只需要修改版本号就行。(如果最新版本安装不成功也可以试试其他的版本)</p>
 <p>在终端输入以下命令: </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://nodejs.org/dist/v18.15.0/node-v18.15.0-linux-armv7l.tar.xz</span><br></pre></td></tr></table></figure>
-
 <p>由于是国外网站下载可能会比较慢，可以使用国内的镜像进行下载。</p>
 <p>在终端中输入以下命令: </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://cdn.npm.taobao.org/dist/node/latest-v18.x/node-v18.15.0-linux-armv7l.tar.xz</span><br></pre></td></tr></table></figure>
-
 <p>下载完成后，会得到一个二进制压缩包，需要对其进行解压。</p>
 <p>在终端中输入以下命令: </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xz -d node-v18.15.0-linux-armv7l.tar.xz &amp;&amp; tar -xavf node-v18.15.0-linux-armv7l.tar</span><br></pre></td></tr></table></figure>
-
 <p>如果失败请尝试以下命令: </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo xz -d node-v18.15.0-linux-armv7l.tar.xz &amp;&amp; sudo tar -xavf node-v18.15.0-linux-armv7l.tar</span><br></pre></td></tr></table></figure>
-
 <p>如果还不成功建议尝试其他版本，参考文章使用了 <strong>v14.15.4</strong> </p>
-<p>解压后，将解压文件移动到 <strong>&#x2F;usr&#x2F;local&#x2F;node</strong> 下，在终端输入：</p>
+<p>解压后，将解压文件移动到 <strong>/usr/local/node</strong> 下，在终端输入：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">mv</span> ./node-v18.15.0-linux-armv7l /usr/local/node</span><br></pre></td></tr></table></figure>
-
 <p>然后为 <strong>node</strong> 和 <strong>npm</strong> 建立软连接，在终端输入：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">ln</span> -s /usr/local/node/bin/node /usr/bin/node</span><br><span class="line">sudo <span class="built_in">ln</span> -s /usr/local/node/bin/npm /usr/bin/npm</span><br><span class="line"><span class="comment">#这类似于Windows中的快捷方式</span></span><br></pre></td></tr></table></figure>
-
 <p>可以通过以下命令检测Node.js是否安装成功</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
-
 <p>可以通过以下命令检测npm是否安装成功</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm -v</span><br></pre></td></tr></table></figure>
-
 <p>显示正确的版本号后说明已经完成了安装，接下来准备安装 <strong>hexo</strong> 博客框架。</p>
 <h1 id="Hexo博客搭建"><a href="#Hexo博客搭建" class="headerlink" title="Hexo博客搭建"></a>Hexo博客搭建</h1><p>首先在终端输入以下命令回到树莓派根目录</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span></span><br></pre></td></tr></table></figure>
-
 <p>接下来需要给Hexo创建一个文件夹来存放博客相关的内容，文件夹的名字可以任意，这里以blog为例。</p>
 <p>在终端输入以下命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">mkdir</span> blog</span><br></pre></td></tr></table></figure>
-
 <p>在终端输入以下命令进入刚刚创建的文件夹</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> blog</span><br></pre></td></tr></table></figure>
-
 <p>进入文件夹后将初始化Hexo，在终端中输入以下命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo hexo init</span><br></pre></td></tr></table></figure>
-
 <p>启动Hexo，在终端中输入以下命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo hexo s</span><br></pre></td></tr></table></figure>
-
 <p>终端会出现一个 <strong>网址</strong> ，并说按 <strong>ctrl + c</strong> 退出</p>
 <p>[图片待更新]</p>
 <p>此时在退出前可以在 <strong>树莓派浏览器</strong> 输入 <strong>该网址</strong> 查看搭建的博客，也可以在与树莓派连接 <strong>同一个网络电脑的浏览器</strong> 上输入 <strong>树莓派IP:4000</strong> 查看搭建的博客。</p>
@@ -330,47 +312,37 @@
 <p>回到终端按 <strong>ctrl + c</strong> 退出浏览，此时就完成了Hexo本地的搭建，接下来将把本地的Hexo部署到一开始创建的GitHub个人仓库中，实现可以随时随地打开个人博客。</p>
 <h1 id="本地的Hexo部署到GitHub个人仓库中"><a href="#本地的Hexo部署到GitHub个人仓库中" class="headerlink" title="本地的Hexo部署到GitHub个人仓库中"></a>本地的Hexo部署到GitHub个人仓库中</h1><p>首先在终端输入以下命令进入博客的根目录</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> blog</span><br></pre></td></tr></table></figure>
-
 <p>注意：如果此时终端还在其他文件夹中，必须先回到根目录下再进行以上操作。</p>
 <p>进入博客根目录后，需要安装一个Hexo的上传插件(保证后面本地到GitHub的部署)，在终端中输入以下命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cnpm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
-
 <p>安装完成后，需要修改Hexo配置文件指定仓库路径</p>
 <p>我们先找到博客根目录下的配置文件 <strong>_config.yml</strong> ，后面我们统一称其为 <strong>站点配置文件</strong></p>
 <p>在博客根目录下输入以下命令可以查看该文件夹下 <strong>除了隐藏文件的所有文件</strong> </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span></span><br></pre></td></tr></table></figure>
-
 <p>输入以下命令可以查看该文件夹下 <strong>所有文件</strong> </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -a</span><br></pre></td></tr></table></figure>
-
 <p>此时我们一定能看到一个名字是 <strong>_config.yml</strong> 的文件，输入以下命令进入该文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano _config.yml</span><br></pre></td></tr></table></figure>
-
 <p>进入_config.yml后，找到deploy: (可以用 <strong>ctrl + w</strong> 搜索)，在后面修改或增加以下内容</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/你的账户名/你的账户名.github.io</span><br><span class="line">  branch: master</span><br><span class="line">  <span class="comment"># 注意这里的冒号后要加空格！！！</span></span><br></pre></td></tr></table></figure>
-
 <p>修改完成后，按 <strong>ctrl + x</strong> 退出文件编辑，提示是否保存，输入 <strong>y</strong> 保存，提示文件名是否修改，不修改直接按 <strong>回车</strong>。</p>
 <p>完成后在终端中输入以下命令，确保终端在博客的根目录下，这时终端的确是在博客根目录下，但以后自己修改其他文件的时候可能结束编辑后不在这个位置了， <strong>要对博客进行部署操作要在博客根目录文件夹下进行操作！</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> blog</span><br></pre></td></tr></table></figure>
-
 <p>然后在终端依次执行以下三条命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo hexo clean</span><br><span class="line">sudo hexo g</span><br><span class="line">sudo hexo s</span><br></pre></td></tr></table></figure>
 <p>当然也可以直接输入以下命令，它会自动依次执行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo hexo clean &amp;&amp; sudo hexo g &amp;&amp; sudo hexo s</span><br></pre></td></tr></table></figure>
-
 <p>sudo hexo clean 是用于清理缓存文件</p>
 <p>sudo hexo g 是用于重新生成静态文件</p>
 <p>sudo hexo s 是用于启动本地服务器</p>
 <p>以上三步完成后按 <strong>ctrl + c</strong> 退出</p>
 <p>在终端中输入以下命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo hexo d</span><br></pre></td></tr></table></figure>
-
 <p>sudo hexo d 是用于把静态文件部署到设定的仓库</p>
 <p>如果没有错误的话，终端上会要求输入你的GitHub用户名和密码，此处需要注意了。</p>
 <p>在2021年8月14日开始github官方就加强安全访问。不能通过原有账号密码git访问，密码需要用官方的token或者采用ssh公私钥访问。否则会出现：鉴权失败（用户名密码错误）</p>
 <p>[图片待更新]</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">官方原话：</span><br><span class="line">近年来，GitHub 客户受益于 GitHub.com 的许多安全增强功能，例如双因素身份验证、登录警报、经过验证的设备、防止使用泄露密码和 WebAuthn 支持。 这些功能使攻击者更难获取在多个网站上重复使用的密码并使用它来尝试访问您的 GitHub 帐户。 尽管有这些改进，但由于历史原因，未启用双因素身份验证的客户仍能够仅使用其GitHub 用户名和密码继续对 Git 和 API 操作进行身份验证。</span><br><span class="line">从 2021 年 8 月 13 日开始，我们将在对 Git 操作进行身份验证时不再接受帐户密码，并将要求使用基于令牌（token）的身份验证，例如个人访问令牌（针对开发人员）或 OAuth 或 GitHub 应用程序安装令牌（针对集成商） GitHub.com 上所有经过身份验证的 Git 操作。 您也可以继续在您喜欢的地方使用 SSH 密钥</span><br></pre></td></tr></table></figure>
-
 <p>那么就需要获得token或者ssh公私钥。</p>
 <p>如何获得token</p>
 <p>登录github点击 <strong>右上角头像旁边的下拉菜单</strong> 选择 <strong>setting-&gt; Developer Settings-&gt; Prosonal access tokens -&gt; Tokens(classic)</strong> 点进去右边会看到 <strong>Generate new token</strong> ，点击并选择 <strong>Generate new token(classic)</strong> 进去后 <strong>Note栏</strong> <strong>任意</strong>取一个名字就行，<strong>Expiration</strong> 需要选择一个有效期，按自己的喜好选就行，嫌麻烦就选 No Expiration ，选完后拉到最下面点击 <strong>Generate token</strong> 这样创建一个新token，此时页面会跳转，需要把新token复制下来保存好就行了，每次更新复制粘贴就行了。</p>
@@ -379,7 +351,7 @@
 <p>注：网上有能直接使用公钥跳过每次输入用户名和密码的步骤，但是我没有成功，还不知道问题在哪里，要是找到问题后面再更新。</p>
 <p>终端出现 <strong>INFO Deplay done: git</strong> 说明已经部署成功了。</p>
 <p>此时可以在任意手机电脑的浏览器输入仓库的名字就能随时进行访问了。</p>
-<p>到这里 GitHub+Hexo 搭建的个人网站就顺利完成了！后面就可以在 <strong>blog&#x2F;source&#x2F;_posts&#x2F;</strong> 这个文件夹下写文章了，所有博客都是以 <strong>.md</strong> 格式保存的。当然hexo博客支持很多不同的主题，可以对自己的博客进行美化，这就后面在Hexo博客美化文章中更新吧。</p>
+<p>到这里 GitHub+Hexo 搭建的个人网站就顺利完成了！后面就可以在 <strong>blog/source/_posts/</strong> 这个文件夹下写文章了，所有博客都是以 <strong>.md</strong> 格式保存的。当然hexo博客支持很多不同的主题，可以对自己的博客进行美化，这就后面在Hexo博客美化文章中更新吧。</p>
 
     </div>
 
@@ -407,13 +379,10 @@
 
         
     <div class="post-nav">
+      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2023/03/17/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%88%9D%E5%A7%8B%E5%8C%96/" rel="prev" title="树莓派初始化">
-      <i class="fa fa-chevron-left"></i> 树莓派初始化
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2023/03/28/%E6%95%B0%E6%8D%AE%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AD%98%E5%82%A8/" rel="next" title="数据在内存中的存储">
-      数据在内存中的存储 <i class="fa fa-chevron-right"></i>
+    <a href="/2023/03/17/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%88%9D%E5%A7%8B%E5%8C%96/" rel="next" title="树莓派初始化">
+      树莓派初始化 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -491,20 +460,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -588,7 +557,7 @@
 <div class="theme-info">
   <div class="powered-by"></div>
   
-  <span class="post-count">博客全站共12.5k字</span>
+  <span class="post-count">博客全站共16k字</span>
   <span class="post-meta-divider">|</span>
   本站访客数<span id="busuanzi_value_site_uv"></span>人次
 </div>
@@ -657,6 +626,8 @@
 
 
 
+
+  
 
   
 

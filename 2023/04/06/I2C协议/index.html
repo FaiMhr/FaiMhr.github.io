@@ -254,7 +254,6 @@
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文将介绍I2C通信协议。</p>
 <p>说明：学习嵌入式五大通信协议之一的I2C通信协议。</p>
 <span id="more"></span>
-
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>I2C总线也称IIC总线是Philips公司在八十年代初推出的一种<strong>串行</strong>、<strong>半双工</strong>总线主要用于<strong>近距离</strong>、<strong>低速</strong>的<strong>芯片之间</strong>的通信；I2C总线有两根双向的信号线一根<strong>数据线SDA</strong>用于收发数据，一根<strong>时钟线SCL</strong>用于通信双方时钟的同步；I2C总线硬件结构简单，成本较低，因此在各个领域得到了广泛的应用。</p>
 <p>I2C总线是一种<strong>多主机总线</strong>，连接在I2C总线上的器件分为主机和从机，<strong>主机有权发起和结束一次通信</strong>，而从机只能被主机呼叫；当总线上有多个主机同时启用总线时，I2C也具备冲突检测和仲裁的功能来防止错误产生；每个连接到I2C总线上的器件都有一个<strong>唯一的地址</strong>（7bit），且每个器件都可以作为主机也可以作为从机（<strong>同一时刻只能有一个主机</strong>），总线上的器件增加和删除不影响其他器件正常工作；I2C总线在通信时总线上发送数据的器件为发送器，接收数据的器件为接收器。</p>
 <h1 id="I2C总线通信过程"><a href="#I2C总线通信过程" class="headerlink" title="I2C总线通信过程"></a>I2C总线通信过程</h1><p>1、主机发送起始信号启用总线</p>
@@ -277,7 +276,7 @@
 <h2 id="字节传送与应答-1"><a href="#字节传送与应答-1" class="headerlink" title="字节传送与应答"></a>字节传送与应答</h2><p>I2C总线通信时每个字节为8位长度，数据传送时，<strong>先传送最高位，后传送低位</strong>，发送器发送完一个字节数据后接收器必须<strong>发送1位应答位</strong>来回应发送器即一帧共9位。</p>
 <h1 id="典型I2C时序"><a href="#典型I2C时序" class="headerlink" title="典型I2C时序"></a>典型I2C时序</h1><h2 id="主机向从机发送数据"><a href="#主机向从机发送数据" class="headerlink" title="主机向从机发送数据"></a>主机向从机发送数据</h2><p>主机发送一个起始信号——主机发送一个字节的从机地址数据——主机发送一个0表示数据由主机发给从机——被寻址的从机要发送一个应答信号——主机发送数据，从机接收数据——从机发送应答信号——……——当主机接收到应答信号后主机主动发送停止信号<strong>或者</strong>当主机没有接收到应答信号，就会发送停止信号</p>
 <h2 id="从机向主机发送数据"><a href="#从机向主机发送数据" class="headerlink" title="从机向主机发送数据"></a>从机向主机发送数据</h2><p>主机发送一个起始信号——主机发送一个字节的从机地址数据——主机发送一个1表示数据由从机发给主机——被寻址的从机要发送一个应答信号——从机发送数据，主机接收数据——主机发送应答信号——……——主机不发送应答信号——主机发送停止信号</p>
-<h2 id="主机先向从机发送数据，然后从机再向主机发送数据（这种情况不可能在一次I2C通信中实现）"><a href="#主机先向从机发送数据，然后从机再向主机发送数据（这种情况不可能在一次I2C通信中实现）" class="headerlink" title="主机先向从机发送数据，然后从机再向主机发送数据（这种情况不可能在一次I2C通信中实现）"></a>主机先向从机发送数据，然后从机再向主机发送数据（这种情况不可能在一次I2C通信中实现）</h2><p>主机发送一个起始信号——主机发送一个字节的从机地址数据——主机发送一个0表示数据由主机发给从机——被寻址的从机要发送一个应答信号——主机发送数据，从机接收数据——从机发送应答信号——……——从机不发送应答信号 &#x2F; —— &#x2F; 主机发送一个起始信号——主机发送一个字节的从机地址数据——主机发送一个1表示数据由从机发给主机——被寻址的从机要发送一个应答信号——从机发送数据，主机接收数据——主机发送应答信号——……——主机不发送应答信号——主机发送停止信号</p>
+<h2 id="主机先向从机发送数据，然后从机再向主机发送数据（这种情况不可能在一次I2C通信中实现）"><a href="#主机先向从机发送数据，然后从机再向主机发送数据（这种情况不可能在一次I2C通信中实现）" class="headerlink" title="主机先向从机发送数据，然后从机再向主机发送数据（这种情况不可能在一次I2C通信中实现）"></a>主机先向从机发送数据，然后从机再向主机发送数据（这种情况不可能在一次I2C通信中实现）</h2><p>主机发送一个起始信号——主机发送一个字节的从机地址数据——主机发送一个0表示数据由主机发给从机——被寻址的从机要发送一个应答信号——主机发送数据，从机接收数据——从机发送应答信号——……——从机不发送应答信号 / —— / 主机发送一个起始信号——主机发送一个字节的从机地址数据——主机发送一个1表示数据由从机发给主机——被寻址的从机要发送一个应答信号——从机发送数据，主机接收数据——主机发送应答信号——……——主机不发送应答信号——主机发送停止信号</p>
 <p>注：中间不需要发送停止信号，就可以避免中间切换的过程中总线的使用权被其他从机占用。</p>
 
     </div>
@@ -390,20 +389,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -487,7 +486,7 @@
 <div class="theme-info">
   <div class="powered-by"></div>
   
-  <span class="post-count">博客全站共12.5k字</span>
+  <span class="post-count">博客全站共16k字</span>
   <span class="post-meta-divider">|</span>
   本站访客数<span id="busuanzi_value_site_uv"></span>人次
 </div>
@@ -556,6 +555,8 @@
 
 
 
+
+  
 
   
 
