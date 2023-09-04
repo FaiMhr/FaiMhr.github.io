@@ -1,35 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
-    <url>/2023/09/03/1/</url>
-    <content><![CDATA[<p>mathjax: true</p>
-<html>
-
-<head>
-  <title>各坐标轴增量公式</title>
-</head>
-
-<body>
-<table style="width:100%;border-collapse: collapse;">
-  <tr style="border-top: none;">
-    <td style="border: none;width: 20px;">&nbsp</td>
-    <td style="border: none;width: 100px;">$$\left\{ \begin {array}{l}
-\Delta x = \frac  {({x_n} - {x_0})}  {N}\\
-\Delta y = \frac  {({y_n} - {y_0})}  {N}\\
-\Delta z = \frac  {({z_n} - {z_0})}  {N}
-\end{array} \right.$$</td>
-    <td style="border: none;width: 20px;text-align: right;">式(4)</td>
-  </tr>
-</table>
-</body>
-
-</html>
-
-
-]]></content>
-  </entry>
-  <entry>
     <title>通信协议（5）Can</title>
     <url>/2023/04/10/Can%E5%8D%8F%E8%AE%AE/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文将介绍Can通信协议。</p>

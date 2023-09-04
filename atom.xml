@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-09-03T16:06:47.837Z</updated>
+  <updated>2023-09-04T14:47:31.874Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,35 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title></title>
-    <link href="http://example.com/2023/09/03/1/"/>
-    <id>http://example.com/2023/09/03/1/</id>
-    <published>2023-09-03T15:11:30.422Z</published>
-    <updated>2023-09-03T16:06:47.837Z</updated>
-    
-    <content type="html"><![CDATA[<p>mathjax: true</p><html><head>  <title>各坐标轴增量公式</title></head><body><table style="width:100%;border-collapse: collapse;">  <tr style="border-top: none;">    <td style="border: none;width: 20px;">&nbsp</td>    <td style="border: none;width: 100px;">$$\left\{ \begin {array}{l}\Delta x = \frac  {({x_n} - {x_0})}  {N}\\\Delta y = \frac  {({y_n} - {y_0})}  {N}\\\Delta z = \frac  {({z_n} - {z_0})}  {N}\end{array} \right.$$</td>    <td style="border: none;width: 20px;text-align: right;">式(4)</td>  </tr></table></body></html>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;mathjax: true&lt;/p&gt;
-&lt;html&gt;
-
-&lt;head&gt;
-  &lt;title&gt;各坐标轴增量公式&lt;/title&gt;
-&lt;/head&gt;
-
-&lt;body&gt;
-&lt;table style=&quot;width:100%;border-collapse: collapse;&quot;&gt;
-  &lt;tr st</summary>
-      
-    
-    
-    
-    
-  </entry>
   
   <entry>
     <title>机械臂笛卡尔空间规划</title>
