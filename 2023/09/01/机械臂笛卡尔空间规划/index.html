@@ -29,15 +29,15 @@
 <meta property="og:site_name" content="FaiMhr&#39;s Blog">
 <meta property="og:description" content="前言本文将介绍笛卡尔空间规划方法。 说明：失踪人口回归，这段时间一直在帮导师写机器人运动规划方面的东西，之前从来没有接触过这方面的知识，通过不断地查资料看论文对机器人运动规划有了一些浅薄的认知。想通过这篇博客记录下学习到的笛卡尔空间规划的知识。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2023/09/01/%E6%9C%BA%E6%A2%B0%E8%87%82%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/picture/%E7%A9%BA%E9%97%B4%E7%9B%B4%E7%BA%BF.jpg#centered">
-<meta property="og:image" content="http://example.com/2023/09/01/%E6%9C%BA%E6%A2%B0%E8%87%82%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/picture/%E7%A9%BA%E9%97%B4%E4%B8%89%E7%82%B9%E5%8F%8A%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0.jpg#centered">
-<meta property="og:image" content="http://example.com/2023/09/01/%E6%9C%BA%E6%A2%B0%E8%87%82%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/picture/%E5%B9%B3%E9%9D%A2%E5%9D%90%E6%A0%87%E7%B3%BB%E5%AE%9A%E4%B9%89.jpg#centered">
+<meta property="og:image" content="http://example.com/2023/09/01/%E6%9C%BA%E6%A2%B0%E8%87%82%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/%E6%9C%BA%E6%A2%B0%E8%87%82%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/%E7%A9%BA%E9%97%B4%E7%9B%B4%E7%BA%BF.jpg#centered">
+<meta property="og:image" content="http://example.com/2023/09/01/%E6%9C%BA%E6%A2%B0%E8%87%82%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/%E6%9C%BA%E6%A2%B0%E8%87%82%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/%E7%A9%BA%E9%97%B4%E4%B8%89%E7%82%B9%E5%8F%8A%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0.jpg#centered">
+<meta property="og:image" content="http://example.com/2023/09/01/%E6%9C%BA%E6%A2%B0%E8%87%82%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/%E6%9C%BA%E6%A2%B0%E8%87%82%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/%E5%B9%B3%E9%9D%A2%E5%9D%90%E6%A0%87%E7%B3%BB%E5%AE%9A%E4%B9%89.jpg#centered">
 <meta property="article:published_time" content="2023-09-01T09:00:00.000Z">
-<meta property="article:modified_time" content="2023-09-03T14:27:09.623Z">
+<meta property="article:modified_time" content="2023-09-04T14:47:31.874Z">
 <meta property="article:author" content="马泓睿">
 <meta property="article:tag" content="运动规划">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2023/09/01/%E6%9C%BA%E6%A2%B0%E8%87%82%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/picture/%E7%A9%BA%E9%97%B4%E7%9B%B4%E7%BA%BF.jpg#centered">
+<meta name="twitter:image" content="http://example.com/2023/09/01/%E6%9C%BA%E6%A2%B0%E8%87%82%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/%E6%9C%BA%E6%A2%B0%E8%87%82%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/%E7%A9%BA%E9%97%B4%E7%9B%B4%E7%BA%BF.jpg#centered">
 
 <link rel="canonical" href="http://example.com/2023/09/01/%E6%9C%BA%E6%A2%B0%E8%87%82%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/">
 
@@ -232,7 +232,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-03 22:27:09" itemprop="dateModified" datetime="2023-09-03T22:27:09+08:00">2023-09-03</time>
+                <time title="修改时间：2023-09-04 22:47:31" itemprop="dateModified" datetime="2023-09-04T22:47:31+08:00">2023-09-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -265,8 +265,8 @@
 <p><strong>第三步</strong>，当关键点处位姿确定后就需要确定关键点之间是如何连接的，也就是要对这些离散的点进行插值或者平滑处理来得到连续的笛卡尔空间轨迹。最简单也是最常用的是通过直线、圆弧或者直线加圆弧混合的方式依次对关键点进行连接，更高级的可以使用高阶多项式、样条曲线和参数化曲线（贝塞尔曲线和B样条曲线）等（这些曲线多用于关节空间规划中）。</p>
 <p><strong>第四步</strong>，由于机械臂由多个关节组成即使得到了机械臂末端执行器的路径并不能直接进行控制，还需要把路径分成多个点，并把每个点进行运动学逆解得到对应的关节角度，这样就可以通过控制关节来实现对末端执行器的控制。所以到底要取多少个点需要自己定，点越多肯定和曲线越接近，但进行运动学逆解的运算量就越大（不是一般的大O.O）。</p>
 <p>下面将介绍直线插值和圆弧插值，更高级的方法在笛卡尔空间的应用在这先挖个坑后面会补上哦。</p>
-<h2 id="直线插值"><a href="#直线插值" class="headerlink" title="直线插值"></a>直线插值</h2><p>在机械臂笛卡尔空间规划中，直线插值是较为重要的插值方法。如图1所示，末端执行器将从点\(P\)直线运动到点\(Q\)，假设移动速度为\(v\)，位姿插补的时间间隔为\(T\)，点\(P\)的坐标为\(P\left[ \{\{x_0\},\{y_0\},\{z_0\}\} \right]\)，点\(Q\)的坐标为\(Q\left[ \{\{x_n\},\{y_n\},\{z_n\}\} \right]\)。</p>
-<p><img src=".\picture\空间直线.jpg#centered" alt="空间直线"></p>
+<h2 id="直线插值"><a href="#直线插值" class="headerlink" title="直线插值"></a>直线插值</h2><p>在机械臂笛卡尔空间规划中，直线插值是较为重要的插值方法。如图1所示，末端执行器将从点\(P\)直线运动到点\(Q\)，假设移动速度为\(v\)，位姿插补的时间间隔为\(T\)，点\(P\)的坐标为\(P\left[ { {x_0},{y_0},{z_0} } \right]\)，点\(Q\)的坐标为\(Q\left[ { {x_n},{y_n},{z_n} } \right]\)。</p>
+<p><img src="/2023/09/01/%E6%9C%BA%E6%A2%B0%E8%87%82%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/机械臂笛卡尔空间规划/空间直线.jpg#centered" alt="空间直线"></p>
 <p style="text-align:center;">图1 空间直线</p>
 
 <p>点\(P\)到点\(Q\)的距离\(L\)如式（1）所示。</p>
@@ -280,7 +280,7 @@
 <table style="width:100%;border-collapse: collapse;">
   <tr style="border-top: none;text-align: center;">
     <td style="border: none;width: 20px;">&nbsp</td>
-    <td style="border: none;width: 100px;">$$L = \sqrt \{\{\{(\{x_n\} - \{x_0\})\}^2\} + \{\{(\{y_n\} - \{y_0\})\}^2\} + \{\{(\{z_n\} - \{z_0\})\}^2\}\} $$</td>
+    <td style="border: none;width: 100px;">$$L = \sqrt { { {({x_n} - {x_0})}^2} + { {({y_n} - {y_0})}^2} + { {({z_n} - {z_0})}^2} } $$</td>
     <td style="border: none;width: 20px;text-align: right;">式(1)</td>
   </tr>
 </table>
@@ -320,7 +320,7 @@
 <table style="width:100%;border-collapse: collapse;">
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
-    <td style="border: none;width: 100px;">$$N = ceil\left( \{\frac\{L\}\{d\}\} \right)$$</td>
+    <td style="border: none;width: 100px;">$$N = ceil\left( {\frac{L}{d} } \right)$$</td>
     <td style="border: none;width: 20px;text-align: right;">式(3)</td>
   </tr>
 </table>
@@ -342,11 +342,11 @@
 <table style="width:100%;border-collapse: collapse;">
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
-    <td style="border: none;width: 100px;">$$\left\{ \begin\{array\}\{l\}
-\Delta x = \frac\{\{(\{x_n\} - \{x_0\})\}\}\{N\}\\
-\Delta y = \frac\{\{(\{y_n\} - \{y_0\})\}\}\{N\}\\
-\Delta z = \frac\{\{(\{z_n\} - \{z_0\})\}\}\{N\}
-\end\{array\} \right.$$</td>
+    <td style="border: none;width: 100px;">$$\left\{ \begin{array}{l}
+\Delta x = \frac{ { {x_n} - {x_0} } }{N}\\
+\Delta y = \frac{ { {y_n} - {y_0} } }{N}\\
+\Delta z = \frac{ { {z_n} - {z_0} } }{N}
+\end{array} \right.$$</td>
     <td style="border: none;width: 20px;text-align: right;">式(4)</td>
   </tr>
 </table>
@@ -366,11 +366,11 @@
 <table style="width:100%;border-collapse: collapse;">
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
-    <td style="border: none;width: 100px;">$$\left\{ \begin\{array\}\{l\}
-x = \{x_\{i - 1\}\} + i\Delta x\\
-y = \{y_\{i - 1\}\} + i\Delta y\\
-z = \{z_\{i - 1\}\} + i\Delta z
-\end\{array\} \right.$$</td>
+    <td style="border: none;width: 100px;">$$\left\{ \begin{array}{l}
+x = {x_{i - 1} } + i\Delta x\\
+y = {y_{i - 1} } + i\Delta y\\
+z = {z_{i - 1} } + i\Delta z
+\end{array} \right.$$</td>
     <td style="border: none;width: 20px;text-align: right;">式(5)</td>
   </tr>
 </table>
@@ -379,8 +379,8 @@ z = \{z_\{i - 1\}\} + i\Delta z
 </html>
 
 
-<h2 id="圆弧插值"><a href="#圆弧插值" class="headerlink" title="圆弧插值"></a>圆弧插值</h2><p>在空间中，通过不在同一直线上的三个点可确定一个圆及三点间的圆弧。假设机械臂笛卡尔空间中的三个节点分别是圆弧的起点\(P\left[ \{\{x_p\},\{y_p\},\{z_p\}\} \right]\)，圆弧的中间点\(Q\left[ \{\{x_q\},\{y_q\},\{z_q\}\} \right]\)，圆弧的终点\(R\left[ \{\{x_r\},\{y_r\},\{z_r\}\} \right]\)，圆弧的圆心\(C\left[ \{\{x_c\},\{y_c\},\{z_c\}\} \right]\)，圆弧的半径为\(r\)，如图2所示。</p>
-<p><img src=".\picture\空间三点及相关参数.jpg#centered" alt="空间三点及相关参数"></p>
+<h2 id="圆弧插值"><a href="#圆弧插值" class="headerlink" title="圆弧插值"></a>圆弧插值</h2><p>在空间中，通过不在同一直线上的三个点可确定一个圆及三点间的圆弧。假设机械臂笛卡尔空间中的三个节点分别是圆弧的起点\(P\left[ { {x_p},{y_p},{z_p} } \right]\)，圆弧的中间点\(Q\left[ { {x_q},{y_q},{z_q} } \right]\)，圆弧的终点\(R\left[ { {x_r},{y_r},{z_r} } \right]\)，圆弧的圆心\(C\left[ { {x_c},{y_c},{z_c} } \right]\)，圆弧的半径为\(r\)，如图2所示。</p>
+<p><img src="/2023/09/01/%E6%9C%BA%E6%A2%B0%E8%87%82%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/机械臂笛卡尔空间规划/空间三点及相关参数.jpg#centered" alt="空间三点及相关参数"></p>
 <p style="text-align:center;">图2 空间三点及相关参数</p>
 
 <p>向量\(PQ\)和向量\(QR\)分别如式（6）和式（7）所示。</p>
@@ -394,9 +394,9 @@ z = \{z_\{i - 1\}\} + i\Delta z
 <table style="width:100%;border-collapse: collapse;">
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
-    <td style="border: none;width: 100px;">$$PQ = \{[\begin\{array\}\{*\{20\}\{c\}\}
-\{\{x_q\} - \{x_p\}\}&\{\{y_q\} - \{y_p\}\}&\{\{z_q\} - \{z_p\}\}
-\end\{array\}]^\{\rm\{T\}\}\}$$</td>
+    <td style="border: none;width: 100px;">$$PQ = {[\begin{array}{*{20}{c} }
+{ {x_q} - {x_p} }&{ {y_q} - {y_p} }&{ {z_q} - {z_p} }
+\end{array}]^{\rm{T} } }$$</td>
     <td style="border: none;width: 20px;text-align: right;">式(6)</td>
   </tr>
 </table>
@@ -415,9 +415,9 @@ z = \{z_\{i - 1\}\} + i\Delta z
 <table style="width:100%;border-collapse: collapse;">
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
-    <td style="border: none;width: 100px;">$$QR = \{[\begin\{array\}\{*\{20\}\{c\}\}
-\{\{x_r\} - \{x_q\}\}&\{\{y_r\} - \{y_q\}\}&\{\{z_r\} - \{z_q\}\}
-\end\{array\}]^\{\rm\{T\}\}\}$$</td>
+    <td style="border: none;width: 100px;">$$QR = {[\begin{array}{*{20}{c} }
+{ {x_r} - {x_q} }&{ {y_r} - {y_q} }&{ {z_r} - {z_q} }
+\end{array}]^{\rm{T} } }$$</td>
     <td style="border: none;width: 20px;text-align: right;">式(7)</td>
   </tr>
 </table>
@@ -437,13 +437,13 @@ z = \{z_\{i - 1\}\} + i\Delta z
 <table style="width:100%;border-collapse: collapse;">
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
-    <td style="border: none;width: 100px;">\[n = \{\left[ \{\begin\{array\}\{*\{20\}\{c\}\}
-\{\{n_x\}\}&\{\{n_y\}\}&\{\{n_z\}\}
-\end\{array\}\} \right]^\{\rm\{T\}\}\} = PQ \times QR = \left| \{\begin\{array\}\{*\{20\}\{c\}\}
+    <td style="border: none;width: 100px;">\[n = {\left[ {\begin{array}{*{20}{c} }
+{ {n_x} }&{ {n_y} }&{ {n_z} }
+\end{array} } \right]^{\rm{T} } } = PQ \times QR = \left| {\begin{array}{*{20}{c} }
 i&j&k\\
-\{\{x_q\} - \{x_p\}\}&\{\{y_q\} - \{y_p\}\}&\{\{z_q\} - \{z_p\}\}\\
-\{\{x_r\} - \{x_q\}\}&\{\{y_r\} - \{y_q\}\}&\{\{z_r\} - \{z_q\}\}
-\end\{array\}\} \right|\]</td>
+{ {x_q} - {x_p} }&{ {y_q} - {y_p} }&{ {z_q} - {z_p} }\\
+{ {x_r} - {x_q} }&{ {y_r} - {y_q} }&{ {z_r} - {z_q} }
+\end{array} } \right|\]</td>
     <td style="border: none;width: 20px;text-align: right;">式(8)</td>
   </tr>
 </table>
@@ -464,13 +464,13 @@ i&j&k\\
 <table style="width:100%;border-collapse: collapse;">
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
-    <td style="border: none;width: 100px;">\[\{n_1\} = \{\left[ \{\begin\{array\}\{*\{20\}\{c\}\}
-\{\{n_\{1x\}\}\}&\{\{n_\{1y\}\}\}&\{\{n_\{1z\}\}\}
-\end\{array\}\} \right]^\{\rm\{T\}\}\} = n \times PQ = \left| \{\begin\{array\}\{*\{20\}\{c\}\}
+    <td style="border: none;width: 100px;">\[{n_1} = {\left[ {\begin{array}{*{20}{c} }
+{ {n_{1x} } }&{ {n_{1y} } }&{ {n_{1z} } }
+\end{array} } \right]^{\rm{T} } } = n \times PQ = \left| {\begin{array}{*{20}{c} }
 i&j&k\\
-\{\{n_x\}\}&\{\{n_y\}\}&\{\{n_z\}\}\\
-\{\{x_q\} - \{x_p\}\}&\{\{y_q\} - \{y_p\}\}&\{\{z_q\} - \{z_p\}\}
-\end\{array\}\} \right|\]</td>
+{ {n_x} }&{ {n_y} }&{ {n_z} }\\
+{ {x_q} - {x_p} }&{ {y_q} - {y_p} }&{ {z_q} - {z_p} }
+\end{array} } \right|\]</td>
     <td style="border: none;width: 20px;text-align: right;">式(9)</td>
   </tr>
 </table>
@@ -479,7 +479,7 @@ i&j&k\\
 </html>
 
 
-<p>假设线段\(PQ\)的中点为\(A\left[ \{\{a_x\},\{a_y\},\{a_z\}\} \right]\)，由\(P\)点和\(Q\)点的坐标可得\(a_x\)、\(a_y\)、\(a_z\)的值如式（10）所示。</p>
+<p>假设线段\(PQ\)的中点为\(A\left[ { {a_x},{a_y},{a_z} } \right]\)，由\(P\)点和\(Q\)点的坐标可得\(a_x\)、\(a_y\)、\(a_z\)的值如式（10）所示。</p>
 <html>
 
 <head>
@@ -490,7 +490,7 @@ i&j&k\\
 <table style="width:100%;border-collapse: collapse;">
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
-    <td style="border: none;width: 100px;">\[\{a_x\} = \frac\{\{\{x_q\} + \{x_p\}\}\}\{2\},\{a_y\} = \frac\{\{\{y_q\} + \{y_p\}\}\}\{2\},\{a_y\} = \frac\{\{\{z_q\} + \{z_p\}\}\}\{2\}\]</td>
+    <td style="border: none;width: 100px;">\[{a_x} = \frac{ { {x_q} + {x_p} } }{2},{a_y} = \frac{ { {y_q} + {y_p} } }{2},{a_y} = \frac{ { {z_q} + {z_p} } }{2}\]</td>
     <td style="border: none;width: 20px;text-align: right;">式(10)</td>
   </tr>
 </table>
@@ -510,7 +510,7 @@ i&j&k\\
 <table style="width:100%;border-collapse: collapse;">
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
-    <td style="border: none;width: 100px;">\[\frac\{\{x - \{a_x\}\}\}\{\{\{n_\{1x\}\}\}\} = \frac\{\{y - \{a_y\}\}\}\{\{\{n_\{1y\}\}\}\} = \frac\{\{z - \{a_z\}\}\}\{\{\{n_\{1z\}\}\}\}\]</td>
+    <td style="border: none;width: 100px;">\[\frac{ {x - {a_x} } }{ { {n_{1x} } } } = \frac{ {y - {a_y} } }{ { {n_{1y} } } } = \frac{ {z - {a_z} } }{ { {n_{1z} } } }\]</td>
     <td style="border: none;width: 20px;text-align: right;">式(11)</td>
   </tr>
 </table>
@@ -530,13 +530,13 @@ i&j&k\\
 <table style="width:100%;border-collapse: collapse;">
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
-    <td style="border: none;width: 100px;">\[\{n_2\} = \{\left[ \{\begin\{array\}\{*\{20\}\{c\}\}
-\{\{n_\{2x\}\}\}&\{\{n_\{2y\}\}\}&\{\{n_\{2z\}\}\}
-\end\{array\}\} \right]^\{\rm\{T\}\}\} = n \times PQ = \left| \{\begin\{array\}\{*\{20\}\{c\}\}
+    <td style="border: none;width: 100px;">\[{n_2} = {\left[ {\begin{array}{*{20}{c} }
+{ {n_{2x} } }&{ {n_{2y} } }&{ {n_{2z} } }
+\end{array} } \right]^{\rm{T} } } = n \times PQ = \left| {\begin{array}{*{20}{c} }
 i&j&k\\
-\{\{n_x\}\}&\{\{n_y\}\}&\{\{n_z\}\}\\
-\{\{x_r\} - \{x_q\}\}&\{\{y_r\} - \{y_q\}\}&\{\{z_r\} - \{z_q\}\}
-\end\{array\}\} \right|\]</td>
+{ {n_x} }&{ {n_y} }&{ {n_z} }\\
+{ {x_r} - {x_q} }&{ {y_r} - {y_q} }&{ {z_r} - {z_q} }
+\end{array} } \right|\]</td>
     <td style="border: none;width: 20px;text-align: right;">式(12)</td>
   </tr>
 </table>
@@ -545,7 +545,7 @@ i&j&k\\
 </html>
 
 
-<p>假设线段\(QR\)的中点为\(B\left[ \{\{b_x\},\{b_y\},\{b_z\}\} \right]\)，由\(Q\)点和\(R\)点的坐标可得\(b_x\)、\(b_y\)、\(b_z\)的值如式（13）所示。</p>
+<p>假设线段\(QR\)的中点为\(B\left[ { {b_x},{b_y},{b_z} } \right]\)，由\(Q\)点和\(R\)点的坐标可得\(b_x\)、\(b_y\)、\(b_z\)的值如式（13）所示。</p>
 <html>
 
 <head>
@@ -556,7 +556,7 @@ i&j&k\\
 <table style="width:100%;border-collapse: collapse;">
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
-    <td style="border: none;width: 100px;">\[\{b_x\} = \frac\{\{\{x_r\} + \{x_q\}\}\}\{2\},\{b_y\} = \frac\{\{\{y_r\} + \{y_q\}\}\}\{2\},\{b_y\} = \frac\{\{\{z_r\} + \{z_q\}\}\}\{2\}\]</td>
+    <td style="border: none;width: 100px;">\[{b_x} = \frac{ { {x_r} + {x_q} } }{2},{b_y} = \frac{ { {y_r} + {y_q} } }{2},{b_y} = \frac{ { {z_r} + {z_q} } }{2}\]</td>
     <td style="border: none;width: 20px;text-align: right;">式(13)</td>
   </tr>
 </table>
@@ -576,7 +576,7 @@ i&j&k\\
 <table style="width:100%;border-collapse: collapse;">
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
-    <td style="border: none;width: 100px;">\[\frac\{\{x - \{b_x\}\}\}\{\{\{n_\{2x\}\}\}\} = \frac\{\{y - \{b_y\}\}\}\{\{\{n_\{2y\}\}\}\} = \frac\{\{z - \{b_z\}\}\}\{\{\{n_\{2z\}\}\}\}\]</td>
+    <td style="border: none;width: 100px;">\[\frac{ {x - {b_x} } }{ { {n_{2x} } } } = \frac{ {y - {b_y} } }{ { {n_{2y} } } } = \frac{ {z - {b_z} } }{ { {n_{2z} } } }\]</td>
     <td style="border: none;width: 20px;text-align: right;">式(14)</td>
   </tr>
 </table>
@@ -596,21 +596,21 @@ i&j&k\\
 <table style="width:100%;border-collapse: collapse;">
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
-    <td style="border: none;width: 100px;">\[\left[ \{\begin\{array\}\{*\{20\}\{c\}\}
-\{\{x_c\}\}\\
-\{\{y_c\}\}\\
-\{\{z_c\}\}
-\end\{array\}\} \right] = \{\left[ \{\begin\{array\}\{*\{20\}\{c\}\}
-\{\{\rm\{ \}\}\{n_\{1y\}\}\{\rm\{\ \ \ \}\}\{n_\{1x\}\}\{\rm\{\ \ \ \}\}0\{\rm\{\ \ \}\}\}\\
-\{\{\rm\{\ \}\}0\{\rm\{\ \ \ \}\}\{n_\{1z\}\}\{\rm\{\ \ \ \}\}\{n_\{1y\}\}\}\\
-\{\{n_\{2y\}\}\{\rm\{\ \ \ \}\}\{n_\{2x\}\}\{\rm\{\ \ \ \}\}0\{\rm\{\ \ \}\}\}\\
-\{\{\rm\{\ \}\}0\{\rm\{\ \ \ \ \}\}\{n_\{2z\}\}\{\rm\{\ \ \ \}\}\{n_\{2y\}\}\}
-\end\{array\}\} \right]^ + \} \cdot \left[ \{\begin\{array\}\{*\{20\}\{c\}\}
-\{\{a_x\}\{n_\{1y\}\} - \{n_\{1x\}\}\{a_y\}\}\\
-\{\{a_y\}\{n_\{1z\}\} - \{a_z\}\{n_\{1y\}\}\}\\
-\{\{b_x\}\{n_\{2y\}\} - \{n_\{2x\}\}\{b_y\}\}\\
-\{\{b_y\}\{n_\{2z\}\} - \{b_z\}\{n_\{2y\}\}\}
-\end\{array\}\} \right]\]</td>
+    <td style="border: none;width: 100px;">\[\left[ {\begin{array}{*{20}{c} }
+{ {x_c} }\\
+{ {y_c} }\\
+{ {z_c} }
+\end{array} } \right] = {\left[ {\begin{array}{*{20}{c} }
+{ {\rm{ } }{n_{1y} }{\rm{\ \ \ } }{n_{1x} }{\rm{\ \ \ } }0{\rm{\ \ } } }\\
+{ {\rm{\ } }0{\rm{\ \ \ } }{n_{1z} }{\rm{\ \ \ } }{n_{1y} } }\\
+{ {n_{2y} }{\rm{\ \ \ } }{n_{2x} }{\rm{\ \ \ } }0{\rm{\ \ } } }\\
+{ {\rm{\ } }0{\rm{\ \ \ \ } }{n_{2z} }{\rm{\ \ \ } }{n_{2y} } }
+\end{array} } \right]^ + } \cdot \left[ {\begin{array}{*{20}{c} }
+{ {a_x}{n_{1y} } - {n_{1x} }{a_y} }\\
+{ {a_y}{n_{1z} } - {a_z}{n_{1y} } }\\
+{ {b_x}{n_{2y} } - {n_{2x} }{b_y} }\\
+{ {b_y}{n_{2z} } - {b_z}{n_{2y} } }
+\end{array} } \right]\]</td>
     <td style="border: none;width: 20px;text-align: right;">式(15)</td>
   </tr>
 </table>
@@ -619,7 +619,7 @@ i&j&k\\
 </html>
 
 
-<p>求得了圆弧的圆心坐标\(\left[ \{\{x_c\},\{y_c\},\{z_c\}\} \right]\)，则\(CP\)、\(CQ\)、\(CR\)三个向量的模都等于圆弧的半径\(r\)，如式（16）所示。</p>
+<p>求得了圆弧的圆心坐标\(\left[ { {x_c},{y_c},{z_c} } \right]\)，则\(CP\)、\(CQ\)、\(CR\)三个向量的模都等于圆弧的半径\(r\)，如式（16）所示。</p>
 <html>
 
 <head>
@@ -630,7 +630,7 @@ i&j&k\\
 <table style="width:100%;border-collapse: collapse;">
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
-    <td style="border: none;width: 100px;">\[r = \left| \{CP\} \right| = \left| \{CQ\} \right| = \left| \{CR\} \right|\]</td>
+    <td style="border: none;width: 100px;">\[r = \left| {CP} \right| = \left| {CQ} \right| = \left| {CR} \right|\]</td>
     <td style="border: none;width: 20px;text-align: right;">式(16)</td>
   </tr>
 </table>
@@ -639,9 +639,9 @@ i&j&k\\
 </html>
 
 
-<p>将空间圆弧转换为平面圆弧。如图3所示，建立坐标系\{\(O’\)\(X’\)\(Y’\)\(Z’\)\}，使原点\(O’\)位于圆心\(C\)处，以向量\(CP\)所在直线为\(X’\)轴，方向与向量\(CP\)相同，过点\(C\)且垂直于平面\(I\)的直线为\(Z’\)轴，\(Y’\)轴由右手定则确定，且平面\(X’\)\(O’\)\(Y’\)与平面\(I\)重合。</p>
-<p><img src=".\picture\平面坐标系定义.jpg#centered" alt="平面坐标系定义"></p>
-<p>假设\(X’\)轴上的单位向量为\(i’\)，它在坐标系\{\(O\)\(X\)\(Y\)\(Z\)\}中如式（17）所示。</p>
+<p>将空间圆弧转换为平面圆弧。如图3所示，建立坐标系{\(O’\)\(X’\)\(Y’\)\(Z’\)}，使原点\(O’\)位于圆心\(C\)处，以向量\(CP\)所在直线为\(X’\)轴，方向与向量\(CP\)相同，过点\(C\)且垂直于平面\(I\)的直线为\(Z’\)轴，\(Y’\)轴由右手定则确定，且平面\(X’\)\(O’\)\(Y’\)与平面\(I\)重合。</p>
+<p><img src="/2023/09/01/%E6%9C%BA%E6%A2%B0%E8%87%82%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/机械臂笛卡尔空间规划/平面坐标系定义.jpg#centered" alt="平面坐标系定义"></p>
+<p>假设\(X’\)轴上的单位向量为\(i’\)，它在坐标系{\(O\)\(X\)\(Y\)\(Z\)}中如式（17）所示。</p>
 <html>
 
 <head>
@@ -652,9 +652,9 @@ i&j&k\\
 <table style="width:100%;border-collapse: collapse;">
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
-    <td style="border: none;width: 100px;">\[i' = \{\left[ \{\begin\{array\}\{*\{20\}\{c\}\}
-\{\frac\{\{\{x_p\} - \{x_c\}\}\}\{\{\left| \{CP\} \right|\}\}\}&\{\frac\{\{\{y_p\} - \{y_c\}\}\}\{\{\left| \{CP\} \right|\}\}\}&\{\frac\{\{\{z_p\} - \{z_c\}\}\}\{\{\left| \{CP\} \right|\}\}\}
-\end\{array\}\} \right]^\{\rm\{T\}\}\}\]</td>
+    <td style="border: none;width: 100px;">\[i' = {\left[ {\begin{array}{*{20}{c} }
+{\frac{ { {x_p} - {x_c} } }{ {\left| {CP} \right|} } }&{\frac{ { {y_p} - {y_c} } }{ {\left| {CP} \right|} } }&{\frac{ { {z_p} - {z_c} } }{ {\left| {CP} \right|} } }
+\end{array} } \right]^{\rm{T} } }\]</td>
     <td style="border: none;width: 20px;text-align: right;">式(17)</td>
   </tr>
 </table>
@@ -663,7 +663,7 @@ i&j&k\\
 </html>
 
 
-<p>假设\(Z’\)轴上的单位向量为\(k’\)，它在坐标系\{\(O\)\(X\)\(Y\)\(Z\)\}中如式（18）所示。</p>
+<p>假设\(Z’\)轴上的单位向量为\(k’\)，它在坐标系{\(O\)\(X\)\(Y\)\(Z\)}中如式（18）所示。</p>
 <html>
 
 <head>
@@ -674,9 +674,9 @@ i&j&k\\
 <table style="width:100%;border-collapse: collapse;">
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
-    <td style="border: none;width: 100px;">\[k' = \frac\{n\}\{\{\left| n \right|\}\} = \{\left[ \{\begin\{array\}\{*\{20\}\{c\}\}
-\{\frac\{\{\{n_x\}\}\}\{\{\left| n \right|\}\}\}&\{\frac\{\{\{n_y\}\}\}\{\{\left| n \right|\}\}\}&\{\frac\{\{\{n_z\}\}\}\{\{\left| n \right|\}\}\}
-\end\{array\}\} \right]^\{\rm\{T\}\}\}\]</td>
+    <td style="border: none;width: 100px;">\[k' = \frac{n}{ {\left| n \right|} } = {\left[ {\begin{array}{*{20}{c} }
+{\frac{ { {n_x} } }{ {\left| n \right|} } }&{\frac{ { {n_y} } }{ {\left| n \right|} } }&{\frac{ { {n_z} } }{ {\left| n \right|} } }
+\end{array} } \right]^{\rm{T} } }\]</td>
     <td style="border: none;width: 20px;text-align: right;">式(18)</td>
   </tr>
 </table>
@@ -685,7 +685,7 @@ i&j&k\\
 </html>
 
 
-<p>假设\(Y’\)轴上的单位向量为\(j’\)，它在坐标系\{\(O\)\(X\)\(Y\)\(Z\)\}中如式（19）所示。</p>
+<p>假设\(Y’\)轴上的单位向量为\(j’\)，它在坐标系{\(O\)\(X\)\(Y\)\(Z\)}中如式（19）所示。</p>
 <html>
 
 <head>
@@ -696,12 +696,12 @@ i&j&k\\
 <table style="width:100%;border-collapse: collapse;">
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
-    <td style="border: none;width: 100px;">\[\begin\{array\}\{l\}
+    <td style="border: none;width: 100px;">\[\begin{array}{l}
 j' = k' \times i'\\
-\{\rm\{\ \ \}\} = \{\left[ \{\begin\{array\}\{*\{20\}\{c\}\}
-\{\frac\{\{\{y_p\} - \{y_c\}\}\}\{\{\left| \{CP\} \right|\}\} \cdot \frac\{\{\{n_x\}\}\}\{\{\left| n \right|\}\} - \frac\{\{\{z_p\} - \{z_c\}\}\}\{\{\left| \{CP\} \right|\}\} \cdot \frac\{\{\{n_y\}\}\}\{\{\left| n \right|\}\}\}&\{\frac\{\{\{z_p\} - \{z_c\}\}\}\{\{\left| \{CP\} \right|\}\} \cdot \frac\{\{\{n_x\}\}\}\{\{\left| n \right|\}\} - \frac\{\{\{x_p\} - \{x_c\}\}\}\{\{\left| \{CP\} \right|\}\} \cdot \frac\{\{\{n_z\}\}\}\{\{\left| n \right|\}\}\}&\{\frac\{\{\{x_p\} - \{x_c\}\}\}\{\{\left| \{CP\} \right|\}\} \cdot \frac\{\{\{n_y\}\}\}\{\{\left| n \right|\}\} - \frac\{\{\{y_p\} - \{y_c\}\}\}\{\{\left| \{CP\} \right|\}\} \cdot \frac\{\{\{n_x\}\}\}\{\{\left| n \right|\}\}\}
-\end\{array\}\} \right]^\{\rm\{T\}\}\}
-\end\{array\}\]</td>
+{\rm{\ \ } } = {\left[ {\begin{array}{*{20}{c} }
+{\frac{ { {y_p} - {y_c} } }{ {\left| {CP} \right|} } \cdot \frac{ { {n_x} } }{ {\left| n \right|} } - \frac{ { {z_p} - {z_c} } }{ {\left| {CP} \right|} } \cdot \frac{ { {n_y} } }{ {\left| n \right|} } }&{\frac{ { {z_p} - {z_c} } }{ {\left| {CP} \right|} } \cdot \frac{ { {n_x} } }{ {\left| n \right|} } - \frac{ { {x_p} - {x_c} } }{ {\left| {CP} \right|} } \cdot \frac{ { {n_z} } }{ {\left| n \right|} } }&{\frac{ { {x_p} - {x_c} } }{ {\left| {CP} \right|} } \cdot \frac{ { {n_y} } }{ {\left| n \right|} } - \frac{ { {y_p} - {y_c} } }{ {\left| {CP} \right|} } \cdot \frac{ { {n_x} } }{ {\left| n \right|} } }
+\end{array} } \right]^{\rm{T} } }
+\end{array}\]</td>
     <td style="border: none;width: 20px;text-align: right;">式(19)</td>
   </tr>
 </table>
@@ -710,23 +710,23 @@ j' = k' \times i'\\
 </html>
 
 
-<p>则坐标系\{\(O’\)\(X’\)\(Y’\)\(Z’\)\}到坐标系\{\(O\)\(X\)\(Y\)\(Z\)\}之间的转换矩阵\(\{\}_o^\{o’\}T\)如式（20）所示。</p>
+<p>则坐标系{\(O’\)\(X’\)\(Y’\)\(Z’\)}到坐标系{\(O\)\(X\)\(Y\)\(Z\)}之间的转换矩阵\({}_o^{o’}T\)如式（20）所示。</p>
 <html>
 
 <head>
-  <title>转换矩阵\\(\{\}_o^\{o'\}T\\)公式</title>
+  <title>转换矩阵\\({}_o^{o'}T\\)公式</title>
 </head>
 
 <body>
 <table style="width:100%;border-collapse: collapse;">
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
-    <td style="border: none;width: 100px;">\[\{\}_o^\{o'\}T = \left[ \{\begin\{array\}\{*\{20\}\{c\}\}
-\{\frac\{\{\{x_p\} - \{x_c\}\}\}\{\{\left| \{CP\} \right|\}\}\}&\{\frac\{\{\{y_p\} - \{y_c\}\}\}\{\{\left| \{CP\} \right|\}\} \cdot \frac\{\{\{n_z\}\}\}\{\{\left| n \right|\}\} - \frac\{\{\{z_p\} - \{z_c\}\}\}\{\{\left| \{CP\} \right|\}\} \cdot \frac\{\{\{n_y\}\}\}\{\{\left| n \right|\}\}\}&\{\frac\{\{\{n_x\}\}\}\{\{\left| n \right|\}\}\}&\{\{x_c\}\}\\
-\{\frac\{\{\{y_p\} - \{y_c\}\}\}\{\{\left| \{CP\} \right|\}\}\}&\{\frac\{\{\{z_p\} - \{z_c\}\}\}\{\{\left| \{CP\} \right|\}\} \cdot \frac\{\{\{n_x\}\}\}\{\{\left| n \right|\}\} - \frac\{\{\{x_p\} - \{x_c\}\}\}\{\{\left| \{CP\} \right|\}\} \cdot \frac\{\{\{n_z\}\}\}\{\{\left| n \right|\}\}\}&\{\frac\{\{\{n_y\}\}\}\{\{\left| n \right|\}\}\}&\{\{y_c\}\}\\
-\{\frac\{\{\{z_p\} - \{z_c\}\}\}\{\{\left| \{CP\} \right|\}\}\}&\{\frac\{\{\{x_p\} - \{x_c\}\}\}\{\{\left| \{CP\} \right|\}\} \cdot \frac\{\{\{n_y\}\}\}\{\{\left| n \right|\}\} - \frac\{\{\{y_p\} - \{y_c\}\}\}\{\{\left| \{CP\} \right|\}\} \cdot \frac\{\{\{n_x\}\}\}\{\{\left| n \right|\}\}\}&\{\frac\{\{\{n_z\}\}\}\{\{\left| n \right|\}\}\}&\{\{z_c\}\}\\
+    <td style="border: none;width: 100px;">\[{}_o^{o'}T = \left[ {\begin{array}{*{20}{c} }
+{\frac{ { {x_p} - {x_c} } }{ {\left| {CP} \right|} } }&{\frac{ { {y_p} - {y_c} } }{ {\left| {CP} \right|} } \cdot \frac{ { {n_z} } }{ {\left| n \right|} } - \frac{ { {z_p} - {z_c} } }{ {\left| {CP} \right|} } \cdot \frac{ { {n_y} } }{ {\left| n \right|} } }&{\frac{ { {n_x} } }{ {\left| n \right|} } }&{ {x_c} }\\
+{\frac{ { {y_p} - {y_c} } }{ {\left| {CP} \right|} } }&{\frac{ { {z_p} - {z_c} } }{ {\left| {CP} \right|} } \cdot \frac{ { {n_x} } }{ {\left| n \right|} } - \frac{ { {x_p} - {x_c} } }{ {\left| {CP} \right|} } \cdot \frac{ { {n_z} } }{ {\left| n \right|} } }&{\frac{ { {n_y} } }{ {\left| n \right|} } }&{ {y_c} }\\
+{\frac{ { {z_p} - {z_c} } }{ {\left| {CP} \right|} } }&{\frac{ { {x_p} - {x_c} } }{ {\left| {CP} \right|} } \cdot \frac{ { {n_y} } }{ {\left| n \right|} } - \frac{ { {y_p} - {y_c} } }{ {\left| {CP} \right|} } \cdot \frac{ { {n_x} } }{ {\left| n \right|} } }&{\frac{ { {n_z} } }{ {\left| n \right|} } }&{ {z_c} }\\
 0&0&0&1
-\end\{array\}\} \right]\]</td>
+\end{array} } \right]\]</td>
     <td style="border: none;width: 20px;text-align: right;">式(20)</td>
   </tr>
 </table>
@@ -735,7 +735,7 @@ j' = k' \times i'\\
 </html>
 
 
-<p>则坐标系\{\(O’\)\(X’\)\(Y’\)\(Z’\)\}中任意点的坐标(\(x’\),\(y’\),\(z’\))，则它在坐标系\{\(O\)\(X\)\(Y\)\(Z\)\}中对应点(\(x\),\(y\),\(z\))如式（21）所示。</p>
+<p>则坐标系{\(O’\)\(X’\)\(Y’\)\(Z’\)}中任意点的坐标(\(x’\),\(y’\),\(z’\))，则它在坐标系{\(O\)\(X\)\(Y\)\(Z\)}中对应点(\(x\),\(y\),\(z\))如式（21）所示。</p>
 <html>
 
 <head>
@@ -746,17 +746,17 @@ j' = k' \times i'\\
 <table style="width:100%;border-collapse: collapse;">
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
-    <td style="border: none;width: 100px;">\[\left[ \{\begin\{array\}\{*\{20\}\{c\}\}
-\{x'\}\\
-\{y'\}\\
-\{z'\}\\
+    <td style="border: none;width: 100px;">\[\left[ {\begin{array}{*{20}{c} }
+{x'}\\
+{y'}\\
+{z'}\\
 1
-\end\{array\}\} \right] = \{\}_o^\{o'\}\{T^\{ - 1\}\}\left[ \{\begin\{array\}\{*\{20\}\{c\}\}
+\end{array} } \right] = {}_o^{o'}{T^{ - 1} }\left[ {\begin{array}{*{20}{c} }
 x\\
 y\\
 z\\
 1
-\end\{array\}\} \right]\]</td>
+\end{array} } \right]\]</td>
     <td style="border: none;width: 20px;text-align: right;">式(21)</td>
   </tr>
 </table>
@@ -765,8 +765,8 @@ z\\
 </html>
 
 
-<p>利用上式就能得到\(P\)、\(Q\)、\(R\)、\(C\)四个点在坐标系\{\(O’\)\(X’\)\(Y’\)\(Z’\)\}中对应点的坐标。</p>
-<p>得到坐标后就可以进行圆弧插补轨迹的规划，首先在平面坐标系\{\(O’\)\(X’\)\(Y’\)\(Z’\)\}中，计算圆弧\(PQR\)的圆心角\(θ\)和插值次数\(N\)。如图3所示，圆心角\(θ\)可能有两种情况：\(θ≤π\)和\(θ&gt;π\)。这里，利用向量\(O’P\)和\(PR\)的法向量\(n_3\)与平面\(X’O’Y’\)的法向量\(n\)的内积来判断\(θ\)的值,如式（22）所示。</p>
+<p>利用上式就能得到\(P\)、\(Q\)、\(R\)、\(C\)四个点在坐标系{\(O’\)\(X’\)\(Y’\)\(Z’\)}中对应点的坐标。</p>
+<p>得到坐标后就可以进行圆弧插补轨迹的规划，首先在平面坐标系{\(O’\)\(X’\)\(Y’\)\(Z’\)}中，计算圆弧\(PQR\)的圆心角\(θ\)和插值次数\(N\)。如图3所示，圆心角\(θ\)可能有两种情况：\(θ≤π\)和\(θ&gt;π\)。这里，利用向量\(O’P\)和\(PR\)的法向量\(n_3\)与平面\(X’O’Y’\)的法向量\(n\)的内积来判断\(θ\)的值,如式（22）所示。</p>
 <html>
 
 <head>
@@ -777,7 +777,7 @@ z\\
 <table style="width:100%;border-collapse: collapse;">
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
-    <td style="border: none;width: 100px;">\[H = \{n_3\} \cdot n = O'P \times PR \cdot n\]</td>
+    <td style="border: none;width: 100px;">\[H = {n_3} \cdot n = O'P \times PR \cdot n\]</td>
     <td style="border: none;width: 20px;text-align: right;">式(22)</td>
   </tr>
 </table>
@@ -786,7 +786,7 @@ z\\
 </html>
 
 
-<p>若\(H≥0\)，则\(θ≤π\)，\(\theta  = 2\arcsin \left( \{\frac\{\{\left| \{PR\} \right|\}\}\{\{2r\}\}\} \right)\);若\(H<0\\)，则\\(θ>π\)，\(\theta  = 2\pi  - 2\arcsin \left( \{\frac\{\{\left| \{PR\} \right|\}\}\{\{2r\}\}\} \right)\)。</p>
+<p>若\(H≥0\)，则\(θ≤π\)，\(\theta  = 2\arcsin \left( {\frac{ {\left| {PR} \right|} }{ {2r} } } \right)\);若\(H<0\\)，则\\(θ>π\)，\(\theta  = 2\pi  - 2\arcsin \left( {\frac{ {\left| {PR} \right|} }{ {2r} } } \right)\)。</0\\)，则\\(θ></p>
 <p>假设机械臂的插补周期为\(t\)，移动速度为\(v\)，则机械臂末端执行器从当前点切向移动到下一个插补点的距离如式（23）所示。</p>
 <html>
 
@@ -818,7 +818,7 @@ z\\
 <table style="width:100%;border-collapse: collapse;">
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
-    <td style="border: none;width: 100px;">\[\delta  = \arcsin \left( \{\frac\{\{vt\}\}\{r\}\} \right)\]</td>
+    <td style="border: none;width: 100px;">\[\delta  = \arcsin \left( {\frac{ {vt} }{r} } \right)\]</td>
     <td style="border: none;width: 20px;text-align: right;">式(24)</td>
   </tr>
 </table>
@@ -838,7 +838,7 @@ z\\
 <table style="width:100%;border-collapse: collapse;">
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
-    <td style="border: none;width: 100px;">$$N = ceil\left( \{\frac\{\theta \}\{\delta \}\} \right)$$</td>
+    <td style="border: none;width: 100px;">$$N = ceil\left( {\frac{\theta }{\delta } } \right)$$</td>
     <td style="border: none;width: 20px;text-align: right;">式(25)</td>
   </tr>
 </table>
@@ -848,16 +848,25 @@ z\\
 
 
 <p>其中，\(ceil()\)为向上取整函数。</p>
-<p>然后，在坐标系\{\(O’\)\(X’\)\(Y’\)\(Z’\)\}中，从\(P\)点开始，依次计算出圆弧轨迹上每个插补点的位置坐标(\(x’\),\(y’\),\(z’\))，再利用坐标变换矩阵\(\{\}_o^\{o’\}T\)求得该点在机械臂参考坐标系\{\(O\)\(X\)\(Y\)\(Z\)\}中的坐标(\(x\),\(y\),\(z\))，这样就完成了机械臂圆弧插补轨迹的规划。</p>
+<p>然后，在坐标系{\(O’\)\(X’\)\(Y’\)\(Z’\)}中，从\(P\)点开始，依次计算出圆弧轨迹上每个插补点的位置坐标(\(x’\),\(y’\),\(z’\))，再利用坐标变换矩阵\({}_o^{o’}T\)求得该点在机械臂参考坐标系{\(O\)\(X\)\(Y\)\(Z\)}中的坐标(\(x\),\(y\),\(z\))，这样就完成了机械臂圆弧插补轨迹的规划。</p>
 <p>既然有了直线和圆弧的插值方法，那将直线插值方法和圆弧插值方式进行组合使用也就很好实现啦。（这里先偷个懒，可能等后面有时间再补上吧）</p>
 <p>当然了还有其他的一些高级方法哦。（这里也先偷个懒，主要还是这些方法有些细节我还没弄明白先弄明白再来写）</p>
-<h2 id="姿态控制"><a href="#姿态控制" class="headerlink" title="姿态控制"></a>姿态控制</h2><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>到此为止我们通过前面的方法得到了大量离散的路径点，后面还需要根据机械臂逆解得到每个点所对应的机械臂每个关节的关节角度，也就是转化为机械臂的关节角度序列，到这里实际上我们已经完成了笛卡尔空间规划。<strong>但是要注意一点哦</strong>，即使取的点够密集那也是离散的点（比如相邻两点，第一个关节角度分别为30°和30.001°，即使它们相差很小，但他们的关节角度不是连续的），关节角度不可能直接发生瞬间变化所以那就还需要在关节空间对其关节角度进行规划给它一个变化的过渡过程，这就是关节空间规划的任务啦。</p>
-<p>注：<br>（1）其实一开始我一直以为笛卡尔空间规划就只是规划出一条在空间中的路径，其实并不是这样的，因为在这段路径中其实还包括机械臂姿态的问题，也就是机械臂在笛卡尔空间进行轨迹规划的过程需要对末端执行器位置和姿态都进行规划。<br>（2）</p>
+<h2 id="姿态控制规划"><a href="#姿态控制规划" class="headerlink" title="姿态控制规划"></a>姿态控制规划</h2><p>注：简单介绍下，感觉不是很详细，后面补充</p>
+<p>对于机械臂的姿态控制规划，特别是在执行中间路径时，有几种方法可以实现。以下是一些常见的方法：</p>
+<p><strong>插值方法</strong>：这是最简单的方法之一，涉及将中间路径上的姿态点进行插值，以便在这些点之间平滑地进行运动。简单来说和前面一样就是把离散的点连接起来，确保机械臂在路径上均匀地变化姿态，从而实现平滑的运动。</p>
+<p>举个例子，当我们有了起始姿态和目标姿态后，我们通过在起始姿态和目标姿态之间选择一些中间点，然后对这些点使用相应的插值方法进行插值。</p>
+<p><strong>关节空间插补</strong>：机械臂通常由一系列关节连接而成。在关节空间中，可以对各个关节的角度进行插值，从而控制机械臂的姿态。这种方法适用于具有较大自由度的机械臂，可以避免姿态的奇异性问题。</p>
+<p>举个例子，当我们有了起始姿态和目标姿态后，使用逆运动学，我们可以计算出每个中间点的关节角度，然后对这些关节角度使用相应的插值方法进行插值。</p>
+<p><strong>欧拉角/四元数插值</strong>：如果机械臂的姿态由欧拉角（滚转、俯仰、偏航）或者四元数表示，可以对这些表示进行插值。这样可以确保在中间路径上平滑地过渡，同时避免姿态的奇异性问题。</p>
+<p>举个例子，假设我们使用欧拉角来表示姿态（欧拉角和四元数可以进行转换）。当我们通过正运动学有了起始欧拉角和目标欧拉角后，可以在起始欧拉角和目标欧拉角之间分别对滚转、俯仰和偏航角使用相应的插值方法进行插值。</p>
+<p><strong>算法</strong>：可以通过一些启发式或者采样的算法，从起始姿态开始，逐步生成到目标姿态的路径。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>到此为止我们通过前面的方法得到了大量离散的路径点，后面还需要根据机械臂逆解得到每个点所对应的机械臂每个关节的关节角度，也就是转化为机械臂的关节角度序列，到这里实际上我们已经完成了笛卡尔空间规划。<strong>但是要注意一点哦</strong>，即使取的点够密集那也是离散的点（比如相邻两点，第一个关节角度分别为30°和30.001°，即使它们相差很小，但他们的关节角度不是连续的），关节角度不可能直接发生瞬间变化所以那就还需要在关节空间对其关节角度进行规划给它一个变化的过渡过程，这就是关节空间规划的任务啦。</p>
+<p>注：<br>其实一开始我一直以为笛卡尔空间规划就只是规划出一条在空间中的路径，其实并不是这样的，因为在这段路径中其实还包括机械臂姿态的问题，也就是机械臂在笛卡尔空间进行轨迹规划的过程需要对末端执行器位置和姿态都进行规划。</p>
 <style>
-    img[src*='centered'] \{
+    img[src*='centered'] {
         margin:auto;
         display:block;
-    \}
+    }
 </style>
 
     </div>
@@ -890,7 +899,10 @@ z\\
     <a href="/2023/04/20/%E7%BD%97%E6%8A%80flow%E8%BF%9E%E6%8E%A5%E9%97%AE%E9%A2%98/" rel="prev" title="罗技FLOW连接问题">
       <i class="fa fa-chevron-left"></i> 罗技FLOW连接问题
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2023/09/03/1/" rel="next" title="">
+       <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -949,7 +961,7 @@ z\\
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">笛卡尔空间规划介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B4%E7%BA%BF%E6%8F%92%E5%80%BC"><span class="nav-number">2.1.</span> <span class="nav-text">直线插值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%86%E5%BC%A7%E6%8F%92%E5%80%BC"><span class="nav-number">2.2.</span> <span class="nav-text">圆弧插值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A7%BF%E6%80%81%E6%8E%A7%E5%88%B6"><span class="nav-number">2.3.</span> <span class="nav-text">姿态控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">2.4.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">笛卡尔空间规划介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B4%E7%BA%BF%E6%8F%92%E5%80%BC"><span class="nav-number">2.1.</span> <span class="nav-text">直线插值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%86%E5%BC%A7%E6%8F%92%E5%80%BC"><span class="nav-number">2.2.</span> <span class="nav-text">圆弧插值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A7%BF%E6%80%81%E6%8E%A7%E5%88%B6%E8%A7%84%E5%88%92"><span class="nav-number">2.3.</span> <span class="nav-text">姿态控制规划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">2.4.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -967,7 +979,7 @@ z\\
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1064,7 +1076,7 @@ z\\
 <div class="theme-info">
   <div class="powered-by"></div>
   
-  <span class="post-count">博客全站共16k字</span>
+  <span class="post-count">博客全站共16.6k字</span>
   <span class="post-meta-divider">|</span>
   本站访客数<span id="busuanzi_value_site_uv"></span>人次
 </div>
