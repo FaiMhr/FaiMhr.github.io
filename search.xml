@@ -806,9 +806,38 @@ z\\
 
 </html>
 
+<p>同样，已知坐标系{\(O\)\(X\)\(Y\)\(Z\)}中任意点的坐标(\(x\),\(y\),\(z\))，则该点在坐标系{\(O’\)\(X’\)\(Y’\)\(Z’\)}中对应点的坐标(\(x’\),\(y’\),\(z’\))如式（22）所示。</p>
+<html>
+
+<head>
+  <title>内积\\(H\\)公式</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;">\[\left[ {\begin{array}{*{20}{c} }
+{x'}\\
+{y'}\\
+{z'}\\
+1
+\end{array} } \right] = {}_o^{o'}{T^{ - 1} }\left[ {\begin{array}{*{20}{c} }
+x\\
+y\\
+z\\
+1
+\end{array} } \right]\]</td>
+    <td style="border: none;width: 20px;text-align: right;">式(22)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
 
 <p>利用上式就能得到\(P\)、\(Q\)、\(R\)、\(C\)四个点在坐标系{\(O’\)\(X’\)\(Y’\)\(Z’\)}中对应点的坐标。</p>
-<p>得到坐标后就可以进行圆弧插补轨迹的规划，首先在平面坐标系{\(O’\)\(X’\)\(Y’\)\(Z’\)}中，计算圆弧\(PQR\)的圆心角\(θ\)和插值次数\(N\)。如图3所示，圆心角\(θ\)可能有两种情况：\(θ≤π\)和\(θ&gt;π\)。这里，利用向量\(O’P\)和\(PR\)的法向量\(n_3\)与平面\(X’O’Y’\)的法向量\(n\)的内积来判断\(θ\)的值,如式（22）所示。</p>
+<p>得到坐标后就可以进行圆弧插补轨迹的规划，首先在平面坐标系{\(O’\)\(X’\)\(Y’\)\(Z’\)}中，计算圆弧\(PQR\)的圆心角\(θ\)和插值次数\(N\)。如图3所示，圆心角\(θ\)可能有两种情况：\(θ≤π\)和\(θ&gt;π\)。这里，利用向量\(O’P\)和\(PR\)的法向量\(n_3\)与平面\(X’O’Y’\)的法向量\(n\)的内积来判断\(θ\)的值,如式（23）所示。</p>
 <html>
 
 <head>
@@ -820,7 +849,7 @@ z\\
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
     <td style="border: none;width: 100px;">\[H = {n_3} \cdot n = O'P \times PR \cdot n\]</td>
-    <td style="border: none;width: 20px;text-align: right;">式(22)</td>
+    <td style="border: none;width: 20px;text-align: right;">式(23)</td>
   </tr>
 </table>
 </body>
@@ -829,7 +858,7 @@ z\\
 
 
 <p>若\(H≥0\)，则\(θ≤π\)，\(\theta  = 2\arcsin \left( {\frac{ {\left| {PR} \right|} }{ {2r} } } \right)\);若\(H<0\\)，则\\(θ>π\)，\(\theta  = 2\pi  - 2\arcsin \left( {\frac{ {\left| {PR} \right|} }{ {2r} } } \right)\)。</0\\)，则\\(θ></p>
-<p>假设机械臂的插补周期为\(t\)，移动速度为\(v\)，则机械臂末端执行器从当前点切向移动到下一个插补点的距离如式（23）所示。</p>
+<p>假设机械臂的插补周期为\(t\)，移动速度为\(v\)，则机械臂末端执行器从当前点切向移动到下一个插补点的距离如式（24）所示。</p>
 <html>
 
 <head>
@@ -841,7 +870,7 @@ z\\
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
     <td style="border: none;width: 100px;">\[\Delta s = vt\]</td>
-    <td style="border: none;width: 20px;text-align: right;">式(23)</td>
+    <td style="border: none;width: 20px;text-align: right;">式(24)</td>
   </tr>
 </table>
 </body>
@@ -849,7 +878,7 @@ z\\
 </html>
 
 
-<p>步距角\(δ\)可如式（24）所示。</p>
+<p>步距角\(δ\)可如式（25）所示。</p>
 <html>
 
 <head>
@@ -861,7 +890,7 @@ z\\
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
     <td style="border: none;width: 100px;">\[\delta  = \arcsin \left( {\frac{ {vt} }{r} } \right)\]</td>
-    <td style="border: none;width: 20px;text-align: right;">式(24)</td>
+    <td style="border: none;width: 20px;text-align: right;">式(25)</td>
   </tr>
 </table>
 </body>
@@ -869,7 +898,7 @@ z\\
 </html>
 
 
-<p>插值总次数\(N\)如式（25）所示。</p>
+<p>插值总次数\(N\)如式（26）所示。</p>
 <html>
 
 <head>
@@ -881,7 +910,7 @@ z\\
   <tr style="border-top: none;">
     <td style="border: none;width: 20px;">&nbsp</td>
     <td style="border: none;width: 100px;">$$N = ceil\left( {\frac{\theta }{\delta } } \right)$$</td>
-    <td style="border: none;width: 20px;text-align: right;">式(25)</td>
+    <td style="border: none;width: 20px;text-align: right;">式(26)</td>
   </tr>
 </table>
 </body>
