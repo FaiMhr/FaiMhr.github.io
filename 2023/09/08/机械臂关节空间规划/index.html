@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="前言本文将介绍关节空间规划方法。 说明：通过这篇博客记录下学习到的关节空间规划的知识。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机械臂关节空间规划">
+<meta property="og:url" content="http://example.com/2023/09/08/%E6%9C%BA%E6%A2%B0%E8%87%82%E5%85%B3%E8%8A%82%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/index.html">
+<meta property="og:site_name" content="FaiMhr&#39;s Blog">
+<meta property="og:description" content="前言本文将介绍关节空间规划方法。 说明：通过这篇博客记录下学习到的关节空间规划的知识。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/09/08/%E6%9C%BA%E6%A2%B0%E8%87%82%E5%85%B3%E8%8A%82%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/%E7%BA%BF%E6%80%A7%E6%8F%92%E5%80%BC.jpg#centered">
+<meta property="og:image" content="http://example.com/2023/09/08/%E6%9C%BA%E6%A2%B0%E8%87%82%E5%85%B3%E8%8A%82%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/%E5%B8%A6%E6%8A%9B%E7%89%A9%E7%BA%BF%E8%BF%87%E6%B8%A1%E7%9A%84%E7%BA%BF%E6%80%A7%E6%8F%92%E5%80%BC.jpg#centered">
+<meta property="og:image" content="http://example.com/2023/09/08/%E6%9C%BA%E6%A2%B0%E8%87%82%E5%85%B3%E8%8A%82%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/%E5%A4%9A%E6%AE%B5%E5%B8%A6%E6%9C%89%E6%8A%9B%E7%89%A9%E7%BA%BF%E8%BF%87%E6%B8%A1%E7%9A%84%E7%BA%BF%E6%80%A7%E6%8F%92%E5%80%BC.jpg#centered">
+<meta property="og:image" content="http://example.com/2023/09/08/%E6%9C%BA%E6%A2%B0%E8%87%82%E5%85%B3%E8%8A%82%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/%E9%87%87%E7%94%A8%E4%BC%AA%E8%B7%AF%E5%BE%84%E7%82%B9%E7%9A%84%E6%8F%92%E5%80%BC%E6%9B%B2%E7%BA%BF.jpg#centered">
+<meta property="og:image" content="http://example.com/2023/09/08/%E6%9C%BA%E6%A2%B0%E8%87%82%E5%85%B3%E8%8A%82%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/%E8%B7%AF%E5%BE%84%E7%82%B9%E4%B8%8A%E9%80%9F%E5%BA%A6%E7%9A%84%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90.jpg#centered">
+<meta property="article:published_time" content="2023-09-08T09:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-04T17:12:23.332Z">
+<meta property="article:author" content="马泓睿">
+<meta property="article:tag" content="运动规划">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/09/08/%E6%9C%BA%E6%A2%B0%E8%87%82%E5%85%B3%E8%8A%82%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/%E7%BA%BF%E6%80%A7%E6%8F%92%E5%80%BC.jpg#centered">
+
+<link rel="canonical" href="http://example.com/2023/09/08/%E6%9C%BA%E6%A2%B0%E8%87%82%E5%85%B3%E8%8A%82%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>机械臂关节空间规划 | FaiMhr's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="FaiMhr's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">FaiMhr's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Code is magic.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/08/%E6%9C%BA%E6%A2%B0%E8%87%82%E5%85%B3%E8%8A%82%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="马泓睿">
+      <meta itemprop="description" content="If I have been able to see further, it was only because I stood on the shoulder of giants.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FaiMhr's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          机械臂关节空间规划
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-09-08 17:00:00" itemprop="dateCreated datePublished" datetime="2023-09-08T17:00:00+08:00">2023-09-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-12-05 01:12:23" itemprop="dateModified" datetime="2023-12-05T01:12:23+08:00">2023-12-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BF%90%E5%8A%A8%E8%A7%84%E5%88%92/" itemprop="url" rel="index"><span itemprop="name">运动规划</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文将介绍关节空间规划方法。</p>
+<p>说明：通过这篇博客记录下学习到的关节空间规划的知识。</p>
+<span id="more"></span>
+<h1 id="关节空间规划介绍"><a href="#关节空间规划介绍" class="headerlink" title="关节空间规划介绍"></a>关节空间规划介绍</h1><p>机械臂末端执行器在笛卡尔坐标系中运动时，时常会发生奇异现象；不仅如此，笛卡尔空间轨迹规划还存在计算量大、关节变量曲线有突变等缺点。关节空间的运动规划就是对每个关节都基于关节运动约束条件规划它的光滑运动轨迹。其中关节的运动约束条件包括它的运动范围、运动速度、加速度等。</p>
+<p>关节空间进行规划主要分为以下几步：</p>
+<p><strong>第一步</strong>，在实际空间中确定机械臂末端执行器要经过的路径点。这个路径点和可以是笛卡尔空间规划出的路径点，也可以只是笛卡尔空间机械臂末端执行器的起始点和目标点。不管是哪种关节空间规划都需要先有这些路径点。</p>
+<p><strong>第二步</strong>，有了这些路径点后，通过运动学逆解求出对应的各关节值。</p>
+<p><strong>第三步</strong>，求解出的各关节值是一系列离散的点，针对每个关节，在每两个相邻关节值之间（也就是两个关节角度之间）规划其过渡运动轨迹，这里的规划需要满足运动过程中的各种约束条件，比如速度、加速度、关节转动角度限制等等，从而保证机械臂满足实际的要求。实际上就是采用平滑函数规划关节变量的平稳变化曲线，即可实现预期的机器人在操作空间中的运动。</p>
+<p>由于在关节空间进行轨迹规划时不需要考虑在笛卡尔空间中的情况，因此相对于笛卡尔空间轨迹规划算法，关节空间轨迹规划相对简便。但在关节空间进行规划没法直观的看出机械臂两点之间的实际路径，这是关节空间规划无法避免的。关节空间常用的插值主要有线性插值、用抛物线过渡的线性插值、三次多项式插值、高次多项式插值、样条曲线、B样条曲线和贝塞尔曲线等。下面对这些方法进行介绍。</p>
+<h1 id="关节空间规划方法"><a href="#关节空间规划方法" class="headerlink" title="关节空间规划方法"></a>关节空间规划方法</h1><h2 id="线性插值"><a href="#线性插值" class="headerlink" title="线性插值"></a>线性插值</h2><p>如果给定了关节初始点和终止点的位置变量，使用线性插值函数是规划关节轨迹最简单的方式。如图1所示。</p>
+<p><img src="线性插值.jpg#centered" alt="线性插值"></p>
+<p style="text-align:center;">图1 线性插值</p>
+
+<p>假设某关节为旋转关节，起始角度为\(\theta_0\)，终止角度为\(\theta_f\)，运动持续时间为\(t_f\)，可以通过线性插值函数得到关节运动的轨迹函数。假设关节从起始点匀速运动到终止点，那么关节速度如式(1)所示。</p>
+<html>
+
+<head>
+  <title>关节速度公式</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">$$\dot \theta  = \frac{ { {\theta _f} - {\theta _0} } } { { {t_f} } }$$</td>
+    <td style="border: none;width: 20px;text-align: right;">式(1)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>关节运动的轨迹函数如式（2）所示。</p>
+<html>
+
+<head>
+  <title>关节运动轨迹函数</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">$$\theta  = {\theta _0} + \dot \theta  \cdot t$$</td>
+    <td style="border: none;width: 20px;text-align: right;">式(2)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>可得到采用线性插值规划的关节轨迹函数通式如式（3）所示。</p>
+<html>
+
+<head>
+  <title>采用线性插值规划的关节轨迹函数通式</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">$$\theta  = {\theta _0} + \frac{ { {\theta _f} - {\theta _0} } } { { {t_f} } } \cdot t$$</td>
+    <td style="border: none;width: 20px;text-align: right;">式(3)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>虽然使用线性插值函数规划起来较为简单，但利用线性插值函数规划时存在关节速度在节点处不连续、加速度在节点处突变的问题。因此，在使用线性插值函数规划关节轨迹时，为了得到角度和速度都连续平滑的运动轨迹，一般需要在起始点和终止点处增加一段抛物线轨迹的缓冲区域，即用线性轨迹函数和抛物线轨迹函数组合来规划机器人的关节轨迹。由于抛物线对于时间的二阶导数为常数，这样就可以在节点处实现速度的平滑过渡，不需要无穷大的加速度。</p>
+<h2 id="用抛物线过渡的线性插值"><a href="#用抛物线过渡的线性插值" class="headerlink" title="用抛物线过渡的线性插值"></a>用抛物线过渡的线性插值</h2><p>依旧给定起始角\(\theta_0\)，终止角\(\theta_f\)，以及运动持续时间\(t_f\)。为了构造抛物线过渡的轨迹函数，假设两端的抛物线过渡域的持续时间\(t_b\)相同，因而在这两个过渡域中采用大小相等、符号相反的加速度值，这种构造具有多个解，得到的轨迹也不是唯一的，但是每一个解都对称于时间中点\(\theta_m\)，如图2所示。</p>
+<p><img src="带抛物线过渡的线性插值.jpg#centered" alt="带抛物线过渡的线性插值"></p>
+<p style="text-align:center;">图2 带抛物线过渡的线性插值</p>
+
+<p>由于过渡域\(\left[ { 0,{t_b} } \right]\)终点的速度必须等于线性域的速度，所以关节在\(t_b\)时刻的速度如式（4）所示。</p>
+<html>
+
+<head>
+  <title>关节在\\(t_b\\)时刻的速度公式</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">$${\dot \theta _{ {t_b} } } = \frac{ { {\theta _m} - {\theta _b} } } { { {t_m} - {t_b} } } = \frac{ { {\theta _m} - {\theta _b} } } { {\frac{ { {t_f} } } {2} - {t_b} } }$$</td>
+    <td style="border: none;width: 20px;text-align: right;">式(4)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>式中，\(\theta_b\)为过渡域终点\(t_b\)时刻的关节角度。</p>
+<p>用\(\ddot \theta \)表示过渡域内的加速度，\(\theta_b\)如式（5）所示。</p>
+<html>
+
+<head>
+  <title>\\(\theta_b\\)公式</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">$${\theta _b} = {\theta _0} + \frac{1} {2}\ddot \theta t_b^2$$</td>
+    <td style="border: none;width: 20px;text-align: right;">式(5)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>由于 \(\dot \theta_ = \ddot \theta  \cdot {t_b}\)，\(\theta_m = \frac{\theta_0 + \theta_f} {2}\)，综合上式（4）和（5）可得：</p>
+<html>
+
+<head>
+  <title>式（4）和（5）化简公式</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">$$\ddot \theta t_b^2 - \ddot \theta {t_f}{t_b} + \left( {\theta _f - \theta _0} \right) = 0$$</td>
+    <td style="border: none;width: 20px;text-align: right;">式(6)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>这样，对于任意给定的起始角\(\theta_0\)、终止角\(\theta_f\)以及运动持续时间\(t_f\)，可以通过上式（6）选择相应的过渡域加速度\(\ddot \theta \)和过渡域时间\(t_b\)，得到对应的抛物线轨迹。通常的做法是先选择加速度\(\ddot \theta \)的值，然后求解\(t_b\)。如式（7）所示。</p>
+<html>
+
+<head>
+  <title>\\(t_b\\)公式</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">$${t_b} = \frac{t}{2} - \frac{ {\sqrt { { {\ddot \theta }^2}{t^2} - 4\ddot \theta \left( { \theta _f - \theta _0 } \right)} } }{ {2\ddot \theta } }$$</td>
+    <td style="border: none;width: 20px;text-align: right;">式(7)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>为保证\(t_b\)有解，过渡域加速度值\(\ddot \theta \)必须选得足够大，如式（8）所示。</p>
+<html>
+
+<head>
+  <title>过渡域加速度值\\(\ddot \theta \\)选择公式</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">$$\ddot \theta \ge \frac{4(\theta_f - \theta_0)}{t^2}$$</td>
+    <td style="border: none;width: 20px;text-align: right;">式(8)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>可以发现，当上述不等式中等号成立时，线性域的长度缩减为零，整个路径段有两个过渡域组成，其连接处速度相等；相反，\(\ddot \theta \)的值取得越大，过渡域的长度越短，当\(\ddot \theta \)的取值为无限大时，过渡域长度变为零，机器人运动轨迹又变成了直线。</p>
+<p>在得到\(\ddot \theta \)和\(t_b\)之后，可以依次得到\({\dot \theta _{ {t_b} } }\)和\(\theta_b\)，并据此得到关节轨迹的分段函数，如式（9）所示。</p>
+<html>
+
+<head>
+  <title>关节轨迹的分段函数</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">\[\theta  = \left\{ \begin{array}{l}
+{\theta _0} + \frac{1}{2}\ddot \theta {t^2}{\rm{                     } }0 \le t < {t_b}\\
+{\theta _0} + \frac{1}{2}\ddot \theta {t^2} + \ddot \theta {t_b}\left( {t - {t_b} } \right){\rm{ } }{t_b} \le t \le t - {t_b}\\
+{\theta _f} - \frac{1}{2}\ddot \theta {\left( {t - {t_f} } \right)^2}{\rm{          } }t - {t_b} < t \le {t_f}
+\end{array} \right.\]</td>
+    <td style="border: none;width: 20px;text-align: right;">式(9)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>若某个关节的运动要经过一个路径点，则可采用带抛物线过渡域的线性路径方案。关节的运动要经过一组路径点，如图3所示，用关节角度\(\theta_j\)、\(\theta_k\)和\(\theta_l\)表示其中3个相邻的路径点，以线性函数将每两个相邻路径点相连，而所有路径点附近都采用抛物线过渡。</p>
+<p><img src="多段带有抛物线过渡的线性插值.jpg#centered" alt="多段带有抛物线过渡的线性插值"></p>
+<p style="text-align:center;">图3 多段带有抛物线过渡的线性插值</p>
+
+<p>图中，在点\(k\)的过渡域的持续时间为\(t_k\)，点\(j\)和点\(k\)之间线性域的持续时间为\({t_{jk}}\)，连接点\(j\)上点\(k\)的路径段的全部持续时间为\({t_{djk}}\)。另外，点\(j\)，与点\(k\)之间的线性域速度为\({\dot \theta _{jk} }\)，点\(j\)过渡域的加速度为\({\ddot \theta _j}\)。现在的问题是在含有路径点的情况下，如何确定带抛物线过渡域的线性轨迹。</p>
+<p>与上述用抛物线过渡的线性插值相同，这个问题有许多种解，每一种解对应于一个选取的加速度值。给定任意路径点的位置\(\theta_k\)、持续时间\({t_{djk}}\)，以及加速度的绝对值\(\left| { { {\ddot \theta }_k} } \right|\)，可以计算出过渡域的持续时间\(t_k\)。对于那些内部路径段\(\left( {j,k \ne 1,2;j,k \ne n - 1,n} \right)\)，可根据下列方程求解以上参数，如式（10）所示。</p>
+<html>
+
+<head>
+  <title>过渡域加速度值\\(\ddot \theta \\)选择公式</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">\[\theta  = \left\{ \begin{array}{l}
+{\theta _0} + \frac{1}{2}\ddot \theta {t^2}{\rm{                     }}0 \le t < {t_b}\\
+{\theta _0} + \frac{1}{2}\ddot \theta {t^2} + \ddot \theta {t_b}\left( {t - {t_b}} \right){\rm{ }}{t_b} \le t \le t - {t_b}\\
+{\theta _f} - \frac{1}{2}\ddot \theta {\left( {t - {t_f}} \right)^2}{\rm{          }}t - {t_b} < t \le {t_f}
+\end{array} \right.\]</td>
+    <td style="border: none;width: 20px;text-align: right;">式(10)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>第一个路径段和最后一个路径段的处理与式(10)略有不同，因为轨迹端部的整个过渡域的持续时间都必须计入这一路径段内。对于第一个路径段，令线性域速度的两个表达式相等，就可求出\(t_1\)，如式（11）所示。</p>
+<html>
+
+<head>
+  <title>\\(t_1\\)公式</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">$$t_1 = \frac{\theta_2 - \theta_1}{\ddot \theta_1(t_{d12} - (\frac{1}{2}){t_1})}$$</td>
+    <td style="border: none;width: 20px;text-align: right;">式(11)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>用式（11）算出起始点过渡域的持续时间\(t_1\)之后，再求出\({\dot \theta _{12} }\)和\(t_12\)，如式（12）所示。</p>
+<html>
+
+<head>
+  <title>\\({\dot \theta _{12} }\\)和\\(t_12\\)公式</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">\[\left\{ \begin{array}{l} 
+\ddot \theta_1 = {\mathop{\rm sgn}} (\dot \theta _2 - \dot \theta _1)\left| {\ddot \theta _1} \right|\\
+t_1 = t_{d12} - \sqrt {t_{d12}^2 - \frac{2(\theta_2 - \theta_1)}{\ddot \theta_1}} \\
+\dot \theta_{12} = \frac{\theta_2 - \theta_1}{t_{d12} - (\frac{1}{2}){t_1}}\\
+t_{12} = t_{d12} - t_1 - (\frac{1}{2}){t_2}
+    \end{array} \right.\]</td>
+    <td style="border: none;width: 20px;text-align: right;">式(12)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>对于最后一个路径段，路径点\(n-1\)与终止点\(n\)之间的参数与第一个路径段相似，如式（13）所示。</p>
+<html>
+
+<head>
+  <title>求路径点\\(n-1\\)与终止点\\(n\\)之间的参数公式</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">$$\frac{\theta_{n - 1} - \theta_n}{t_{d(n - 1)n} - (\frac{1}{2}){t_n}} = {\ddot \theta _n}{t_n}$$</td>
+    <td style="border: none;width: 20px;text-align: right;">式(13)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>根据上式（13）便可求出\({\dot \theta _{(n - 1)n} }\)和\({t_{\left( {n - 1} \right)n} }\)，如式（14）所示。</p>
+<html>
+
+<head>
+  <title>各参数公式</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">\[\left\{ \begin{array}{l}
+\ddot \theta_1 = {\mathop{\rm sgn}} (\dot \theta _{n - 1} - \dot \theta _n)\left| {\ddot \theta _n} \right|\\
+t_n = t_{d(n - 1)n} - \sqrt {t_{d(n - 1)n}^2 + \frac{2(\theta _n - \theta _{n - 1})}{\ddot \theta_n}} \\
+\dot \theta_{(n - 1)n} = \frac{\theta _n - \theta _{n - 1}}{t_{d(n - 1)n} - (\frac{1}{2}){t_n}}\\
+t_{(n - 1)n} = t_{d(n - 1)n} - t_n - (\frac{1}{2})t_{(n - 1)}
+\end{array} \right.\]</td>
+    <td style="border: none;width: 20px;text-align: right;">式(14)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>式（10）至式（14）可用来求出多段轨迹中各个过渡域的时间和速度。对于各段的过渡域，加速度值应取得足够大，以使各路径段有足够长的线性域。</p>
+<p>应当注意的是，多段用抛物线过渡的线性插值函数一般并不经过那些路径点，除非在这些路径点处运动停止。即使选取的加速度非常大，实际路径也只是十分接近理想路径点。如果要求机械臂途经某个节点，那么将轨迹分成两段，把此节点作为前一段的终止点和后一段的起始点即可。如果用户要求机械臂通过某个节点，同时速度不为零，可以在此节点两端规定两个“伪节点”，令该节点在两伪节点的连线上，并位于两过渡域之间的线性域上，如图4所示。这样，利用前面所述方法所生成的轨迹势必能以一定的速度穿过指定的节点。穿过速度可由用户指定也可由控制系统根据适当的启发信息来确定。</p>
+<p><img src="采用伪路径点的插值曲线.jpg#centered" alt="采用伪路径点的插值曲线"></p>
+<p style="text-align:center;">图4 采用伪路径点的插值曲线</p>
+
+<h2 id="三次多项式插值"><a href="#三次多项式插值" class="headerlink" title="三次多项式插值"></a>三次多项式插值</h2><p>三次多项式插值函数具有一阶、二阶微分光滑特性，所以在机械臂关节空间运动规划中被普遍采用。依旧给定起始角\(\theta_0\)，终止角\(\theta_f\)，以及运动持续时间\(t_f\)。要使机械臂平稳运动，则各关节的运动轨迹都必须为平滑轨迹。为实现这点，需要构建用初始位置关节角度与目标（终止）位置关节关节角度的一个平滑插值函数\(\theta \left( t \right)\)来描述运动轨迹，并要求\(\theta \left( t \right)\)满足4个约束条件，即两端点位置约束和两端点速度约束。通过选择初始位置和目标位置可得到对轨迹函数\(\theta \left( t \right)\)的连杆约束条件，如式（15）所示。</p>
+<html>
+
+<head>
+  <title>对轨迹函数\\(\theta \left( t \right)\\)的连杆约束条件公式</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">$$\left\{ \begin{array}{l}
+\theta (0) = {\theta _0}\\
+\theta ({t_f}) = {\theta _f}
+\end{array} \right.$$</td>
+    <td style="border: none;width: 20px;text-align: right;">式(15)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>另外，两个约束条件需要保证关节运动速度函数的连续性，即在初始位置和目标位置的关节速度要求。一般设置为零，如式（16）所示。</p>
+<html>
+
+<head>
+  <title>初始位置和目标位置的关节速度要求</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">$$\left\{ \begin{array}{l}
+\dot \theta (0) = 0\\
+\dot \theta ({t_f}) = 0
+\end{array} \right.$$</td>
+    <td style="border: none;width: 20px;text-align: right;">式(16)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>由上式(15)和式(16)唯一确定了一个三次多项式，如式(17)所示。</p>
+<html>
+
+<head>
+  <title>初始位置和目标位置的关节速度要求</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">$$\theta (t) = {a_0} + {a_1}t + {a_2}{t^2} + {a_3}{t^3}$$</td>
+    <td style="border: none;width: 20px;text-align: right;">式(17)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>对应于该运动轨迹的关节速度和加速度，如式(18)所示。</p>
+<html>
+
+<head>
+  <title>该运动轨迹的关节速度和加速度</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">\[\left\{ \begin{array}{l}
+\dot \theta (t) = {a_1} + 2{a_2}t + 3{a_3}{t^2}\\
+\ddot \theta (t) = 2{a_2} + 6{a_3}t
+\end{array} \right.\]</td>
+    <td style="border: none;width: 20px;text-align: right;">式(18)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>把上述约束条件式(15)和式(16)代入式(17)和式(18)，可得含有4个系数\(a_0\)，\(a_1\)，\(a_2\)和\(a_3\)的四个线性方程，如式(19)所示。</p>
+<html>
+
+<head>
+  <title>线性方程</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">\[\left\{ \begin{array}{l}
+{\theta _0} = {a_0}\\
+{\theta _f} = {a_0} + {a_1}{t_f} + {a_2}t_f^2 + {a_3}t_f^3\\
+0 = {a_1}\\
+0 = {a_1} + 2{a_2}{t_f} + 3{a_3}t_f^2
+\end{array} \right.\]</td>
+    <td style="border: none;width: 20px;text-align: right;">式(19)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>求解上述线性方程组可得式(20)：</p>
+<html>
+
+<head>
+  <title>求解线性方程</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">$$\left\{ \begin{array}{l}
+{a_0} = {\theta _0}\\
+{a_1} = 0\\
+{a_2} = \frac{3}({\theta _f} - {\theta _0})\\
+{a_3} =  - \frac{2}{t_f^3(\theta _f - \theta _0)}
+\end{array} \right.$$</td>
+    <td style="border: none;width: 20px;text-align: right;">式(20)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>由上式（20）可以求出从任意初始关节角位置到目标（终止）位置的三次多项式，但该组解只适用于起始关节速度和终止关节速度为零的情况。</p>
+<p>一般情况下，要求规划过路径点的轨迹。如果机械臂在路径点停留，则可直接使用上述三次多项式插值的方法；如果只是“经过”路径点并不停留，即过路径点时关节运动速度不为零，则需要改进上述方法。</p>
+<p>实际上，可以把所有路径点看作“起始点”和“终止点”，求解逆运动学，得到相应的关节矢量值，然后确定所要求的三次多项式插值函数，把路径点平滑地连接起来。但是，这些“起始点”和“终止点”关节运动速度不再是零。</p>
+<p>如果已知各关节再中间点的期望速度，那么就可像前面一样构造出三次多项式；但是，起始点和终止点的速度限制条件不再为零，而是已知的速度。速度约束条件如式（21）所示。</p>
+<html>
+
+<head>
+  <title>速度约束条件方程</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">$$\left\{ \begin{array}{c}
+\dot \theta (0) = {\dot \theta_0}\\
+\dot \theta ({t_f}) = {\dot \theta_f}
+\end{array} \right.$$</td>
+    <td style="border: none;width: 20px;text-align: right;">式(21)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>描述该三次多项式的四个方程，如式（22）所示。</p>
+<html>
+
+<head>
+  <title>描述该三次多项式的四个方程</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">$$\left\{ \begin{array}{l}
+{\theta _0} = {a_0}\\
+{\theta _f} = {a_0} + {a_1}{t_f} + {a_2}t_f^2 + {a_3}t_f^3\\
+{dot \theta_0} = {a_1}\\
+{\dot \theta_f} = {a_1} + 2{a_2}{t_f} + 3{a_3}t_f^2
+\end{array} \right.$$</td>
+    <td style="border: none;width: 20px;text-align: right;">式(22)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>求解方程组（22），可得三次多项式的系数，如式（23）所示。</p>
+<html>
+
+<head>
+  <title>求解方程组</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">$$\left\{ \begin{array}{l}
+{a_0} = {\theta _0}\\
+{a_1} = {\dot \theta_0}\\
+{a_2} = \frac{3}(\theta _f - \theta _0) - \frac{2}{t_f}{\dot \theta_0} - \frac{1}{t_f}{\dot \theta_f}\\
+{a_3} =  - \frac{2}{t_f^2}(\theta _f - \theta _0) + \frac{1}{t_f^2}({\dot \theta_0} + {\dot \theta_f})
+\end{array} \right.$$</td>
+    <td style="border: none;width: 20px;text-align: right;">式(23)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>式（23）可以求出符合任何起始位置和终止位置以及任何起始速度和终止速度的三次多项式。</p>
+<p>如果再每个中间点处均有期望的关节速度，那么可以简单地将式（23）应用到每个曲线段来求出所需的三次多项式。确定中间点处的期望关节速度可以使用以下几种方法：</p>
+<p>1）根据工具坐标系在直角坐标空间中的瞬时线速度和角速度确定每个路径点的瞬时期望关节速度。</p>
+<p>2）在直角坐标空间或关节空间中采用启发式方法，由控制系统自动地选择路径点的速度。</p>
+<p>3）为了保证每个路径点上的加速度连续，由控制系统自动地选择路径点的速度。</p>
+<p>对于方法一，利用机械臂在此路径点上的逆雅可比矩阵把该点的直角坐标速度映射为所要求的关节速度。当然，如果操作臂的某个路径点是奇异点，这时就不能任意设置速度值。按照方法一生成的轨迹虽然能满足设置速度的需要，但是逐点设置速度毕竟有很大的工作量。因此，一个方便易用的机器人的控制系统最好还包括方法二或方法三对应的功能，或者二者兼而有之。</p>
+<p>对于方法二，系统采用某种启发式方法自动选取合适的路径点速度。启发式选择路径点速度的方式如图5所示。图中\(\theta_0\)为起始点，\(\theta_D\)为终止点，\(\theta_A\)、\(\theta_B\)和\(\theta_C\)是路径点。</p>
+<p><img src="路径点上速度的自动生成.jpg#centered" alt="路径点上速度的自动生成"></p>
+<p style="text-align:center;">图5 路径点上速度的自动生成</p>
+
+<p>在图5中，已经合理选取了各中间点上的关节速度，并用细实线来表示，这些细实线即为曲线在么个中间点处的切线。这种选取结果是通过使用了从概念到计算都很简单的启发算法而得到的。假设用直线段把这些路径点依次连接起来，如果相邻线段的斜率在路径点处改变符号，则把速度选定为零；如果相邻线段的斜率不改变符号，则选取路径点两侧的线段斜率的平均值作为该点的速度。按照此法，系统可以只根据规定的期望中间点来自动选取每个中间点的速度。</p>
+<p>对于方法三，为了保证路径点处的加速度连续，可以设法用两条三次曲线将路径点按定规则连接起来，拼凑成所要求的轨迹。其约束条件是：连接处不仅速度连续，而且加速度也连续。下面具体地说明这种方法。</p>
+<p>设所经过的路径点处的关节角度为\(\theta_y\)，与该点相邻的前后两点的关节角分别为\(\theta_0\)和\(\theta_g\)。从\(\theta_0\)和\(\theta_y\)的插值三次多项式如式（24）所示。</p>
+<html>
+
+<head>
+  <title>从\\(\theta_0\\)和\\(\theta_y\\)的插值三次多项式</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">$$\theta (t) = {a_{10}} + {a_{11}}t + {a_{12}}{t^2} + {a_{13}}{t^3}$$</td>
+    <td style="border: none;width: 20px;text-align: right;">式(24)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>从\(\theta_y\)和\(\theta_g\)的插值三次多项式如式（25）所示。</p>
+<html>
+
+<head>
+  <title>从\\(\theta_y\\)和\\(\theta_g\\)的插值三次多项式</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">$$\theta (t) = {a_{20}} + {a_{21}}t + {a_{22}}{t^2} + {a_{23}}{t^3}$$</td>
+    <td style="border: none;width: 20px;text-align: right;">式(25)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>上述两个三次多项式的时间区间分别为\(\left[ {0,{t_{f1}}} \right]\)和\(\left[ {0,{t_{f2}}} \right]\)。对这两个多项式的约束如式（26）所示。</p>
+<html>
+
+<head>
+  <title>两个多项式的约束方程</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">\[\left\{ \begin{array}{l}
+{\theta _0} = {a_{10}}\\
+{\theta _y} = {a_{10}} + {a_{11}}{t_{f1}} + {a_{12}}t_{f1}^2 + {a_{13}}t_{f1}^3\\
+{\theta _y} = {a_{20}}\\
+{\theta _g} = {a_{20}} + {a_{21}}{t_{f2}} + {a_{12}}t_{f2}^2 + {a_{23}}t_{f2}^3\\
+0 = {a_{11}}\\
+0 = {a_{21}} + 2{a_{22}}{t_{f2}} + 3{a_{23}}t_{f2}^3\\
+{a_{11}} + 2{a_{12}}{t_{f1}} + 3{a_{13}}t_{f1}^2 = {a_{21}}\\
+2{a_{12}} + 6{a_{13}}{t_{f1}} = 2{a_{22}}
+\end{array} \right.\]</td>
+    <td style="border: none;width: 20px;text-align: right;">式(26)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>以上约束组成了含有8个未知数的8个线性方程。对于\({t_{f1}} = {t_{f2}} = {t_f}\)的情况，这个方程组的解如式（27）所示。</p>
+<html>
+
+<head>
+  <title>当\\({t_{f1}} = {t_{f2}} = {t_f}\\)求解方程组</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">\[\left\{ \begin{array}{l}
+{a_{10}} = {\theta _0}\\
+{a_{11}} = 0\\
+{a_{12}} = \frac{12{\theta _y} - 3{\theta _g} - 9{\theta _0}}{4t_f^2}\\
+{a_{13}} = \frac{ - 8{\theta _y} + 3{\theta _g} + 5{\theta _0}}{4t_f^2}\\
+{a_{20}} = {\theta _y}\\
+{a_{21}} = \frac{3{\theta _g} - 3{\theta _0}}{4{t_f}}\\
+{a_{22}} = \frac{ - 12{\theta _y} + 6{\theta _g} + 6{\theta _0}}{4t_f^2}\\
+{a_{23}} = \frac{8{\theta _y} - 5{\theta _g} - 3{\theta _0}}{4t_f^2}
+\end{array} \right.\]</td>
+    <td style="border: none;width: 20px;text-align: right;">式(27)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>一般情况下，一个完整的轨迹由多个三次多项式表示，约束条件（包括路径点处的关节加速度连续）构成的方程组可以表示成矩阵的形式。用矩阵来求路径点的速度，由于系数矩阵是三角形的，易于达到目的。</p>
+<h2 id="高次多项式"><a href="#高次多项式" class="headerlink" title="高次多项式"></a>高次多项式</h2><p>通常将最高次方大于三次的插值称为高次多项式插值，高次多项式插值以各关节角、角速度、角加速度为约束条件，弥补了三次多项式插值时各关节的加速度存在突变这一缺点，但其计算量要高于三次多项式插值，规划结果能够确保各关节变量均为连续平滑曲线。常用的高次多项式插值为五次多项式插值，如式（28）所示。</p>
+<html>
+
+<head>
+  <title>五次多项式插值</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">$$\theta (t) = {a_0} + {a_1}t + {a_2}{t^2} + {a_3}{t^3} + {a_4}{t^4} + {a_5}{t^5}$$</td>
+    <td style="border: none;width: 20px;text-align: right;">式(28)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>五次多项式插值的系数\(a_0\)，\(a_1\)，…，\(a_5\)必须满足6个约束条件，分别为起始点和终止点的角度约束、速度约束和加速度约束，如式（29）所示。</p>
+<html>
+
+<head>
+  <title>约束方程组</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">\[\left\{ \begin{array}{l}
+{\theta _0} = {a_0}\\
+{\theta _f} = {a_0} + {a_1}{t_f} + {a_2}t_f^2 + {a_3}t_f^3 + {a_4}t_f^4 + {a_5}t_f^5\\
+{\dot \theta_0} = {a_1}\\
+{\dot \theta_f} = {a_1} + 2{a_2}{t_f} + 3{a_3}t_f^2 + 4{a_4}t_f^3 + 5{a_5}t_f^4\\
+{\ddot \theta_0} = 2{a_2}\\
+{\ddot \theta_f} = 2{a_2} + 6{a_3}{t_f} + 12{a_4}t_f^2 + 20{a_5}t_f^3
+\end{array} \right.\]</td>
+    <td style="border: none;width: 20px;text-align: right;">式(29)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>将式（29）进行求解可以得到式（30）。</p>
+<html>
+
+<head>
+  <title>求解约束方程组</title>
+</head>
+
+<body>
+<table style="width:100%;border-collapse: collapse;">
+  <tr style="border-top: none;text-align: center;">
+    <td style="border: none;width: 20px;">&nbsp</td>
+    <td style="border: none;width: 100px;text-align: right;">$$\left\{ \begin{array}{l}
+{a_0} = {\theta _0}\\
+{a_1} = {\dot \theta_0}\\
+{a_2} = \frac{\ddot \theta_0}{2}\\
+{a_3} = \frac{20{\theta _f} - 20{\theta _0} - (8{\dot \theta_f} + 12{\dot \theta_0}){t_f} - (3{\ddot \theta_0} - {\ddot \theta_f})t_f^2}{2t_f^3}\\
+{a_4} = \frac{30{\theta _0} - 30{\theta _f}{\rm{ + }}({\rm{14}}{\dot \theta_f} + 1{\rm{6}}{\dot \theta_0}){t_f}{\rm{ + }}(3{\ddot \theta_0} - {\ddot \theta_f})t_f^2}{2t_f^{\rm{4}}}\\
+{a_5} = \frac{12{\theta _f} - 12{\theta _0} - (6{\dot \theta_f} + {\rm{6}}{\dot \theta_0}){t_f} - ({\ddot \theta_0} - {\ddot \theta_f})t_f^2}{2t_f^5}
+\end{array} \right.$$</td>
+    <td style="border: none;width: 20px;text-align: right;">式(30)</td>
+  </tr>
+</table>
+</body>
+
+</html>
+
+
+<p>将上述系数代入五次多项式通式（28），即可得到这两个路径点之间的轨迹函数。</p>
+<h2 id="样条曲线"><a href="#样条曲线" class="headerlink" title="样条曲线"></a>样条曲线</h2><h2 id="B样条曲线"><a href="#B样条曲线" class="headerlink" title="B样条曲线"></a>B样条曲线</h2><h2 id="贝塞尔曲线"><a href="#贝塞尔曲线" class="headerlink" title="贝塞尔曲线"></a>贝塞尔曲线</h2><h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>通过上述方法就完成了机械臂关节空间的规划，但实际应用需要结合相应的优化目标比如说时间最短、能耗最小、冲击最小等对轨迹进行规划。时间关注的是在给定的运动约束下，使机械臂从一个起始状态移动到目标状态所需要的时间。能耗关注的是在机械臂完成任务的同时，所需的能源消耗。冲击关注的是在机械臂执行任务的过程中可能受到的冲击和振动。这里一般需要结合相应的优化算法进行规划。总而言之，关节空间规划是把离散的关节角度值通过相应的曲线连接起来，并结合实际的要求通过优化算法进行优化，使机械臂关节轨迹在满足运动任务的同时更平滑。然后就可以通过规划后的关节轨迹通过控制算法对机械臂进行轨迹跟踪控制，以实现预期的轨迹。</p>
+<style>
+    img[src*='centered'] {
+        margin:auto;
+        display:block;
+    }
+</style>
+
+    </div>
+
+    
+    
+    
+    <div>
+      
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%BF%90%E5%8A%A8%E8%A7%84%E5%88%92/" rel="tag"># 运动规划</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/09/01/%E6%9C%BA%E6%A2%B0%E8%87%82%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/" rel="prev" title="机械臂笛卡尔空间规划">
+      <i class="fa fa-chevron-left"></i> 机械臂笛卡尔空间规划
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E8%8A%82%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">关节空间规划介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E8%8A%82%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">关节空间规划方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%8F%92%E5%80%BC"><span class="nav-number">3.1.</span> <span class="nav-text">线性插值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%8A%9B%E7%89%A9%E7%BA%BF%E8%BF%87%E6%B8%A1%E7%9A%84%E7%BA%BF%E6%80%A7%E6%8F%92%E5%80%BC"><span class="nav-number">3.2.</span> <span class="nav-text">用抛物线过渡的线性插值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E6%AC%A1%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8F%92%E5%80%BC"><span class="nav-number">3.3.</span> <span class="nav-text">三次多项式插值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E6%AC%A1%E5%A4%9A%E9%A1%B9%E5%BC%8F"><span class="nav-number">3.4.</span> <span class="nav-text">高次多项式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF"><span class="nav-number">3.5.</span> <span class="nav-text">样条曲线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF"><span class="nav-number">3.6.</span> <span class="nav-text">B样条曲线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E7%BA%BF"><span class="nav-number">3.7.</span> <span class="nav-text">贝塞尔曲线</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="马泓睿"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">马泓睿</p>
+  <div class="site-description" itemprop="description">If I have been able to see further, it was only because I stood on the shoulder of giants.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+     
+      <div>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="420" height="86" src="//music.163.com/outchain/player?type=2&id=28151022&auto=1&height=66"></iframe> 
+      </div>
+
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div> 
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fas fa-user" /></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">马泓睿</span>
+</div>
+
+<!--添加运行时间-->
+<div>
+  <span id="sitetime"></span>
+  <script language=javascript>
+      function siteTime(){
+          window.setTimeout("siteTime()", 1000);
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth()+1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          /*
+        Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+        year - 作为date对象的年份，为4位年份值
+        month - 0-11之间的整数，做为date对象的月份
+        day - 1-31之间的整数，做为date对象的天数
+        hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+        minutes - 0-59之间的整数，做为date对象的分钟数
+        seconds - 0-59之间的整数，做为date对象的秒数
+        microseconds - 0-999之间的整数，做为date对象的毫秒数
+       */
+          var t1 = Date.UTC(2020,03,14,18,12,20); //北京时间2018-2-13 00:00:00
+          var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+          var diff = t2-t1;
+          var diffYears = Math.floor(diff/years);
+          var diffDays = Math.floor((diff/days)-diffYears*365);
+          var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+          var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+          var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+          document.getElementById("sitetime").innerHTML=" 已运行"+/*diffYears+" 年 "+*/diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+      }
+      siteTime();
+  </script>
+</div>
+<!--// 添加运行时间-->
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="theme-info">
+  <div class="powered-by"></div>
+  
+  <span class="post-count">博客全站共22.7k字</span>
+  <span class="post-meta-divider">|</span>
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script src="/live2dwlib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw","pluginJsPath":"lib/","pluginModePath":"assets/","tegMode":false,"debug":false,"model":{"jsonPath":"live2d-widget-model-miku"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginModelPath":"assets/","tagMode":false});</script></body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
