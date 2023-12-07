@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="前言本文将展示一个自动化企业微信打卡脚本。 说明：实在是不想每天一早进行企业微信打开，一咬牙一跺脚，通过模拟器和python编写了一个在电脑上可以定时、多天的自动打卡脚本。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="企业微信自动打卡脚本">
+<meta property="og:url" content="http://example.com/2023/12/07/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E8%87%AA%E5%8A%A8%E6%89%93%E5%8D%A1%E8%84%9A%E6%9C%AC/index.html">
+<meta property="og:site_name" content="FaiMhr&#39;s Blog">
+<meta property="og:description" content="前言本文将展示一个自动化企业微信打卡脚本。 说明：实在是不想每天一早进行企业微信打开，一咬牙一跺脚，通过模拟器和python编写了一个在电脑上可以定时、多天的自动打卡脚本。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-07T08:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-07T12:27:47.460Z">
+<meta property="article:author" content="马泓睿">
+<meta property="article:tag" content="脚本">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/12/07/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E8%87%AA%E5%8A%A8%E6%89%93%E5%8D%A1%E8%84%9A%E6%9C%AC/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>企业微信自动打卡脚本 | FaiMhr's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="FaiMhr's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">FaiMhr's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Code is magic.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/07/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E8%87%AA%E5%8A%A8%E6%89%93%E5%8D%A1%E8%84%9A%E6%9C%AC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="马泓睿">
+      <meta itemprop="description" content="If I have been able to see further, it was only because I stood on the shoulder of giants.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FaiMhr's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          企业微信自动打卡脚本
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-12-07 16:00:00 / 修改时间：20:27:47" itemprop="dateCreated datePublished" datetime="2023-12-07T16:00:00+08:00">2023-12-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%84%9A%E6%9C%AC/" itemprop="url" rel="index"><span itemprop="name">脚本</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文将展示一个自动化企业微信打卡脚本。</p>
+<p>说明：实在是不想每天一早进行企业微信打开，一咬牙一跺脚，通过模拟器和python编写了一个在电脑上可以定时、多天的自动打卡脚本。</p>
+<span id="more"></span>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><strong>事先声明：本文章代码仅做为学习使用，如果使用文章提供的代码进行的一切行为所造成的后果由使用者个人承担</strong></p>
+<p>通过python并结合模拟器写了一个脚本用于企业微信的定时自动打开。实现方式简单来说就是在通过识别到企业微信上<strong>立即打卡</strong>和<strong>上班打卡</strong>的字，python程序通过鼠标按顺序对两个字进行双击操作，实现自动打卡。</p>
+<h1 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h1><p>引入pyautogui库，这个库可以识别电脑屏幕最上层的图片，并控制鼠标进行单击、双击、右击，控制键盘进行输入等操作。程序采用了pyautogui库的识别和双击，confidence参数控制图像的识别精度。</p>
+<p>引入datetime库，这个库可以获取时间（年月日时分秒）。程序通过让用户输入时间的方式让用户自定义打卡时间，并通过要求设置时间的方式，对参数day进行累加实现多天的打卡。</p>
+<p>由于是模拟器打卡所以，企业微信会每天自动出现<strong>xx:xx上班打卡  未满足自动打卡条件，请手动打卡  关闭  立即打卡</strong>这样一个提示框，所以就利用这点截取<strong>立即打卡</strong>这部分的图片，导入截图通过pyautogui库实现点击操作，完成后会有<strong>上班打卡</strong>的提示框，同理，通过设置循环读取截图后识别并点击的操作即可实现自动打卡。</p>
+<p>很简单的实现，按照这种实现方式也可以编写用于其他地方的脚本，自由发挥吧。</p>
+<h1 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h1><h2 id="模拟器使用说明"><a href="#模拟器使用说明" class="headerlink" title="模拟器使用说明"></a>模拟器使用说明</h2><p>安装模拟器（此处采用ldplayer9进行说明，其它模拟器也一样，<strong>非指定！！</strong>）</p>
+<p>安装完模拟器后安装企业微信，如果应用商店没有就通过apk安装（安装按钮在最右侧倒数第三个）</p>
+<p>同时打开定位（安装按钮在最右侧倒数第一个<strong>更多</strong>中点进去第二个按钮）</p>
+<h2 id="程序使用说明"><a href="#程序使用说明" class="headerlink" title="程序使用说明"></a>程序使用说明</h2><p>需要安装对应的库，pyautogui，datetime。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install pyautogui</span><br><span class="line">pip install python-time</span><br></pre></td></tr></table></figure>
+<p>为了使用方便也可以封装成.exe文件</p>
+<p>注：需要程序运行时需要保持企业微信窗口处于主屏幕最上层，不然识别不了</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>代码写的并不完美肯定有更简单的实现方法，而且程序对输入也没有做限制和修正，只能说能用哈哈哈。</p>
+<p><strong>再次声明：本文章代码仅做为学习使用，如果使用文章提供的代码进行的一切行为所造成的后果由使用者个人承担</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pyautogui</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime, timedelta</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">find_image_and_double_click</span>(<span class="params">image_path, confidence=<span class="number">0.9</span></span>):</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            location = pyautogui.locateOnScreen(image_path, confidence=confidence)</span><br><span class="line">            <span class="keyword">if</span> location:</span><br><span class="line">                x, y = pyautogui.center(location)</span><br><span class="line">                pyautogui.doubleClick(x, y)</span><br><span class="line">                <span class="keyword">break</span>  <span class="comment"># 找到并点击图像后，跳出循环</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;未找到指定图像，正在重新检测...&quot;</span>)</span><br><span class="line">                time.sleep(<span class="number">1</span>)  <span class="comment"># 暂停一秒再次检测，防止过于频繁的检测</span></span><br><span class="line">        <span class="keyword">except</span> pyautogui.ImageNotFoundException:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;未找到指定图像，正在重新检测...&quot;</span>)</span><br><span class="line">            time.sleep(<span class="number">1</span>)  <span class="comment"># 暂停一秒再次检测，防止过于频繁的检测</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">execute_at</span>(<span class="params">target_time, image_path</span>):</span><br><span class="line">    current_time = datetime.now()</span><br><span class="line">    time_difference = target_time - current_time</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> time_difference.total_seconds() &gt; <span class="number">0</span>:</span><br><span class="line">        time.sleep(time_difference.total_seconds())</span><br><span class="line"></span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    <span class="comment"># 执行打卡</span></span><br><span class="line">    daka(image_path)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">daka</span>(<span class="params">image_paths</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;程序开始运行&quot;</span>)</span><br><span class="line"></span><br><span class="line">    image_paths = image_paths</span><br><span class="line">    index = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> index &lt; <span class="built_in">len</span>(image_paths):</span><br><span class="line">        image_path = image_paths[index]</span><br><span class="line">        find_image_and_double_click(image_path)</span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;第&quot;</span> + <span class="built_in">str</span>(index + <span class="number">1</span>) + <span class="string">&quot;步&quot;</span> + <span class="string">&quot;执行成功&quot;</span>)</span><br><span class="line">        index += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;程序运行结束&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">mainWork</span>(<span class="params">image_paths</span>):</span><br><span class="line">    image_paths = image_paths</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;请按照以下提示进行时间输入&quot;</span>)</span><br><span class="line">        <span class="comment"># 设置目标时间</span></span><br><span class="line"></span><br><span class="line">        year = <span class="built_in">input</span>(<span class="string">&#x27;请输入年份（如2023）：&#x27;</span>)</span><br><span class="line">        year = <span class="built_in">int</span>(year)</span><br><span class="line">        month = <span class="built_in">input</span>(<span class="string">&#x27;请输入月份（如12）：&#x27;</span>)</span><br><span class="line">        month = <span class="built_in">int</span>(month)</span><br><span class="line">        day = <span class="built_in">input</span>(<span class="string">&#x27;请输入日期（如6）：&#x27;</span>)</span><br><span class="line">        day = <span class="built_in">int</span>(day)</span><br><span class="line">        hour = <span class="built_in">input</span>(<span class="string">&#x27;请输入小时（如8）：&#x27;</span>)</span><br><span class="line">        hour = <span class="built_in">int</span>(hour)</span><br><span class="line">        minute = <span class="built_in">input</span>(<span class="string">&#x27;请输入分钟（如20）：&#x27;</span>)</span><br><span class="line">        minute = <span class="built_in">int</span>(minute)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 设置目标时间</span></span><br><span class="line">        target_time = datetime(year=year, month=month, day=day, hour=hour, minute=minute)</span><br><span class="line"></span><br><span class="line">        number_day = <span class="built_in">input</span>(<span class="string">&#x27;请输入天数（如10）：&#x27;</span>)</span><br><span class="line">        number_day = <span class="built_in">int</span>(number_day)</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;输入的时间是：&quot;</span>, target_time)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;程序将打卡&quot;</span> + <span class="built_in">str</span>(number_day) + <span class="string">&quot;天&quot;</span>)</span><br><span class="line"></span><br><span class="line">        days = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(number_day):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;等待中......&quot;</span>)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;目标时间是：&quot;</span>, target_time)</span><br><span class="line">            <span class="comment"># 到达目标时间后执行程序</span></span><br><span class="line">            execute_at(target_time, image_paths)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 将天数加到目标时间上</span></span><br><span class="line">            target_time += timedelta(days=<span class="number">1</span>)</span><br><span class="line">            days += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        index = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;自动打卡程序启动&quot;</span>)</span><br><span class="line"></span><br><span class="line">    image_paths = [<span class="string">&quot;lijidaka.png&quot;</span>, <span class="string">&quot;shangbandaka.png&quot;</span>]  <span class="comment"># 打卡图片</span></span><br><span class="line"></span><br><span class="line">    mainWork(image_paths)</span><br><span class="line"></span><br><span class="line">    os.system(<span class="string">&#x27;pause&#x27;</span>)</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+    <div>
+      
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%84%9A%E6%9C%AC/" rel="tag"># 脚本</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/10/08/%E6%9C%BA%E6%A2%B0%E8%87%82%E5%85%B3%E8%8A%82%E7%A9%BA%E9%97%B4%E8%A7%84%E5%88%92/" rel="prev" title="机械臂关节空间规划">
+      <i class="fa fa-chevron-left"></i> 机械臂关节空间规划
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">实现方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><span class="nav-number">4.</span> <span class="nav-text">使用说明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E5%99%A8%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><span class="nav-number">4.1.</span> <span class="nav-text">模拟器使用说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><span class="nav-number">4.2.</span> <span class="nav-text">程序使用说明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">5.</span> <span class="nav-text">代码</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="马泓睿"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">马泓睿</p>
+  <div class="site-description" itemprop="description">If I have been able to see further, it was only because I stood on the shoulder of giants.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+     
+      <div>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="420" height="86" src="//music.163.com/outchain/player?type=2&id=28151022&auto=1&height=66"></iframe> 
+      </div>
+
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div> 
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fas fa-user" /></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">马泓睿</span>
+</div>
+
+<!--添加运行时间-->
+<div>
+  <span id="sitetime"></span>
+  <script language=javascript>
+      function siteTime(){
+          window.setTimeout("siteTime()", 1000);
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth()+1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          /*
+        Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+        year - 作为date对象的年份，为4位年份值
+        month - 0-11之间的整数，做为date对象的月份
+        day - 1-31之间的整数，做为date对象的天数
+        hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+        minutes - 0-59之间的整数，做为date对象的分钟数
+        seconds - 0-59之间的整数，做为date对象的秒数
+        microseconds - 0-999之间的整数，做为date对象的毫秒数
+       */
+          var t1 = Date.UTC(2020,03,14,18,12,20); //北京时间2018-2-13 00:00:00
+          var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+          var diff = t2-t1;
+          var diffYears = Math.floor(diff/years);
+          var diffDays = Math.floor((diff/days)-diffYears*365);
+          var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+          var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+          var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+          document.getElementById("sitetime").innerHTML=" 已运行"+/*diffYears+" 年 "+*/diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+      }
+      siteTime();
+  </script>
+</div>
+<!--// 添加运行时间-->
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="theme-info">
+  <div class="powered-by"></div>
+  
+  <span class="post-count">博客全站共23.9k字</span>
+  <span class="post-meta-divider">|</span>
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script src="/live2dwlib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw","pluginJsPath":"lib/","pluginModePath":"assets/","tegMode":false,"debug":false,"model":{"jsonPath":"live2d-widget-model-miku"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginModelPath":"assets/","tagMode":false});</script></body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
